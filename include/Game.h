@@ -7,7 +7,16 @@
 class Game: public Inputable, public sf::Drawable
 {
 private:
+	/*
+	classses
 
+	character
+	props
+	story
+	puzzle
+	act room
+	
+	*/
 
 
 public:
