@@ -18,6 +18,8 @@ enum location {GAME, MAIN_MENU, PAUSE_MENU, OPTIONS_MENU};
 #pragma region functions
 #pragma endregion
 
+
+
 #endif
 
 
