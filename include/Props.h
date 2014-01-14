@@ -1,8 +1,17 @@
-#pragma once
-class Character
+#ifndef PROPS_H
+#define PROPS_H
+
+#include "Common.h"
+#include "ClassUtilities.h"
+#include "UIUtilities.h"
+
+class Props: public Fileable
 {
+private:
+
 public:
-	Character(void);
-	~Character(void);
+	Props();
+
 };
 
+#endif

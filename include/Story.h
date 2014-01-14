@@ -1,8 +1,19 @@
-#pragma once
-class Character
+#ifndef STORY_H
+#define STORY_H
+
+#include "Common.h"
+#include "ClassUtilities.h"
+
+class Story: public Inputable
 {
+private:
+
 public:
-	Character(void);
-	~Character(void);
+	Story();
+
+	
+	virtual bool loadFromFile();
+	virtual bool saveTofile();
 };
 
+#endif
