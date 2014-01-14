@@ -2,7 +2,10 @@
 #define GAME_H
 
 #include "Common.h"
-#include "Inputable.h"
+#include "ClassUtilities.h"
+#include "Puzzle.h"
+#include "Story.h"
+#include "Props.h"
 
 class Game: public Inputable, public sf::Drawable
 {
@@ -20,6 +23,8 @@ private:
 
 
 public:
+	Game();
+
 	void resetGame();
 	void saveGame();
 	void loadFromFile();

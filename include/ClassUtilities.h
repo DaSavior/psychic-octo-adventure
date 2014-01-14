@@ -1,7 +1,15 @@
+#ifndef CLASS_UTILITIES_H
+#define CLASS_UTILITIES_H
+
 #include "Common.h"
 
-#ifndef INPUTABLE_H
-#define INPUTABLE_H
+class Fileable
+{
+public:
+	virtual bool loadFromFile() =0;
+	virtual bool saveTofile() =0;
+
+};
 
 class Inputable
 {
@@ -25,6 +33,16 @@ public:
 	virtual location keyPressed(sf::Keyboard::Key key, location loc) {return loc;};
 	virtual location mousePressed(sf::Vector2i mouse_pos, location loc) {return loc;};
 	virtual location mouseMoved(sf::Vector2i mouse_pos, location loc) {return loc;};
+};
+
+class SpritePlus: public sf::Sprite
+{
+private:
+
+
+public:	
+	SpritePlus();
+	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 };
 
 #endif

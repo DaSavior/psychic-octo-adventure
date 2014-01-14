@@ -1,12 +1,12 @@
-#ifndef UIUTILITY_H
-#define UIUTILITY_H
+#ifndef UIUTILITIES_H
+#define UIUTILITIES_H
 
 #include "Common.h"
 
-class Textbox: public sf::Sprite
+class Textbox: public sf::Text
 {
 private:
-
+	
 public:
 	Textbox();
 };

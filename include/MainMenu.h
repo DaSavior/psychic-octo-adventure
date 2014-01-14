@@ -2,7 +2,8 @@
 #define MAIN_MENU_H
 
 #include "Common.h"
-#include "Inputable.h"
+#include "ClassUtilities.h"
+#include "UIUtilities.h"
 
 class MainMenu: public Inputable, public sf::Drawable
 {
@@ -12,12 +13,11 @@ private:
 	//continue button
 	//options button
 	//close button
-	//canContinue
+	//canContinue bool
 
 
 public:	
 	MainMenu();
-	void setContinue (bool can_continue);
 
 	virtual location mousePressed(sf::Vector2i mouse_pos, location loc);
 	/*

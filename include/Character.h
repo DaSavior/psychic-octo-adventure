@@ -2,7 +2,7 @@
 #define CHARACTER_H
 
 #include "Common.h"
-#include "SpritePlus.h"
+#include "ClassUtilities.h"
 
 class Character: public SpritePlus 
 {
