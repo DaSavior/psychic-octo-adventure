@@ -7,7 +7,9 @@
 class OptionsMenu: public Inputable, public sf::Drawable
 {
 private:
-
+	//fullscreen toggle button
+	//volume ppicture button
+	//resolution up/down buttons?
 
 
 public:

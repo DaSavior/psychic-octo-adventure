@@ -1,8 +1,14 @@
-#pragma once
-class Character
+#ifndef STORY_H
+#define STORY_H
+
+#include "Common.h"
+
+class Story
 {
+private:
+
 public:
-	Character(void);
-	~Character(void);
+	Story();
 };
 
+#endif

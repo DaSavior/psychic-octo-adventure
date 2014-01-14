@@ -19,7 +19,7 @@ public:
 	MainMenu();
 	void setContinue (bool can_continue);
 
-	virtual location mousePressed(sf::Vector2i mouse_pos, location loc)
+	virtual location mousePressed(sf::Vector2i mouse_pos, location loc);
 	/*
 		if (.contain new game
 			clear save

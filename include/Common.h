@@ -5,6 +5,7 @@
 #include <SFML\Graphics.hpp>
 #include <string>
 #include <fstream>
+#include <vector>
 
 #pragma region enums
 
