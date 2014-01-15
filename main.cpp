@@ -11,12 +11,10 @@ int main()
 	MainMenu mainMenu;
 	PauseMenu pauseMenu;
 	OptionsMenu optionsMenu;
-
-	//TODO: make all variables
-	//TODO: make window
-	//TODO: make setting
-
 	sf::Event event;
+
+	//TODO: make music thread
+	//TODO: make console thread
 
 	SettingsInfo settings;
 	sf::RenderWindow window(settings.resolution, settings.window_name, settings.style);
@@ -75,9 +73,7 @@ int main()
 		}
 #pragma endregion
 
-
 	}
-
 
 	return 0;
 }
