@@ -6,9 +6,11 @@
 class Fileable
 {
 public:
-	virtual bool loadFromFile() =0;
-	virtual bool saveTofile() =0;
+	virtual bool load() =0;
+	virtual void save() =0;
 
+	virtual bool load(std::ifstream &in) =0;
+	virtual void save(std::ofstream &out) =0;
 };
 
 class Inputable
