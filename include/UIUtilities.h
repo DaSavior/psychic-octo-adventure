@@ -22,10 +22,11 @@ public:
 	
 	//gets
 	std::string getScroll() const;
-	//std::string getLine() const;
-	
+	sf::IntRect getRectangle() const;
+
 	//sets
 	void setScroll(std::string scroll);
+	void setRectangle(sf::IntRect rect);
 	//void setLine();
 
 	//checks
@@ -34,23 +35,29 @@ public:
 	//changes
 	void appendScroll(std::string scroll);
 	void close();
+	void scrollText();
 
 	//virtuals
 	virtual void animate();
-	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const
-	{
-		target.draw(sf::RectangleShape(getSize()), sf::RectangleShape::getTransform());
-		target.draw(sf::Text(getString(), *getFont(), getCharacterSize()), sf::Text::getTransform());
-	};
-
+	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 };
 
 class Button: public Textbox
 {
 private:
+	sf::RectangleShape highlight_;
+	sf::Sprite effect_;
 
+	void fitButton();
 public:
 	Button();
+
+	void highLight(sf::Color color);
+	void addEffect(sf::Sprite sprite);
+	void removeHighlight();
+	void removeEffect();
+
+	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 };
 
 #endif
