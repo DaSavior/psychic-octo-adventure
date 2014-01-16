@@ -6,6 +6,8 @@
 #include "Puzzle.h"
 #include "Story.h"
 #include "Props.h"
+#include "GodMode.h"
+
 
 class Game: public Inputable, public Animateable, public sf::Drawable
 {
@@ -23,6 +25,7 @@ private:
 
 
 public:
+	friend GodMode;
 	Game();
 
 	void resetGame();
