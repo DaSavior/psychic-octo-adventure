@@ -1,12 +1,10 @@
 #include "include\Common.h"
 #include "include\Game.h"
-#include "include\OptionsMenu.h"
-#include "include\MainMenu.h"
-#include "include\PauseMenu.h"
+#include "include\Menus.h"
 
 int main()
 {
-#pragma region initialize 
+#pragma region initialize
 	Game game;
 	MainMenu mainMenu;
 	PauseMenu pauseMenu;
@@ -49,7 +47,7 @@ int main()
 			case OPTIONS_MENU:
 				if (event.type == sf::Event::KeyPressed)
 					break;
-				loc = optionsMenu.input(event, prev_menu); 
+				loc = optionsMenu.input(event, prev_menu);
 				break;
 			}
 		}
@@ -59,7 +57,7 @@ int main()
 		switch (loc)
 		{
 		case GAME:
-			game.animate();	
+			game.animate();
 			break;
 		}
 #pragma endregion
@@ -68,7 +66,7 @@ int main()
 		switch (loc)
 		{
 		case GAME:
-			window.draw(game);		
+			window.draw(game);
 			break;
 		case MAIN_MENU:
 			window.draw(mainMenu);
