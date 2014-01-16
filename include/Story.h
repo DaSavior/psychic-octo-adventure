@@ -4,24 +4,25 @@
 #include "Common.h"
 #include "ClassUtilities.h"
 
-class StoryObject : public sf::IntRect;
-
 class Story: public Inputable
 {
 private:
     //std::vector<std::vector<sf::IntRect>> refers to room then objects within the room
     std::vector<std::vector<StoryObject>> new_room_tiles;
     std::vector<std::vector<StoryObject>> floor_text;
-    unsigned short act_, room_;
-
 
 public:
 	Story();
 
-    std::vector<sf::IntRect> getNewRoomTiles();
+    std::vector<std::vector<StoryObject>> getNewRoomTiles() const;
+    std::vector<std::vector<StoryObject>> getFloorText() const;
 
-	virtual bool loadFromFile();
-	virtual bool saveTofile();
+	std::string getActFile() const;
+
+	virtual bool load();
+	virtual void save();
+	virtual bool load(std::ifstream &in);
+	virtual void save(std::ofstream &out);
 };
 
 class StoryObject : public sf::IntRect , public Fileable
@@ -32,13 +33,19 @@ private:
 
     unsigned short state; //HACK: dont let the character walk after picking up the book
 public:
-    std::string getText();
-    unsigned short getState();
-    sf::Vector2i getNextRoom();
+	//gets
+    std::string getText() const;
+    unsigned short getState() const;
+    sf::Vector2i getNextRoom() const;
 
+	//sets
     void setText(std::string t_text);
     void setState(unsigned short t_state);
     void setNextRoom(sf::Vector2i t_next_room);
+	
+	//virtuals
+	virtual bool load();
+	virtual void save();
 };
 
 #endif

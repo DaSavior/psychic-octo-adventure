@@ -18,6 +18,8 @@ private:
 	Props props
 	Story story
 	Puzzle puzzle
+    unsigned short act_, room_;
+
 
 
 

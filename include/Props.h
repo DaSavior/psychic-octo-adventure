@@ -5,8 +5,6 @@
 #include "ClassUtilities.h"
 #include "UIUtilities.h"
 
-class PropObject : public SpritePlus;
-
 class Props: public Fileable
 {
 private:

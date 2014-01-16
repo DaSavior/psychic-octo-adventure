@@ -11,6 +11,7 @@
 
 enum location {GAME, MAIN_MENU, PAUSE_MENU, OPTIONS_MENU};
 enum direction {NONE = -1, NORTH, EAST, SOUTH, WEST};
+enum leverState {NEGATIVE = -1, ZERO, POSITIVE};
 
 #pragma endregion
 
@@ -50,6 +51,7 @@ direction convertKeyToDirection(sf::Keyboard::Key key)
     }
     return dir;
 }
+sf::Font fontFromFile(std::ifstream &file);
 
 #pragma endregion
 
@@ -78,6 +80,3 @@ struct SettingsInfo
 
 
 #endif
-
-
-
