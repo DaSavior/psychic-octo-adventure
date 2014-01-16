@@ -36,6 +36,7 @@ public:
 	void close();
 
 	//virtuals
+	virtual void animate();
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const
 	{
 		target.draw(sf::RectangleShape(getSize()), sf::RectangleShape::getTransform());

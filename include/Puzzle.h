@@ -19,8 +19,8 @@ private:
 public:
 	DoorObject();
 
-	virtual bool loadFromFile();
-	virtual bool saveTofile();
+	virtual bool load();
+	virtual bool save();
 };
 
 class CircuitObject: public Fileable
