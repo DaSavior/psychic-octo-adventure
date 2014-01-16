@@ -34,7 +34,7 @@ int main()
 			switch (loc) //
 			{
 			case GAME:
-				game.input(event, loc);
+				loc = game.input(event, loc);
 				break;
 			case MAIN_MENU:
 				prev_menu = MAIN_MENU;

@@ -41,6 +41,7 @@ public:
 
 	//virtual functions
 	virtual location keyPressed(sf::Keyboard::Key key, location loc);
+	virtual location keyReleased(sf::Keyboard::Key key, location loc);
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 };
 

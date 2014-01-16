@@ -10,8 +10,8 @@ class Story: public Inputable
 {
 private:
     //std::vector<std::vector<sf::IntRect>> refers to room then objects within the room
-    std::vector<std::vector<sf::>> new_room_tiles;
-    std::vector<std::vector<sf::>> floor_text;
+    std::vector<std::vector<StoryObject>> new_room_tiles;
+    std::vector<std::vector<StoryObject>> floor_text;
     unsigned short act_, room_;
 
 

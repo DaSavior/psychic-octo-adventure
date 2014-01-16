@@ -14,3 +14,31 @@ void Game::update(int act, int room)
 
     return;
 }
+
+location Game::keyPressed(sf::Keyboard::Key key, location loc)
+{
+    /*
+    direction dir = convertKeyToDirection(key);
+    if((character.getDirection() != dir) && (dir != direction::NONE))    //TODO: finish this
+        character.setDirection(dir);
+    */
+}
+
+location Game::keyReleased(sf::Keyboard::Key key, location loc)
+{
+    /*
+    switch(key)
+    {
+    case 'up':
+    case 'W':
+        char.startWalk();
+        break;
+    case:
+        break;
+    case:
+        break;
+    case:
+        break;
+    }
+    */
+}

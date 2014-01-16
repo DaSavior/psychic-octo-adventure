@@ -10,7 +10,7 @@
 #pragma region enums
 
 enum location {GAME, MAIN_MENU, PAUSE_MENU, OPTIONS_MENU};
-enum direction {NORTH, EAST, SOUTH, WEST};
+enum direction {NONE = -1, NORTH, EAST, SOUTH, WEST};
 
 #pragma endregion
 
@@ -23,7 +23,33 @@ enum direction {NORTH, EAST, SOUTH, WEST};
 
 #pragma region functions
 
-
+direction convertKeyToDirection(sf::Keyboard::Key key)
+{
+    direction dir;
+    switch(key)
+    {
+    case sf::Keyboard::UP:
+    case sf::Keyboard::W:
+        dir = NORTH;
+        break;
+    case sf::Keyboard::RIGHT:
+    case sf::Keyboard::D:
+        dir = EAST;
+        break;
+    case sf::Keyboard::DOWN:
+    case sf::Keyboard::S:
+        dir = SOUTH;
+        break;
+    case sf::Keyboard::LEFT:
+    case sf::Keyboard::A:
+        dir = WEST;
+        break;
+    default:
+        dir = NONE;
+        break;
+    }
+    return dir;
+}
 
 #pragma endregion
 
