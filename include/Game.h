@@ -3,6 +3,7 @@
 
 #include "Common.h"
 #include "ClassUtilities.h"
+#include "Character.h"
 #include "Puzzle.h"
 #include "Story.h"
 #include "Props.h"
@@ -12,16 +13,12 @@
 class Game: public Inputable, public Animateable, public sf::Drawable
 {
 private:
-	/*
-	classses
-
-	character
-	props
-	story
-	puzzle
-	act room
-	
-	*/
+	//classses
+	Character character
+	Props props
+	Story story
+	Puzzle puzzle
+	unsigned short act, room;
 
 
 public:
@@ -33,7 +30,7 @@ public:
 	void loadFromFile();
 	void update(int act, int room);
 
-	
+
 	//gets
 
 	//sets
