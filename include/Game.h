@@ -18,7 +18,7 @@ private:
 	Props props
 	Story story
 	Puzzle puzzle
-	unsigned short act, room;
+
 
 
 public:

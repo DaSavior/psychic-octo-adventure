@@ -5,12 +5,20 @@
 #include "ClassUtilities.h"
 #include "UIUtilities.h"
 
+class PropObject : public SpritePlus;
+
 class Props: public Fileable
 {
 private:
+    //TODO: add propObjects
 
 public:
 	Props();
+
+};
+
+class PropObject : public SpritePlus
+{
 
 };
 
