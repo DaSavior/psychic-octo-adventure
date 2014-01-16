@@ -7,7 +7,7 @@
 #include "Story.h"
 #include "Props.h"
 
-class Game: public Inputable, public sf::Drawable
+class Game: public Inputable, public Animateable, public sf::Drawable
 {
 private:
 	/*
@@ -30,6 +30,16 @@ public:
 	void loadFromFile();
 	void update(int act, int room);
 
+	
+	//gets
+
+	//sets
+
+	//checks
+
+	//changes
+
+	//virtual functions
 	virtual location keyPressed(sf::Keyboard::Key key, location loc);
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 };

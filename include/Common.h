@@ -10,12 +10,14 @@
 #pragma region enums
 
 enum location {GAME, MAIN_MENU, PAUSE_MENU, OPTIONS_MENU};
+enum direction {NORTH, EAST, SOUTH, WEST};
 
 #pragma endregion
 
 #pragma region defines
 
-
+#define UNCOLIDABLE_BOX sf::IntRect()
+#define CHAR_COL_BOX sf::IntRect(100,100,100,100)
 
 #pragma endregion
 

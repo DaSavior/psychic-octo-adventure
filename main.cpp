@@ -32,11 +32,11 @@ int main()
 				window.close();
 			//if (event.type == sf::Event::KeyPressed)
 				//if ((event.key.alt) && (event.key.code == sf::Keyboard::Key::Tab))
-				
-			switch (loc)
+
+			switch (loc) //
 			{
 			case GAME:
-				loc = game.input(event, loc);
+				game.input(event, loc);
 				break;
 			case MAIN_MENU:
 				prev_menu = MAIN_MENU;
@@ -54,7 +54,16 @@ int main()
 			}
 		}
 #pragma endregion
-		
+
+#pragma region Animate
+		switch (loc)
+		{
+		case GAME:
+			game.animate();	
+			break;
+		}
+#pragma endregion
+
 #pragma region Draw
 		switch (loc)
 		{

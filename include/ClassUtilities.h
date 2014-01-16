@@ -23,6 +23,9 @@ public:
 		case sf::Event::KeyPressed:
 			loc = keyPressed(event.key.code, loc);
 			break;
+		case sf::Event::KeyReleased:
+			loc = keyReleased(event.key.code, loc);
+			break;
 		case sf::Event::MouseButtonPressed:
 			loc = mousePressed(sf::Mouse::getPosition(), loc);
 			break;
@@ -33,18 +36,43 @@ public:
 		return loc;
 	}
 	virtual location keyPressed(sf::Keyboard::Key key, location loc) {return loc;};
+	virtual location keyReleased(sf::Keyboard::Key key, location loc) {return loc;};
 	virtual location mousePressed(sf::Vector2i mouse_pos, location loc) {return loc;};
 	virtual location mouseMoved(sf::Vector2i mouse_pos, location loc) {return loc;};
+};
+
+class Animateable
+{
+public:
+	virtual void animate() = 0;
 };
 
 class SpritePlus: public sf::Sprite
 {
 private:
-
-
+	sf::IntRect collisionRectangle_;
+	
 public:	
 	SpritePlus();
-	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+	
+	//gets
+	sf::IntRect getCollisionRectangle() const;
+	sf::IntRect getGlobalCollisionRectangle() const;
+	sf::Vector2f getFrame() const;
+
+	//sets
+	void setCollisionRectangle(sf::IntRect collisionRectangle);
+	void setFrame(sf::Vector2f frame);
+	void setFrame(float x, float y);
+	
+	//checks
+	bool collides(sf::IntRect rect) const;
+	bool collides(sf::Vector2i point) const;
+
+	//changes
+	void moveFrame(sf::Vector2f move);
+	void moveFrame(float dx, float dy);
+
 };
 
 #endif
