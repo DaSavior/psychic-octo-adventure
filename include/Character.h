@@ -7,9 +7,25 @@
 class Character: public SpritePlus 
 {
 private:
+	unsigned short energy_;
+	direction facing_;
 
 public:
 	Character();
+
+	//gets
+	unsigned short getEnergy() const;
+
+	//sets
+	void setEnergy(unsigned short energy);
+
+	//checks
+
+	//changes
+	
+	//console stuff
+	void toggleCollision();
+
 };
 
 #endif

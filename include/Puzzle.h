@@ -34,7 +34,6 @@ public:
 	virtual bool saveTofile();
 };
 
-
 class WireObject: public Fileable, public sf::IntRect
 {
 private:
