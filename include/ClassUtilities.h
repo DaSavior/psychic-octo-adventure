@@ -11,6 +11,10 @@ public:
 
 	virtual bool load(std::ifstream &in) =0;
 	virtual void save(std::ofstream &out) =0;
+/*
+	friend std::ifstream& operator>> (std::ifstream &in, Fileable fileable);
+	friend std::ofstream& operator<< (std::ofstream &out, Fileable fileable);*/
+	//TODO: make class not abstract and uncomment these lines
 };
 
 class Inputable
