@@ -23,7 +23,7 @@ public:
 	//gets
 	std::string getScroll() const;
 	//std::string getLine() const;
-
+	
 	//sets
 	void setScroll(std::string scroll);
 	//void setLine();
@@ -35,8 +35,11 @@ public:
 	void appendScroll(std::string scroll);
 	void close();
 
+	//virtuals
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const
 	{
+		target.draw(sf::RectangleShape(getSize()), sf::RectangleShape::getTransform());
+		target.draw(sf::Text(getString(), *getFont(), getCharacterSize()), sf::Text::getTransform());
 	};
 
 };
