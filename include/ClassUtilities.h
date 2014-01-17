@@ -6,10 +6,10 @@
 class Fileable
 {
 public:
-	virtual bool load() =0;
+	virtual bool load() =0; //used for progress
 	virtual void save() =0;
 
-	virtual bool load(std::ifstream &in) =0;
+	virtual bool load(std::ifstream &in) =0; //used for main file
 	virtual void save(std::ofstream &out) =0;
 /*
 	friend std::ifstream& operator>> (std::ifstream &in, Fileable fileable);
@@ -58,6 +58,10 @@ private:
 	
 public:	
 	SpritePlus();
+	SpritePlus(const sf::Sprite &sprite, const sf::IntRect &collision = sf::IntRect());
+	SpritePlus(const sf::Texture &texture, const sf::IntRect &collision = sf::IntRect());
+	SpritePlus(const sf::Texture &texture, const sf::IntRect &rectangle, const sf::IntRect &collision = sf::IntRect());
+	
 	
 	//gets
 	sf::IntRect getCollisionRectangle() const;
@@ -66,16 +70,18 @@ public:
 
 	//sets
 	void setCollisionRectangle(sf::IntRect collisionRectangle);
-	void setFrame(sf::Vector2f frame);
+	void setFrame(sf::Vector2f framePosition);
 	void setFrame(float x, float y);
 	
 	//checks
 	bool collides(sf::IntRect rect) const;
 	bool collides(sf::Vector2i point) const;
+	bool frameAt(direction position) const;
 
 	//changes
 	void moveFrame(sf::Vector2f move);
 	void moveFrame(float dx, float dy);
+	void moveFrameTo(direction position);
 
 };
 

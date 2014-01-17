@@ -18,6 +18,8 @@ public:
 	//gets
 	unsigned short getEnergy() const;
 	direction getDirection() const;
+	sf::IntRect getWalkCollision() const;
+	sf::IntRect getInteractCollision() const;
 
 	//sets
 	void setEnergy(unsigned short energy);

@@ -11,7 +11,8 @@
 
 enum location {GAME, MAIN_MENU, PAUSE_MENU, OPTIONS_MENU};
 enum direction {NONE = -1, NORTH, EAST, SOUTH, WEST};
-enum leverState {NEGATIVE = -1, ZERO, POSITIVE};
+enum leverState {NO_LEVER, NEGATIVE, NEUTRAL, POSITIVE};
+enum plugState {NO_PLUG, PLAYER_TO_CIRCUIT, CIRCUIT_TO_CIRCUIT};
 
 #pragma endregion
 
@@ -52,6 +53,14 @@ direction convertKeyToDirection(sf::Keyboard::Key key)
     return dir;
 }
 sf::Font fontFromFile(std::ifstream &file);
+
+sf::Vector2i getCenter(sf::IntRect rect);
+sf::Vector2f getCenter(sf::FloatRect rect);
+
+sf::IntRect makeRect_Center(sf::Vector2i center, sf::Vector2i size);
+sf::IntRect makeRect_Corners(sf::Vector2i TLCorner, sf::Vector2i BRCorner);
+sf::IntRect makeRect_Corners(int top, int left, int bottom, int right);
+sf::IntRect makeRect_Containing(sf::IntRect one, sf::IntRect two);
 
 #pragma endregion
 
