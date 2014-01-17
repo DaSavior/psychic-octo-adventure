@@ -24,7 +24,7 @@ private:
 
 
 public:
-	friend GodMode;
+	friend class GodMode;
 	Game();
 
 	void resetGame();

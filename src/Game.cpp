@@ -17,28 +17,32 @@ void Game::update(int act, int room)
 
 location Game::keyPressed(sf::Keyboard::Key key, location loc)
 {
-    /*
     direction dir = convertKeyToDirection(key);
-    if((character.getDirection() != dir) && (dir != direction::NONE))    //TODO: finish this
-        character.setDirection(dir);
-    */
+    if((character.getDirection() != dir) && (dir != direction::NONE))    //TODO: finish this   
+	{
+	   character.setDirection(dir);
+	   character.startWalk();
+	}
+	else if (character.getDirection() == dir)
+	{
+		character.startWalk(); //TODO: does this work?
+	}
 }
 
 location Game::keyReleased(sf::Keyboard::Key key, location loc)
 {
-    /*
     switch(key)
     {
-    case 'up':
-    case 'W':
-        char.startWalk();
-        break;
-    case:
-        break;
-    case:
-        break;
-    case:
+	case sf::Keyboard::Up:
+    case sf::Keyboard::W:
+	case sf::Keyboard::Right:
+	case sf::Keyboard::D:
+	case sf::Keyboard::Down:
+	case sf::Keyboard::S:
+	case sf::Keyboard::Left:
+	case sf::Keyboard::A:
+		character.stopWalk();
         break;
     }
-    */
+	return loc;
 }

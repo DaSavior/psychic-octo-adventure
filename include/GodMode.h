@@ -21,7 +21,6 @@ public:
 	void loadFile(std::ifstream stream);
 	void saveFile(std::ofstream stream);
 	void toggleCollisionBoxVisibility();
-	void togglePropObjectVisibility();
     sf::Vector2i getCharPosition();
 };
 

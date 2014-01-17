@@ -1,3 +1,4 @@
+
 #include "..\include\GodMode.h"
 
 GodMode::GodMode(Game *t_game_p, sf::RenderWindow *t_window_p, SettingsInfo *t_settings_p)
@@ -27,7 +28,7 @@ GodMode::~GodMode()
 
 void GodMode::toggleClipping()
 {
-    game_p->character.toggleCollision();
+	game_p->character.toggleCollision();
 }
 
 void GodMode::gotoActRoom(int act, int room)
