@@ -18,9 +18,9 @@ private:
 	Props props
 	Story story
 	Puzzle puzzle
-    unsigned short act_, room_;
+    short act_, room_;
 
-
+	std::string findActFile(short act);
 
 
 public:
@@ -30,7 +30,7 @@ public:
 	void resetGame();
 	void saveGame();
 	void loadFromFile();
-	void update(int act, int room);
+	void update(short act, short room);
 
 
 	//gets

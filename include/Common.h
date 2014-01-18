@@ -30,19 +30,19 @@ direction convertKeyToDirection(sf::Keyboard::Key key)
     direction dir;
     switch(key)
     {
-    case sf::Keyboard::UP:
+	case sf::Keyboard::Up:
     case sf::Keyboard::W:
         dir = NORTH;
         break;
-    case sf::Keyboard::RIGHT:
+    case sf::Keyboard::Right:
     case sf::Keyboard::D:
         dir = EAST;
         break;
-    case sf::Keyboard::DOWN:
+    case sf::Keyboard::Down:
     case sf::Keyboard::S:
         dir = SOUTH;
         break;
-    case sf::Keyboard::LEFT:
+    case sf::Keyboard::Left:
     case sf::Keyboard::A:
         dir = WEST;
         break;
@@ -83,7 +83,23 @@ struct SettingsInfo
 	unsigned short volume;
 	sf::Uint32 style;
 };
+struct AllTextures
+{
+	std::vector<sf::Texture> textures_;
 
+	void loadAll();
+	std::vector<sf::Texture*> forGame() const;
+	sf::Texture* basicProps() const;
+	//TODO: list all textures needed
+}
+struct AllFonts
+{
+	std::vector<sf::Font> fonts_;
+
+	void loadAll();
+	sf::Font* arial() const;
+	//TODO: list all fonts needed
+}
 #pragma endregion
 
 

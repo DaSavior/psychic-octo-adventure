@@ -11,14 +11,17 @@ private:
 	std::vector<std::vector<DoorObject>> doors;
 	std::vector<std::vector<CircuitObject>> circuits;
 	std::vector<std::vector<WireObject>> wires;
+	short room_;
 
 public:
 	Puzzle();
 
 	//gets
-	std::vector<std::vector<CircuitObject>> getCircuits();
-	std::vector<std::vector<DoorObject>> getDoors();
-	std::vector<std::vector<WireObject>> getWires();
+	std::vector<std::vector<CircuitObject>> getCircuits() const;
+	std::vector<std::vector<DoorObject>> getDoors() const;
+	std::vector<std::vector<WireObject>> getWires() const;
+
+	void update(short room);
 
 	//for character
 	void charToPlugEnergy(Character &character);
@@ -31,12 +34,14 @@ public:
 	virtual void save();
 	virtual bool load(std::ifstream &in);
 	virtual void save(std::ofstream &out);
+	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 };
 
 class DoorObject: public Fileable, public SpritePlus
 {
 private:
 	short answer_;
+	sf::Text doorNumber_;
 	direction facing_;
 	short circuitFrom_;
 
@@ -65,8 +70,11 @@ public:
 	void close();
 	
 	//virtuals
+	virtual bool load();
+	virtual void save();
 	virtual bool load(std::ifstream &in);
 	virtual void save(std::ofstream &out);
+	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 };
 
 class WireObject: public Fileable, public sf::IntRect
@@ -80,7 +88,7 @@ public:
 	void setStart(sf::Vector2i point);
 	void setEnd(sf::Vector2i point);
 	void setWidth(float width);
-	void setState(leverState state);s
+	void setState(leverState state);
 
 	//virtuals
 	virtual bool load(std::ifstream &in);

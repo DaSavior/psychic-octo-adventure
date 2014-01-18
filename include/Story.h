@@ -8,16 +8,20 @@ class Story: public Inputable
 {
 private:
     //std::vector<std::vector<sf::IntRect>> refers to room then objects within the room
-    std::vector<std::vector<StoryObject>> new_room_tiles;
-    std::vector<std::vector<StoryObject>> floor_text;
+	std::vector<std::vector<NewRoomTile>> newRoomTiles_;
+	std::vector<std::vector<TextTile>> interactText_;
+	std::vector<std::vector<TextTile>> walkOverText_;
+	short room_;
 
 public:
 	Story();
 
-    std::vector<std::vector<StoryObject>> getNewRoomTiles() const;
-    std::vector<std::vector<StoryObject>> getFloorText() const;
+	void update(short room);
 
-	std::string getActFile() const;
+	//for character
+	std::string charWalk(const Character &character);		//for text
+	std::string charInteract(const Character &character);	//for text
+	short charNewRoomCheck(Character &character);			//for new room tiles, will move character if there is one and returns the room of the character or NEXTACT
 
 	virtual bool load();
 	virtual void save();
@@ -25,27 +29,49 @@ public:
 	virtual void save(std::ofstream &out);
 };
 
-class StoryObject : public sf::IntRect , public Fileable
+class NewRoomTile : public TextTile
 {
 private:
-    sf::Vector2i next_room;
-    std::string text;
+    short nextRoom_;	//999 = next act //HACK: could be a define
+	direction exiting_;	//for where the character will move after
 
-    unsigned short state; //HACK: dont let the character walk after picking up the book
+public:
+	//gets
+    short getNextRoom() const;
+	direction getExitDirection() const;
+
+	//sets
+    void setNextRoom(short nextRoom);
+	void setExitDirection(direction exit);
+
+	//virtuals
+	virtual bool load();
+	virtual void save();
+	virtual bool load(std::ifstream &in);
+	virtual void save(std::ofstream &out);
+};
+
+class TextTile : public sf::IntRect , public Fileable
+{
+private:
+    std::string text_;
+	short repeat; //repeat forever if == -1
 public:
 	//gets
     std::string getText() const;
     unsigned short getState() const;
-    sf::Vector2i getNextRoom() const;
 
 	//sets
-    void setText(std::string t_text);
-    void setState(unsigned short t_state);
-    void setNextRoom(sf::Vector2i t_next_room);
+    void setText(std::string text);
+    void setState(unsigned short state);
+
+	std::string useTile();//return text and lowers repeat
 	
 	//virtuals
 	virtual bool load();
 	virtual void save();
+	virtual bool load(std::ifstream &in);
+	virtual void save(std::ofstream &out);
 };
 
 #endif

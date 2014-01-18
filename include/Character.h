@@ -18,14 +18,15 @@ public:
 	//gets
 	unsigned short getEnergy() const;
 	direction getDirection() const;
-	sf::IntRect getWalkCollision() const;
-	sf::IntRect getInteractCollision() const;
+	sf::IntRect getWalkCollision() const; //collision box with next step
+	sf::IntRect getInteractCollision() const; //collision box for interact events (flipping a switch, 
 
 	//sets
 	void setEnergy(unsigned short energy);
 	void setDirection(direction facing);
 
 	//checks
+	bool canWalk() const; //can't while arm is raised
 
 	//changes
 	void startWalk();
