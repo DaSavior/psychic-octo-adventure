@@ -32,10 +32,12 @@ public:
 class NewRoomTile : public TextTile
 {
 private:
-    short nextRoom_;	//999 = next act //HACK: could be a define
+    short nextRoom_;	//999 = next act, -999 = from previous act //HACK: could be a define
 	direction exiting_;	//for where the character will move after
 
 public:
+	NewRoomTile();
+
 	//gets
     short getNextRoom() const;
 	direction getExitDirection() const;
@@ -57,6 +59,8 @@ private:
     std::string text_;
 	short repeat; //repeat forever if == -1
 public:
+	TextTile();
+
 	//gets
     std::string getText() const;
     unsigned short getState() const;

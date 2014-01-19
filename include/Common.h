@@ -62,6 +62,9 @@ sf::IntRect makeRect_Corners(sf::Vector2i TLCorner, sf::Vector2i BRCorner);
 sf::IntRect makeRect_Corners(int top, int left, int bottom, int right);
 sf::IntRect makeRect_Containing(sf::IntRect one, sf::IntRect two);
 
+int rect_Bottom(sf::IntRect rect);
+int rect_Right(sf::IntRect rect);
+
 #pragma endregion
 
 #pragma region structs

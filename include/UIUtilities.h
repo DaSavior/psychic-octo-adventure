@@ -18,7 +18,7 @@ private:
 	void fitText();
 
 public:
-	Textbox(): sf::Text() , sf::RectangleShape() {};
+	Textbox();
 	
 	//gets
 	std::string getScroll() const;
