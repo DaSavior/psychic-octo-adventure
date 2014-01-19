@@ -33,6 +33,7 @@ class PropObject : public SpritePlus, public Fileable
 private:
 	std::string text_;
 public:
+	PropObject();
 	
 	//gets
 	std::string getText() const;

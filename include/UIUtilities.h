@@ -10,12 +10,6 @@ class Textbox: public sf::Text, public sf::RectangleShape, public Animateable
 private:
 	std::string scroll_;
 	std::string line_;
-	sf::RectangleShape box_;
-
-	sf::Font font_;
-	int charSize_;
-
-	void fitText();
 
 public:
 	Textbox();
@@ -33,6 +27,7 @@ public:
 	bool isOpen() const;
 
 	//changes
+	void fit();
 	void appendScroll(std::string scroll);
 	void close();
 	void scrollText();
@@ -48,9 +43,9 @@ private:
 	sf::RectangleShape highlight_;
 	sf::Sprite effect_;
 
-	void fitButton();
 public:
 	Button();
+	void fit();
 
 	void highLight(sf::Color color);
 	void addEffect(sf::Sprite sprite);
