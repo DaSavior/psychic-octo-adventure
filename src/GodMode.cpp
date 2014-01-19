@@ -13,15 +13,15 @@ GodMode::~GodMode()
 {
     if (game_p != NULL)
     {
-        game_p = NULL
+        game_p = NULL;
     }
     if (window_p != NULL)
     {
-        window_p = NULL
+        window_p = NULL;
     }
     if (settings_p != NULL)
     {
-        settings_p = NULL
+        settings_p = NULL;
     }
     return;
 }
@@ -47,12 +47,18 @@ void GodMode::toggleCollisionBoxVisibility()
 
 }
 
-void GodMode::togglePropObjectVisibility()
-{
-
-}
-
 sf::Vector2i GodMode::getCharPosition()
 {
-    return game_p->character.getPosition();
+	return sf::Vector2i(game_p->character.getPosition().x,game_p->character.getPosition().y);
+}
+
+void GodMode::reloadRooms()
+{
+	std::ifstream stream(game_p->findActFile(game_p->act_));
+
+	game_p->props.load(stream);
+	game_p->puzzle.load(stream);
+	game_p->story.load(stream);
+
+	stream.close();
 }

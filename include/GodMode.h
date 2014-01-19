@@ -22,6 +22,7 @@ public:
 	void saveFile(std::ofstream stream);
 	void toggleCollisionBoxVisibility();
     sf::Vector2i getCharPosition();
+	void reloadRooms();
 };
 
 

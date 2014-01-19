@@ -14,10 +14,10 @@ class Game: public Inputable, public Animateable, public sf::Drawable
 {
 private:
 	//classses
-	Character character
-	Props props
-	Story story
-	Puzzle puzzle
+	Character character;
+	Props props;
+	Story story;
+	Puzzle puzzle;
     short act_, room_;
 
 	std::string findActFile(short act);
