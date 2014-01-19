@@ -6,17 +6,24 @@
 class Fileable
 {
 public:
-	virtual bool load() =0; //used for progress
-	virtual void save() =0;
+	virtual bool load(); //used for progress
+	virtual void save();
 
-	virtual bool load(std::ifstream &in) =0; //used for main file
-	virtual void save(std::ofstream &out) =0;
-/*
-	friend std::ifstream& operator>> (std::ifstream &in, Fileable fileable);
-	friend std::ofstream& operator<< (std::ofstream &out, Fileable fileable);*/
-	//TODO: make class not abstract and uncomment these lines
+	virtual bool load(std::ifstream &in); //used for main file
+	virtual void save(std::ofstream &out);
+
+	friend std::ifstream& operator>> (std::ifstream &in, Fileable fileable)
+	{
+		fileable.load(in);
+		return in;
+	}
+	friend std::ofstream& operator<< (std::ofstream &out, Fileable fileable)
+	{
+		fileable.save(out);
+		return out;
+	}
 };
-
+ 
 class Inputable
 {
 public:

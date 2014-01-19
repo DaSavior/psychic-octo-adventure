@@ -9,7 +9,7 @@
 #include "Props.h"
 #include "GodMode.h"
 
-
+//TODO: fill out game
 class Game: public Inputable, public Animateable, public sf::Drawable
 {
 private:
