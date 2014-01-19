@@ -25,34 +25,8 @@ enum plugState {NO_PLUG, PLAYER_TO_CIRCUIT, CIRCUIT_TO_CIRCUIT};
 
 #pragma region functions
 
-direction convertKeyToDirection(sf::Keyboard::Key key)
-{
-    direction dir;
-    switch(key)
-    {
-	case sf::Keyboard::Up:
-    case sf::Keyboard::W:
-        dir = NORTH;
-        break;
-    case sf::Keyboard::Right:
-    case sf::Keyboard::D:
-        dir = EAST;
-        break;
-    case sf::Keyboard::Down:
-    case sf::Keyboard::S:
-        dir = SOUTH;
-        break;
-    case sf::Keyboard::Left:
-    case sf::Keyboard::A:
-        dir = WEST;
-        break;
-    default:
-        dir = NONE;
-        break;
-    }
-    return dir;
-}
-sf::Font fontFromFile(std::ifstream &file);
+direction convertKeyToDirection(sf::Keyboard::Key key);
+sf::Font fontFromFile(std::string fileName);
 
 sf::Vector2i getCenter(sf::IntRect rect);
 sf::Vector2f getCenter(sf::FloatRect rect);
@@ -102,7 +76,7 @@ struct AllFonts
 	void loadAll();
 	sf::Font* arial() const;
 	//TODO: list all fonts needed
-}
+};
 #pragma endregion
 
 
