@@ -12,7 +12,7 @@ private:
 	bool walking_;
 	bool raisingArm_;
 
-public:
+public:	
 	Character();
 
 	//gets
