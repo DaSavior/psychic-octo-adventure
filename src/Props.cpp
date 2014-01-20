@@ -4,6 +4,7 @@ Props::Props();
 void Props::update(short room)
 {
 	room_ = room;
+	saveProgress();
 }
 
 std::string Props::charInteract(const Character &character) const
@@ -23,8 +24,8 @@ bool Props::charCanWalk(const Character &character) const
 	return true;
 }
 
-bool Props::load();
-void Props::save();
+bool Props::loadProgress();
+void Props::saveProgress();
 bool Props::load(std::ifstream &in);
 void Props::save(std::ofstream &out);
 void Props::draw(sf::RenderTarget &target, sf::RenderStates states) const

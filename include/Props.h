@@ -22,8 +22,8 @@ public:
 	bool charCanWalk(const Character &character) const;
 
 	//virtuals
-	virtual bool load();
-	virtual void save();
+	virtual bool loadProgress();
+	virtual void saveProgress();
 	virtual bool load(std::ifstream &in);
 	virtual void save(std::ofstream &out);
 	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;

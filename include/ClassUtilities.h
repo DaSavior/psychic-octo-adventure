@@ -6,8 +6,8 @@
 class Fileable
 {
 public:
-	virtual bool load(); //used for progress
-	virtual void save();
+	virtual bool loadProgress()=0; //used for progress
+	virtual void saveProgress()=0;
 
 	virtual bool load(std::ifstream &in); //used for main file
 	virtual void save(std::ofstream &out);
