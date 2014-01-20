@@ -1,5 +1,7 @@
 #include "..\include\Puzzle.h"
 
+#pragma region Puzzle
+
 Puzzle::Puzzle()
 {
 	room_ = 0;
@@ -63,6 +65,9 @@ void Puzzle::draw(sf::RenderTarget &target, sf::RenderStates states) const
 		target.draw(wire, states);
 }
 
+#pragma endregion
+
+#pragma region Door
 
 //TODO: figure out this weird error
 DoorObject::DoorObject() : sf::Sprite()
@@ -131,6 +136,9 @@ bool DoorObject::load(std::ifstream &in);
 void DoorObject::save(std::ofstream &out);
 void DoorObject::draw(sf::RenderTarget &target, sf::RenderStates states) const;
 
+#pragma endregion
+
+#pragma region Wire
 
 WireObject::WireObject() : sf::RectangleShape()
 {
@@ -162,9 +170,9 @@ void WireObject::saveProgress();
 bool WireObject::load(std::ifstream &in);
 void WireObject::save(std::ofstream &out);
 
+#pragma endregion
 
-
-
+#pragma region Circuit
 
 CircuitObject::CircuitObject()
 {
@@ -340,7 +348,9 @@ void CircuitObject::draw(sf::RenderTarget &target, sf::RenderStates states)
 	target.draw(plug_, states);
 }
 
+#pragma endregion
 
+#pragma region Bulbs
 
 BulbObject::BulbObject() : SpritePlus::SpritePlus()
 {
@@ -373,7 +383,9 @@ void BulbObject::saveProgress();
 bool BulbObject::load(std::ifstream &in);
 void BulbObject::save(std::ofstream &out);
 
+#pragma endregion
 
+#pragma region Lever
 
 LeverObject::LeverObject() : SpritePlus::SpritePlus()
 {
@@ -440,3 +452,5 @@ bool PlugObject::loadProgress();
 void PlugObject::saveProgress();
 bool PlugObject::load(std::ifstream &in);
 void PlugObject::save(std::ofstream &out);
+
+#pragma endregion
