@@ -74,5 +74,30 @@ public:
 	void moveFrameTo(direction position);
 };
 
+class LineShape: private sf::RectangleShape
+{
+private:
+	sf::Vector2i start;
+	sf::Vector2i end;
+public:
+	//gets
+	sf::Vector2i getState();
+	sf::Vector2i getEnd();
+	int getThickness();
+	sf::Color getColor();
+
+	//sets
+	void setState(sf::Vector2i point);
+	void setEnd(sf::Vector2i point);
+	void setThickness(int thickness);
+	void setColor(sf::Color::color)
+
+	//checks
+	bool intersects(LineShape other);
+	bool intersects(sf::RectangleShape other);
+
+	//changes
+}
+
 
 #endif

@@ -27,12 +27,26 @@ public:
 
 	//checks
 	bool canWalk() const; //can't while arm is raised
+	bool hasEnergy() const;
 
 	//changes
 	void startWalk();
 	void stopWalk();
 	void raiseArm();
 	void lowerArm();
+	
+	bool addEnergy(unsigned short energy)
+	{
+		setEnergy(getEnergy() + energy);
+	}
+	bool removeEnergy(unsigned short energy)
+	{
+		if (energy > getEnergy())
+			return false;
+
+		setEnergy(getEnergy() - energy);
+		return true;
+	}
 	
 	//virtuals
 	virtual void animate();
