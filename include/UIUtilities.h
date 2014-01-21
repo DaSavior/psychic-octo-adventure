@@ -50,7 +50,7 @@ public:
 	bool Button::contains(sf::Vector2i point);
 	bool Button::intersects(sf::IntRect rect);
 
-	void highLight(sf::Color color);
+	void highlight(sf::Color color);
 	void addEffect(sf::Sprite sprite);
 	void removeHighlight();
 	void removeEffect();

@@ -11,6 +11,7 @@ private:
 	direction facing_;
 	bool walking_;
 	bool raisingArm_;
+	bool collides_;
 
 public:	
 	Character();
@@ -28,6 +29,7 @@ public:
 	//checks
 	bool canWalk() const; //can't while arm is raised
 	bool hasEnergy() const;
+	bool movingArm() const;
 
 	//changes
 	void startWalk();
@@ -35,18 +37,8 @@ public:
 	void raiseArm();
 	void lowerArm();
 	
-	bool addEnergy(unsigned short energy)
-	{
-		setEnergy(getEnergy() + energy);
-	}
-	bool removeEnergy(unsigned short energy)
-	{
-		if (energy > getEnergy())
-			return false;
-
-		setEnergy(getEnergy() - energy);
-		return true;
-	}
+	bool addEnergy(unsigned short energy);
+	bool removeEnergy(unsigned short energy);
 	
 	//virtuals
 	virtual void animate();

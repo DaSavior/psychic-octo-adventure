@@ -1,5 +1,7 @@
 #include "..\include\Props.h"
 
+#pragma region Props
+
 Props::Props();
 void Props::update(short room)
 {
@@ -34,6 +36,9 @@ void Props::draw(sf::RenderTarget &target, sf::RenderStates states) const
 		target.draw(propList_[room_][c], states);
 }
 
+#pragma endregion
+
+#pragma region PropObject
 
 	PropObject::PropObject() :SpritePlus::SpritePlus()
 {
@@ -48,3 +53,5 @@ bool PropObject::load();
 void PropObject::save();
 bool PropObject::load(std::ifstream &in);
 void PropObject::save(std::ofstream &out);
+
+#pragma endregion

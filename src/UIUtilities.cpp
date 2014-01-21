@@ -1,5 +1,6 @@
 #include "..\include\UIUtilities.h"
 
+#pragma region TextBox
 
 Textbox::Textbox() :sf::RectangleShape(), sf::Text()
 {
@@ -33,7 +34,7 @@ bool Textbox::isOpen() const
 	return !(getString() == "" && line_ == "")
 }
 
-void Textbox::fit();
+void Textbox::fit(); //fits text into box
 void Textbox::appendScroll(std::string scroll)
 {
 	scroll_ += scroll;
@@ -69,12 +70,15 @@ void Textbox::animate()
 }
 void Textbox::draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
+#pragma endregion
+
+#pragma region Button
 
 Button::Button() :Textbox::Textbox()
 {
 	fit();
 }
-void Button::fit();
+void Button::fit(); //fits highlight and sprite onto box
 
 void Button::highlight(sf::Color color)
 {
@@ -108,3 +112,5 @@ void Button::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 
 }
+
+#pragma endregion

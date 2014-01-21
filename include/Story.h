@@ -51,8 +51,6 @@ public:
 	std::string useTile();//return text and lowers repeat
 	
 	//virtuals
-	virtual bool load();
-	virtual void save();
 	virtual bool load(std::ifstream &in);
 	virtual void save(std::ofstream &out);
 };
@@ -75,8 +73,6 @@ public:
 	void setExitDirection(direction exit);
 
 	//virtuals
-	virtual bool load();
-	virtual void save();
 	virtual bool load(std::ifstream &in);
 	virtual void save(std::ofstream &out);
 };

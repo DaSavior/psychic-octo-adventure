@@ -1,5 +1,7 @@
 #include "..\include\Story.h"
 
+#pragma region Story
+
 Story::Story()
 {
 	room_ = 0;
@@ -41,7 +43,9 @@ void Story::saveProgress();
 bool Story::load(std::ifstream &in);
 void Story::save(std::ofstream &out);
 
+#pragma endregion
 
+#pragma region TextTile
 
 TextTile::TextTile() : sf::IntRect()
 {
@@ -76,11 +80,12 @@ std::string TextTile::useTile()
 	return text_;
 }
 	
-bool TextTile::load();
-void TextTile::save();
 bool TextTile::load(std::ifstream &in);
 void TextTile::save(std::ofstream &out);
 
+#pragma endregion
+
+#pragma region NewRoomTile
 
 NewRoomTile::NewRoomTile() : TextTile::TextTile()
 {
@@ -106,7 +111,7 @@ void NewRoomTile::setExitDirection(direction exit)
 	exiting_ = exit;
 }
 
-bool NewRoomTile::load();
-void NewRoomTile::save();
 bool NewRoomTile::load(std::ifstream &in);
 void NewRoomTile::save(std::ofstream &out);
+
+#pragma endregion
