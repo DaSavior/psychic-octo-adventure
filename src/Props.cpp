@@ -40,17 +40,39 @@ void Props::draw(sf::RenderTarget &target, sf::RenderStates states) const
 
 #pragma region PropObject
 
-	PropObject::PropObject() :SpritePlus::SpritePlus()
+PropObject::PropObject() :SpritePlus::SpritePlus()
 {
 	text_ = "";
+	facing_ = NO_DIRECTION;
+	type_ = NO_OBJECT;
 }
 	
-std::string PropObject::getText() const;
+std::string PropObject::getText() const
+{
+	return text_;
+}
+direction PropObject::getDirection() const
+{
+	return facing_;
+}
+propType PropObject::getType() const
+{
+	return type_;
+}
 	
-void PropObject::setText(std::string text);
+void PropObject::setText(std::string text)
+{
+	text_ = text;
+}
+void PropObject::setDirection(direction facing)
+{
+	facing_ = facing;
+}
+void PropObject::setType(propType type)
+{
+	type_ = type;
+}
 
-bool PropObject::load();
-void PropObject::save();
 bool PropObject::load(std::ifstream &in);
 void PropObject::save(std::ofstream &out);
 

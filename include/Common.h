@@ -9,10 +9,46 @@
 
 #pragma region enums
 
-enum location {NO_LOCATION =-1, GAME, MAIN_MENU, PAUSE_MENU, OPTIONS_MENU};
-enum direction {NO_DIRECTION =-1, NORTH, EAST, SOUTH, WEST};
-enum leverState {NO_LEVER =-1, NEGATIVE, NEUTRAL, POSITIVE};
-enum plugState {NO_PLUG =-1, PLAYER_TO_CIRCUIT, CIRCUIT_TO_CIRCUIT};
+enum location {
+	NO_LOCATION =-1, 
+	GAME, 
+	MAIN_MENU, 
+	PAUSE_MENU, 
+	OPTIONS_MENU};
+enum direction {
+	NO_DIRECTION =-1, 
+	NORTH, 
+	EAST, 
+	SOUTH,
+	WEST};
+enum leverState {
+	NO_LEVER =-1, 
+	NEGATIVE, 
+	NEUTRAL, 
+	POSITIVE};
+enum plugState {
+	NO_PLUG =-1, 
+	PLAYER_TO_CIRCUIT, 
+	CIRCUIT_TO_CIRCUIT};
+enum propType {
+	NO_OBJECT =-1, 
+	BED, 
+	WARDROBE,
+	WINDOW,
+
+	CHILD_MALE,
+	CHILD_FEMALE,
+	JANITOR,
+};
+enum doorType
+{
+	NO_DOOR =-1,
+	WOODEN,
+	MAHOGANY,
+	BATHROOM,
+	METAL,
+	VAULT
+};
 
 #pragma endregion
 

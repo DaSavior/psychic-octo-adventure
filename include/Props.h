@@ -33,6 +33,8 @@ class PropObject : public SpritePlus, public Fileable
 {
 private:
 	std::string text_;
+	direction facing_;
+	propType type_;
 	//TODO: IMPORTANT, make things for choosing which kind of prop it is
 public:
 	//HACK: inheriting constructors from SpritePlus
@@ -40,9 +42,13 @@ public:
 	
 	//gets
 	std::string getText() const;
+	direction getDirection() const;
+	propType getType() const;
 	
 	//sets
 	void setText(std::string text);
+	void setDirection(direction facing);
+	void setType(propType type);
 
 	//virtuals
 	virtual bool load(std::ifstream &in);
