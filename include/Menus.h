@@ -10,12 +10,12 @@ class MainMenu: public Inputable, public sf::Drawable
 {
 private:
 	
-	//new game button
-	//continue button
-	//options button
-	//close button
-	//canContinue bool
+	Button newGame_;
+	Button continue_;
+	Button options_;
+	Button close_;
 
+	bool canContinue_;
 
 public:	
 	friend GodMode;
@@ -38,10 +38,12 @@ public:
 class OptionsMenu: public Inputable, public sf::Drawable
 {
 private:
-	//fullscreen toggle button
-	//volume ppicture button
+	Button fullScreenToggle_;
+	Button volume_;
+	Button accept_;
+	Button cancel_;
 	//resolution up/down buttons?
-
+	//TODO: how does optionsMenu know the settings and change them? should it use a pointer to the settings?
 
 public:
 	OptionsMenu();
@@ -54,7 +56,9 @@ public:
 class PauseMenu: public Inputable, public sf::Drawable
 {
 private:
-
+	Button resumegame_;
+	Button options_;
+	Button exitGame_;
 
 
 public:

@@ -104,4 +104,7 @@ bool Button::intersects(sf::IntRect rect)
 	return getRectangle().intersects(rect);
 }
 
-void Button::draw(sf::RenderTarget& target, sf::RenderStates states) const;
+void Button::draw(sf::RenderTarget& target, sf::RenderStates states) const 
+{
+
+}

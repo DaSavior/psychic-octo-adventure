@@ -20,6 +20,8 @@ enum plugState {NO_PLUG =-1, PLAYER_TO_CIRCUIT, CIRCUIT_TO_CIRCUIT};
 
 #define UNCOLIDABLE_BOX sf::IntRect()
 #define CHAR_COL_BOX sf::IntRect(100,100,100,100)
+#define COLOR_MOUSE_OVER sf::Color::Color(200,150,50,100)
+#define COLOR_GRAY sf::Color::Color(150,150,150,150)
 
 #pragma endregion
 
