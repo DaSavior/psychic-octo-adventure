@@ -2,7 +2,7 @@
 
 #pragma region TextBox
 
-Textbox::Textbox() :sf::RectangleShape(), sf::Text()
+Textbox::Textbox() : sf::Text()
 {
 	scroll_ ="";
 	line_ ="";
@@ -34,7 +34,7 @@ bool Textbox::isOpen() const
 	return !(getString() == "" && line_ == "")
 }
 
-void Textbox::fit(); //fits text into box
+void Textbox::fit();//fits text into box
 void Textbox::appendScroll(std::string scroll)
 {
 	scroll_ += scroll;
@@ -68,7 +68,10 @@ void Textbox::animate()
 
 	fit();
 }
-void Textbox::draw(sf::RenderTarget& target, sf::RenderStates states) const;
+void Textbox::draw(sf::RenderTarget& target, sf::RenderStates states) const
+{
+
+}
 
 #pragma endregion
 

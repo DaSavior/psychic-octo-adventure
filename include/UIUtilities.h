@@ -5,9 +5,10 @@
 #include "ClassUtilities.h"
 
 //TODO: test if draw can call draw from rectngleshape and 
-class Textbox: public sf::Text, public sf::RectangleShape, public Animateable
+class Textbox: public sf::Text, public Animateable
 {
 private:
+	sf::RectangleShape box;
 	std::string scroll_;
 	std::string line_;
 

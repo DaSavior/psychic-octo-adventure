@@ -39,7 +39,7 @@ enum propType {
 	CHILD_MALE,
 	CHILD_FEMALE,
 	JANITOR,
-};
+}; 
 enum doorType
 {
 	NO_DOOR =-1,
@@ -61,6 +61,8 @@ enum doorType
 
 #define ARM_UP 20
 #define ARM_DOWN 30
+
+#define FILE_PROGRESS "Resources/save.txt"	//TODO: change to .dat once everything works
 
 #pragma endregion
 
