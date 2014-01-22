@@ -58,13 +58,75 @@ void MainMenu::draw(sf::RenderTarget& target, sf::RenderStates states) const
 
 #pragma region OptionsMenu
 
-OptionsMenu::OptionsMenu(SettingsInfo *setting_p);
-OptionsMenu::~OptionsMenu();
-	
+OptionsMenu::OptionsMenu(SettingsInfo *t_setting_p)
+{
+	setting_p = t_setting_p;
+}
+OptionsMenu::~OptionsMenu()
+{
+	if (setting_p == NULL)
+		setting_p = NULL;
+}
+
+
 location OptionsMenu::mousePressed(sf::Vector2i mouse_pos, location loc)
 {
-}	//loc is the menu that entered options menu
-location OptionsMenu::mouseMoved(sf::Vector2i mouse_pos, location loc);
+	if (fullScreenToggle_.contains(mouse_pos))
+	{
+		if (setting_p->style == sf::Style::Fullscreen)
+			setting_p->style = sf::Style::Close;
+		else
+			setting_p->style = sf::Style::Fullscreen;
+	}
+	if (volume_.contains(mouse_pos))
+	if (resolution_up_.contains(mouse_pos))
+	if (resolution_down_.contains(mouse_pos))
+	if (accept_.contains(mouse_pos))
+	{
+
+	}
+	if (cancel_.contains(mouse_pos))
+		return loc;
+	if (apply_.contains(mouse_pos))
+
+	return OPTIONS_MENU;
+}	
+
+location OptionsMenu::mouseMoved(sf::Vector2i mouse_pos, location loc)
+{
+	if (!fullScreenToggle_.contains(mouse_pos))
+		fullScreenToggle_.removeHighlight();
+	if (!volume_.contains(mouse_pos))
+		volume_.removeHighlight();
+	if (!resolution_up_.contains(mouse_pos))
+		resolution_up_.removeHighlight();
+	if (!resolution_down_.contains(mouse_pos))
+		resolution_down_.removeHighlight();
+	if (!accept_.contains(mouse_pos))
+		accept_.removeHighlight();
+	if (!cancel_.contains(mouse_pos))
+		cancel_.removeHighlight();
+	if (!apply_.contains(mouse_pos))
+		apply_.removeHighlight();
+
+	if (fullScreenToggle_.contains(mouse_pos))
+		fullScreenToggle_.highlight(COLOR_MOUSE_OVER);
+	if (volume_.contains(mouse_pos))
+		volume_.highlight(COLOR_MOUSE_OVER);
+	if (resolution_up_.contains(mouse_pos))
+		resolution_up_.highlight(COLOR_MOUSE_OVER);
+	if (resolution_down_.contains(mouse_pos))
+		resolution_down_.highlight(COLOR_MOUSE_OVER);
+	if (accept_.contains(mouse_pos))
+		accept_.highlight(COLOR_MOUSE_OVER);
+	if (cancel_.contains(mouse_pos))
+		cancel_.highlight(COLOR_MOUSE_OVER);
+	if (apply_.contains(mouse_pos))
+		apply_.highlight(COLOR_MOUSE_OVER);
+
+	return OPTIONS_MENU;
+}
+
 void OptionsMenu::draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
 #pragma endregion

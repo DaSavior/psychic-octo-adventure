@@ -42,8 +42,9 @@ private:
 	Button volume_;
 	Button accept_;
 	Button cancel_;
-	//resolution up/down buttons?
-	//TODO: how does optionsMenu know the settings and change them? should it use a pointer to the settings?
+	Button resolution_up_;
+	Button resolution_down_;
+	Button apply_;
 
 	SettingsInfo *setting_p;
 public:
