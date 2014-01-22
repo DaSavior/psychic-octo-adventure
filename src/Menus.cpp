@@ -8,7 +8,10 @@ location MainMenu::mousePressed(sf::Vector2i mouse_pos, location loc)
 {
 	if (newGame_.contains(mouse_pos))
 	{
-		//TODO: Clear Save
+		std::ofstream file;
+		file.open(FILE_PROGRESS);
+		file.close();
+		
 		return GAME;
 	}
 	if (continue_.contains(mouse_pos))
@@ -55,7 +58,8 @@ void MainMenu::draw(sf::RenderTarget& target, sf::RenderStates states) const
 
 #pragma region OptionsMenu
 
-OptionsMenu::OptionsMenu();
+OptionsMenu::OptionsMenu(SettingsInfo *setting_p);
+OptionsMenu::~OptionsMenu();
 	
 location OptionsMenu::mousePressed(sf::Vector2i mouse_pos, location loc)
 {

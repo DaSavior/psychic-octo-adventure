@@ -45,8 +45,10 @@ private:
 	//resolution up/down buttons?
 	//TODO: how does optionsMenu know the settings and change them? should it use a pointer to the settings?
 
+	SettingsInfo *setting_p;
 public:
-	OptionsMenu();
+	OptionsMenu(SettingsInfo *t_setting_p);
+	~OptionsMenu();
 	
 	virtual location mousePressed(sf::Vector2i mouse_pos, location loc);	//loc is the menu that entered options menu
 	virtual location mouseMoved(sf::Vector2i mouse_pos, location loc);
