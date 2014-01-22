@@ -23,7 +23,7 @@ direction convertKeyToDirection(sf::Keyboard::Key key)
         dir = WEST;
         break;
     default:
-        dir = NONE;
+        dir = NO_DIRECTION;
         break;
     }
     return dir;
@@ -82,4 +82,61 @@ int rect_Bottom(sf::IntRect rect)
 int rect_Right(sf::IntRect rect)
 {
 	return (rect.left + rect.width);
+}
+
+bool progressFileExists()
+{
+	bool exists = true;
+
+	std::ifstream progress_file(FILE_PROGRESS);
+	std::string buffer = "";
+
+	std::getline(progress_file, buffer);
+
+	if (buffer == "")
+	{
+		exists = false;
+	}
+
+	return exists;
+}
+
+SettingsInfo::SettingsInfo(sf::VideoMode win_res = sf::VideoMode(800, 600), unsigned short vol = 50, 
+						   sf::Uint32 t_style = sf::Style::Fullscreen, std::string window_title = "Psychosis")
+{
+	window_name = window_title;
+	resolution = win_res;
+	style = t_style;
+	if (vol >= 100)
+		volume = 100;
+	else
+		volume = vol;
+}
+
+void SettingsInfo::loadFromFile(std::string file_name)
+{
+	std::ifstream i_file;
+	std::size_t pos;
+	std::string buffer = "";
+	i_file.open(file_name);
+		
+	std::getline(i_file, buffer);
+
+	pos = buffer.find(SETTINGS_ID);
+
+	if (pos != std::string::npos)
+	{
+		i_file.close();
+		i_file.open(file_name);
+
+		i_file.ignore(pos+1);
+		i_file.ignore('\n');
+
+		sf::Vector2i temp_vec;
+
+		std::getline(i_file, window_name, '\n');
+		i_file >> temp_vec.x >> temp_vec.y >> volume >> style;
+	}
+
+	return;
 }

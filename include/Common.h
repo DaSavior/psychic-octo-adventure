@@ -16,7 +16,7 @@ enum location {
 	PAUSE_MENU, 
 	OPTIONS_MENU};
 enum direction {
-	NO_DIRECTION =-1, 
+	NO_DIRECTION = -1, 
 	NORTH, 
 	EAST, 
 	SOUTH,
@@ -64,6 +64,11 @@ enum doorType
 
 #define FILE_PROGRESS "Resources/save.txt"	//TODO: change to .dat once everything works
 
+#define SETTINGS_ID "#settings"
+#define PROPS_ID "#props"
+#define PUZZLE_ID "#puzzle"
+#define STORY_ID "#story"
+
 #pragma endregion
 
 #pragma region functions
@@ -82,22 +87,18 @@ sf::IntRect makeRect_Containing(sf::IntRect one, sf::IntRect two);
 int rect_Bottom(sf::IntRect rect);
 int rect_Right(sf::IntRect rect);
 
+bool progressFileExists();
+
 #pragma endregion
 
 #pragma region structs
 
 struct SettingsInfo
 {
-	SettingsInfo(sf::VideoMode win_res = sf::VideoMode(800, 600), unsigned short vol = 50, sf::Uint32 t_style = sf::Style::Fullscreen, std::string window_title = "Psychosis")
-	{
-		window_name = window_title;
-		resolution = win_res;
-		style = t_style;
-		if (vol >= 100)
-			volume = 100;
-		else
-			volume = vol;
-	}
+	SettingsInfo(sf::VideoMode win_res = sf::VideoMode(800, 600), unsigned short vol = 50, 
+				 sf::Uint32 t_style = sf::Style::Fullscreen, std::string window_title = "Psychosis");
+	void loadFromFile(std::string file_name);
+
 	std::string window_name;
 	sf::VideoMode resolution;
 	unsigned short volume;
@@ -111,7 +112,7 @@ struct AllTextures
 	std::vector<sf::Texture*> forGame() const;
 	sf::Texture* basicProps() const;
 	//TODO: list all textures needed
-}
+};
 struct AllFonts
 {
 	std::vector<sf::Font> fonts_;
