@@ -64,10 +64,11 @@ enum doorType
 
 #define FILE_PROGRESS "Resources/save.txt"	//TODO: change to .dat once everything works
 
-#define SETTINGS_ID "#settings"
-#define PROPS_ID "#props"
-#define PUZZLE_ID "#puzzle"
-#define STORY_ID "#story"
+#define ID_SETTINGS "#settings"
+#define ID_PROPS "#props"
+#define ID_PUZZLE "#puzzle"
+#define ID_STORY "#story"
+#define ID_CHARACTER "#character"
 
 #pragma endregion
 

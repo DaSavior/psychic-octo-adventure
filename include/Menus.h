@@ -46,9 +46,13 @@ private:
 	Button resolution_down_;
 	Button apply_;
 
+	bool changed;
+
 	SettingsInfo *setting_p;
+	SettingsInfo t_setting;
+	sf::RenderWindow *window_p;
 public:
-	OptionsMenu(SettingsInfo *t_setting_p);
+	OptionsMenu(SettingsInfo *t_setting_p, sf::RenderWindow *t_window_p);
 	~OptionsMenu();
 	
 	virtual location mousePressed(sf::Vector2i mouse_pos, location loc);	//loc is the menu that entered options menu
@@ -61,7 +65,7 @@ class PauseMenu: public Inputable, public sf::Drawable
 private:
 	Button resumegame_;
 	Button options_;
-	Button exitGame_;
+	Button exitToMenu_;
 
 
 public:
