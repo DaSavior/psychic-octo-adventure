@@ -3,7 +3,6 @@
 #include "include\Menus.h"
 #include "include\GodMode.h"
 #include "include\Threads.h"
-#include <functional>
 
 int main()
 {
@@ -16,6 +15,13 @@ int main()
 
 	if (can_continue)
 		settings.loadFromFile(FILE_PROGRESS);
+
+	{
+		AllTextures t;
+		AllFonts f;
+		t.loadAll();
+		f.loadAll();
+	}
 
 	Game game;
 	MainMenu mainMenu;

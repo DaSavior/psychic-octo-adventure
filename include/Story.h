@@ -19,7 +19,7 @@ private:
 public:
 	Story();
 
-	void update(short room);
+	void updateRoom(short room);
 
 	//for character
 	std::string charWalk(const Character &character);		//for text

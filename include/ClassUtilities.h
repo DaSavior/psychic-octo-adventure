@@ -97,7 +97,42 @@ public:
 	bool intersects(sf::RectangleShape other);
 
 	//changes
-}
+};
+
+class AllTextures
+{
+private:
+	void cutTextures();
+	static std::vector<sf::Texture> textures_;
+public:
+
+	AllTextures();
+	void loadAll();
+	
+	sf::Texture* basicProps() const;
+	sf::Texture* floor(floorType type) const;
+	sf::Texture* walls(wallType type, direction facing) const;
+
+	sf::Texture* lever() const;
+	sf::Texture* bulb() const;
+	sf::Texture* plug() const;
+	sf::Texture* door(doorType type) const;
+	//TODO: list all textures needed
+
+public:
+	
+};
+class AllFonts
+{
+private:
+	std::vector<sf::Font> fonts_;
+
+public:
+
+	void loadAll();
+	sf::Font* arial() const;
+	//TODO: list all fonts needed
+};
 
 
 #endif

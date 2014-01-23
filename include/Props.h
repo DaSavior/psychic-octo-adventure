@@ -11,11 +11,12 @@ class Props: public Fileable
 private:
 	std::vector<std::vector<PropObject>> propList_;
 	short room_;
+	AllTextures textures;
 
 public:
 	Props();
 
-	void update(short room);
+	void updateRoom(short room);
 
 	//for character
 	std::string charInteract(const Character &character) const;

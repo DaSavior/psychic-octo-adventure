@@ -9,11 +9,11 @@
 class MainMenu: public Inputable, public sf::Drawable
 {
 private:
-	
 	Button newGame_;
 	Button continue_;
 	Button options_;
 	Button close_;
+	AllFonts fonts_;
 
 	bool canContinue_;
 
@@ -51,6 +51,8 @@ private:
 	SettingsInfo *setting_p;
 	SettingsInfo t_setting;
 	sf::RenderWindow *window_p;
+	
+	AllFonts fonts_;
 public:
 	OptionsMenu(SettingsInfo *t_setting_p, sf::RenderWindow *t_window_p);
 	~OptionsMenu();
@@ -66,7 +68,8 @@ private:
 	Button resumegame_;
 	Button options_;
 	Button exitToMenu_;
-
+	
+	AllFonts fonts_;
 
 public:
 	PauseMenu();

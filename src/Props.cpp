@@ -3,7 +3,7 @@
 #pragma region Props
 
 Props::Props();
-void Props::update(short room)
+void Props::updateRoom(short room)
 {
 	room_ = room;
 	saveProgress();

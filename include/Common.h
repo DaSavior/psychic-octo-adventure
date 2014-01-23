@@ -6,6 +6,7 @@
 #include <string>
 #include <fstream>
 #include <vector>
+#include <functional>
 
 #pragma region enums
 
@@ -48,6 +49,25 @@ enum doorType
 	BATHROOM,
 	METAL,
 	VAULT
+};
+enum wallType
+{
+	NO_WALL = -1,
+	CLASSY,
+	STRIPED,
+	DECROSHUTTHEUCKUPTIVE,
+	FESTIVE,
+	WOODEN,
+	UTILITY_CLOSET,
+	MAINTENCE_TUNNEL,
+	BRICK,
+	FELT
+};
+enum floorType
+{
+	NO_FLOOR,
+	TILE,
+	WOOD
 };
 
 #pragma endregion
@@ -104,23 +124,6 @@ struct SettingsInfo
 	sf::VideoMode resolution;
 	unsigned short volume;
 	sf::Uint32 style;
-};
-struct AllTextures
-{
-	std::vector<sf::Texture> textures_;
-
-	void loadAll();
-	std::vector<sf::Texture*> forGame() const;
-	sf::Texture* basicProps() const;
-	//TODO: list all textures needed
-};
-struct AllFonts
-{
-	std::vector<sf::Font> fonts_;
-
-	void loadAll();
-	sf::Font* arial() const;
-	//TODO: list all fonts needed
 };
 #pragma endregion
 

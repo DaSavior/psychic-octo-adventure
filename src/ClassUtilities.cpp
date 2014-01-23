@@ -147,3 +147,15 @@ void SpritePlus::moveFrameTo(direction position)
 		break;
 	}
 }
+
+void AllTextures::cutTextures()
+{
+	/*
+	for (int c = 0, c <= num_of_textures, c++)
+	{
+		sf::textures
+	}
+
+
+	*/
+}

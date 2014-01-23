@@ -14,12 +14,15 @@ private:
 	std::vector<std::vector<WireObject>> wires_;
 	short room_;
 
+	AllTextures textures;
+	AllFonts fonts;
+
 public:
 	Puzzle();
 
 	//gets
 
-	void update(short room);
+	void updateRoom(short room);
 
 	//for character
 	bool charToPlugEnergy(Character &character);

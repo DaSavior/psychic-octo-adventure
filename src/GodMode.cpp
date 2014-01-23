@@ -33,7 +33,7 @@ void GodMode::toggleClipping()
 
 void GodMode::gotoActRoom(int act, int room)
 {
-    game_p->update(act, room);
+    game_p->updateRoom(act, room);
 }
 
 void GodMode::setCharEnergy(unsigned short energy)

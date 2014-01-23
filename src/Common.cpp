@@ -122,7 +122,7 @@ void SettingsInfo::loadFromFile(std::string file_name)
 		
 	std::getline(i_file, buffer);
 
-	pos = buffer.find(SETTINGS_ID);
+	pos = buffer.find(ID_SETTINGS);
 
 	if (pos != std::string::npos)
 	{
@@ -140,3 +140,4 @@ void SettingsInfo::loadFromFile(std::string file_name)
 
 	return;
 }
+
