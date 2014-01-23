@@ -14,6 +14,9 @@ private:
 	std::vector<std::vector<WireObject>> wires_;
 	short room_;
 
+	AllTextures textures;
+	AllFonts fonts;
+
 public:
 	Puzzle();
 

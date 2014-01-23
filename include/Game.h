@@ -13,11 +13,14 @@
 class Game: public Inputable, public Animateable, public sf::Drawable
 {
 private:
+	//
 	//classses
 	Character character;
 	Props props;
+	std::vector<int> *t;
 	Story story;
 	Puzzle puzzle;
+	AllTextures textures;
     short act_, room_;
 
 	std::string findActFile(short act);

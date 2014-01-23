@@ -11,6 +11,7 @@ class Props: public Fileable
 private:
 	std::vector<std::vector<PropObject>> propList_;
 	short room_;
+	AllTextures textures;
 
 public:
 	Props();

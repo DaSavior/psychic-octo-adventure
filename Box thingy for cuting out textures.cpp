@@ -25,13 +25,13 @@ int main()
 		}
 
 		window.clear();
-
+		
 		
 		if(draw_test)
 		{
 			test2.loadFromImage(test1.copyToImage(), sf::IntRect(100, 100, 200, 200));
 			test2.setRepeated(true);
-			test_sprite.setTexture(test2, false);
+			test_sprite.setTexture(test2);
 		}
 		
 		window.draw(test_sprite);
