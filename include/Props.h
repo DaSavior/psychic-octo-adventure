@@ -15,7 +15,7 @@ private:
 public:
 	Props();
 
-	void update(short room);
+	void updateRoom(short room);
 
 	//for character
 	std::string charInteract(const Character &character) const;

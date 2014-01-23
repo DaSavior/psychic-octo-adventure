@@ -1,7 +1,7 @@
 #include "..\include\Game.h"
 
 
-void Game::update(short act, short room)
+void Game::updateRoom(short act, short room)
 {
 	/*
     act_ = act;
@@ -16,7 +16,7 @@ void Game::update(short act, short room)
 location Game::keyPressed(sf::Keyboard::Key key, location loc)
 {
     direction dir = convertKeyToDirection(key);
-    if((character.getDirection() != dir) && (dir != direction::NONE))    //TODO: finish this   
+	if((character.getDirection() != dir) && (dir != direction::NO_DIRECTION))    //TODO: finish this   
 	{
 	   character.setDirection(dir);
 	   character.startWalk();
@@ -43,4 +43,9 @@ location Game::keyReleased(sf::Keyboard::Key key, location loc)
         break;
     }
 	return loc;
+}
+
+void Game::animate()
+{
+
 }

@@ -19,7 +19,7 @@ public:
 
 	//gets
 
-	void update(short room);
+	void updateRoom(short room);
 
 	//for character
 	bool charToPlugEnergy(Character &character);
