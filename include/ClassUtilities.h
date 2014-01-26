@@ -102,11 +102,12 @@ public:
 class AllTextures
 {
 private:
-	void cutTextures();
-	static std::vector<sf::Texture> props_;
+	void loadSheets();
+
+	static std::vector<sf::Texture[4]> props_;
+	static std::vector<sf::Texture[4]> walls_;
+	static std::vector<sf::Texture[4]> doors_;
 	static std::vector<sf::Texture> floors_;
-	static std::vector<sf::Texture> walls_;
-	static std::vector<sf::Texture> doors_;
 	static sf::Texture lever_;
 	static sf::Texture plug_;
 	static sf::Texture bulb_;
@@ -115,10 +116,9 @@ public:
 	AllTextures();
 	void loadAll();
 	
-	sf::Texture* basicProps(propType type, direction facing) const;
+	sf::Texture* prop(propType type, direction facing) const;
 	sf::Texture* floor(floorType type) const;
 	sf::Texture* walls(wallType type, direction facing) const;
-
 	sf::Texture* lever() const;
 	sf::Texture* bulb() const;
 	sf::Texture* plug() const;

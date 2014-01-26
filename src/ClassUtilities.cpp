@@ -20,6 +20,7 @@ location Inputable::input(sf::Event event, location loc)
 	return loc;
 }
 
+#pragma region SpritePlus
 
 SpritePlus::SpritePlus(const sf::IntRect &collision = sf::IntRect()) : sf::Sprite() 
 {
@@ -148,14 +149,103 @@ void SpritePlus::moveFrameTo(direction position)
 	}
 }
 
-void AllTextures::cutTextures()
+#pragma endregion
+
+#pragma region AllTextures
+
+AllTextures::AllTextures()
 {
-	/*
-	for (int c = 0, c <= num_of_textures, c++)
+
+}
+
+void AllTextures::loadSheets()
+{
+	props_.clear();
+	floors_.clear();
+	walls_.clear();
+	doors_.clear();
+
+	sf::Texture sheet;
+
+	sf::Vector2i size; 
+	sf::Vector2i position;
+
+	//prop sheet
+	size = sf::Vector2i(100, 100);
+	sheet.loadFromFile("Resources/props.png");
+
+	for (int c = 0; c < propType::COUNT; c++)
 	{
-		sf::textures
+		for (int d = 0; d < 4; d++)
+		{
+			position.x = size.x * c;	position.y = size.y * d;
+			props_[c][d].loadFromImage(sheet.copyToImage(), sf::IntRect(position, size));
+		}
 	}
 
 
-	*/
+	//floors
+	size = sf::Vector2i(100, 100);
+	sheet.loadFromFile("Resources/floors.png");
+/*
+	for (int c = 0; c < floorType::COUNT; c++)
+		for (int d = 0; d < 4; d++)
+			props_[c][d].loadFromImage(sheet.copyToImage(), sf::IntRect(size.x*c, size.x*d, size.x, size.y));*/
+
+
+	//walls
+	size = sf::Vector2i(100, 160); //if 160 will be the height of the wall
+	sheet.loadFromFile("Resources/walls.png");
+
+	for (int c = 0; c < wallType::COUNT; c++)
+		for (int d = 0; d < 4; d++)
+			props_[c][d].loadFromImage(sheet.copyToImage(), sf::IntRect(size.x*c, size.x*d, size.x, size.y));
+
+
+	//doors
+	size = sf::Vector2i(200, 100);	//size of open and closed door in one texture
+	sheet.loadFromFile("Resources/doors.png");
+
+	for (int c = 0; c < doorType::COUNT; c++)
+		for (int d = 0; d < 4; d++)
+			props_[c][d].loadFromImage(sheet.copyToImage(), sf::IntRect(size.x*c, size.x*d, size.x, size.y));
 }
+
+void AllTextures::loadAll()
+{
+	lever_.loadFromFile("Resources/lever.png");
+	plug_.loadFromFile("Resources/plug.png");
+	bulb_.loadFromFile("Resources/bulb.png");
+	loadSheets();
+}
+
+sf::Texture* AllTextures::prop(propType type, direction facing) const
+{
+	return &props_[(int)type][(int)facing];
+}
+sf::Texture* AllTextures::floor(floorType type) const
+{
+	return &floors_[type];
+}
+sf::Texture* AllTextures::walls(wallType type, direction facing) const
+{
+	return &walls_[(int)type][(int)facing];
+}
+sf::Texture* AllTextures::door(doorType type, direction facing) const
+{
+	return &doors_[(int)type][(int)facing];
+}
+sf::Texture* AllTextures::lever() const
+{
+	return &lever_;
+}
+sf::Texture* AllTextures::bulb() const
+{
+	return &bulb_;
+}
+sf::Texture* AllTextures::plug() const
+{
+	return &plug_;
+}
+
+#pragma endregion

@@ -40,6 +40,7 @@ enum propType {
 	CHILD_MALE,
 	CHILD_FEMALE,
 	JANITOR,
+	COUNT
 }; 
 enum doorType
 {
@@ -48,7 +49,8 @@ enum doorType
 	MAHOGANY,
 	BATHROOM,
 	METAL,
-	VAULT
+	VAULT,
+	COUNT
 };
 enum wallType
 {
@@ -61,13 +63,15 @@ enum wallType
 	UTILITY_CLOSET,
 	MAINTENCE_TUNNEL,
 	BRICK,
-	FELT
+	FELT,
+	COUNT
 };
 enum floorType
 {
 	NO_FLOOR,
 	TILE,
-	WOOD
+	WOOD,
+	COUNT
 };
 
 #pragma endregion
