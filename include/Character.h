@@ -30,6 +30,7 @@ public:
 	bool canWalk() const; //can't while arm is raised
 	bool hasEnergy() const;
 	bool movingArm() const;
+	bool isWalking() const;
 
 	//changes
 	void startWalk();

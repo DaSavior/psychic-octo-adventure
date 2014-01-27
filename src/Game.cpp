@@ -25,10 +25,17 @@ location Game::keyPressed(sf::Keyboard::Key key, location loc)
 	{
 		character.startWalk(); //TODO: does this work?
 	}
+
+	//TODO: add stuf for lowering arm
 }
 
 location Game::keyReleased(sf::Keyboard::Key key, location loc)
 {
+    direction dir = convertKeyToDirection(key);
+	if (dir != NO_DIRECTION && dir == character.getDirection() && character.isWalking())
+		character.stopWalk();
+
+	//TODO: add stuff for lowering arm
     switch(key)
     {
 	case sf::Keyboard::Up:
