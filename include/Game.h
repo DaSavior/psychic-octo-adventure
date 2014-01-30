@@ -17,10 +17,11 @@ private:
 	//classses
 	Character character;
 	Props props;
-	std::vector<int> *t;
+	std::vector<int> *t;	//what is this?
 	Story story;
 	Puzzle puzzle;
 	AllTextures textures;
+	Textbox textbox;
     short act_, room_;
 
 	std::string findActFile(short act);

@@ -1,0 +1,25 @@
+//NOTE: anything with "//" will not be in the final template
+//NOTE: I will be using '##' to stand for some number 
+//      and '??' to stand for some string
+//NOTE: [] will mean repetition, like in music
+
+#props
+[
+room ##
+
+
+]
+
+#puzzle
+[
+room ##
+
+
+]
+
+#story
+[
+room ##
+
+
+]

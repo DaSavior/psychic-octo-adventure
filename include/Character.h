@@ -13,6 +13,8 @@ private:
 	bool raisingArm_;
 	bool collides_;
 
+	short walkDistance_;
+
 public:	
 	Character();
 

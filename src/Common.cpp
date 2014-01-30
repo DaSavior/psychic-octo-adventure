@@ -50,29 +50,51 @@ sf::Vector2f getCenter(sf::FloatRect rect)
 	return point;
 }
 
-sf::IntRect makeRect_Center(sf::Vector2i center, sf::Vector2i size)
+sf::IntRect rectMake_Center(sf::Vector2i center, sf::Vector2i size)
 {
 	sf::Vector2i position = (center - size/2);
 	
 	return sf::IntRect(position, size);
 }
-sf::IntRect makeRect_Corners(sf::Vector2i TLCorner, sf::Vector2i BRCorner)
+sf::IntRect rectMake_Corners(sf::Vector2i TLCorner, sf::Vector2i BRCorner)
 {
 	sf::Vector2i size = BRCorner - TLCorner;
 	return sf::IntRect(TLCorner, size);
 }
-sf::IntRect makeRect_Corners(int top, int left, int bottom, int right)
+sf::IntRect rectMake_Corners(int top, int left, int bottom, int right)
 {
-	return makeRect_Corners(sf::Vector2i(top, left), sf::Vector2i(bottom, right));
+	return rectMake_Corners(sf::Vector2i(top, left), sf::Vector2i(bottom, right));
 }
-sf::IntRect makeRect_Containing(sf::IntRect one, sf::IntRect two)
+sf::IntRect rectMake_Containing(sf::IntRect one, sf::IntRect two)
 {
 	int top =  one.top  < two.top   ?  one.top  : two.top,
 		left = one.left < two.left  ?  one.left : two.left,
 		bottom = rect_Bottom(one) > rect_Bottom(two)  ?  rect_Bottom(one) : rect_Bottom(two),
 		right =  rect_Right(one)  > rect_Right(two)   ?  rect_Right(one)  : rect_Right(two);
 
-	return makeRect_Corners(top, left, bottom, right);
+	return rectMake_Corners(top, left, bottom, right);
+}
+
+sf::IntRect rectMove(sf::IntRect rect, direction d, int distance)
+{
+	switch (d)
+	{
+	case NO_DIRECTION:
+		break;
+	case NORTH:
+		rect.top	-= distance;
+		break;
+	case EAST:
+		rect.left	+= distance;
+		break;
+	case SOUTH:
+		rect.top	+= distance;
+		break;
+	case WEST:
+		rect.left	-= distance;
+		break;
+	}
+	return rect;
 }
 
 int rect_Bottom(sf::IntRect rect)

@@ -8,6 +8,7 @@ Character::Character()
 	stopWalk();
 	lowerArm();
 	collides_ = true;
+	//TODO: initialize walkDistance_ to something
 }
 
 unsigned short Character::getEnergy() const
@@ -18,8 +19,19 @@ direction Character::getDirection() const
 {
 	return facing_;
 }
-sf::IntRect Character::getWalkCollision() const; //collision box with next step
-sf::IntRect Character::getInteractCollision() const; //collision box for interact events (flipping a switch, 
+sf::IntRect Character::getWalkCollision() const //collision box with next step
+{
+	sf::IntRect temp = rectMove(getGlobalCollisionRectangle(), facing_, walkDistance_);
+	return rectMake_Containing(getGlobalCollisionRectangle(), temp);
+}
+sf::IntRect Character::getInteractCollision() const //collision box for interact events (flipping a switch, etc...
+{
+	sf::FloatRect box1 = getGlobalBounds();
+	sf::IntRect box2 = sf::IntRect(box1.left, box1.top, box1.width, box1.height);
+	sf::IntRect temp = rectMove(box2, facing_, walkDistance_);
+
+	return rectMake_Containing(box2, temp);
+}
 
 void Character::setEnergy(unsigned short energy)
 {

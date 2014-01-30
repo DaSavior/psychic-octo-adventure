@@ -104,10 +104,12 @@ sf::Font fontFromFile(std::string fileName);
 sf::Vector2i getCenter(sf::IntRect rect);
 sf::Vector2f getCenter(sf::FloatRect rect);
 
-sf::IntRect makeRect_Center(sf::Vector2i center, sf::Vector2i size);
-sf::IntRect makeRect_Corners(sf::Vector2i TLCorner, sf::Vector2i BRCorner);
-sf::IntRect makeRect_Corners(int top, int left, int bottom, int right);
-sf::IntRect makeRect_Containing(sf::IntRect one, sf::IntRect two);
+sf::IntRect rectMake_Center(sf::Vector2i center, sf::Vector2i size);
+sf::IntRect rectMake_Corners(sf::Vector2i TLCorner, sf::Vector2i BRCorner);
+sf::IntRect rectMake_Corners(int top, int left, int bottom, int right);
+sf::IntRect rectMake_Containing(sf::IntRect one, sf::IntRect two);
+
+sf::IntRect rectMove(sf::IntRect rect, direction d, int distance);
 
 int rect_Bottom(sf::IntRect rect);
 int rect_Right(sf::IntRect rect);
