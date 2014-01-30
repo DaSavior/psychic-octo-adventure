@@ -33,10 +33,8 @@ public:
 class PropObject : public SpritePlus, public Fileable
 {
 private:
-	std::string text_;
 	direction facing_;
 	propType type_;
-	//TODO: IMPORTANT, make things for choosing which kind of prop it is
 public:
 	//HACK: inheriting constructors from SpritePlus
 	PropObject();

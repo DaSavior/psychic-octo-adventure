@@ -5,9 +5,17 @@
 
 class Fileable
 {
+protected:
+	static std::string progressFile_;
+	static std::vector<std::string> actFiles_;	
+
 public:
+	void loadFiles();
+	void saveFiles();
+
 	virtual bool loadProgress()=0; //used for progress
 	virtual void saveProgress()=0;
+	virtual void checkpoint()=0;
 
 	virtual bool load(std::ifstream &in); //used for main file
 	virtual void save(std::ofstream &out);
@@ -139,6 +147,9 @@ public:
 	sf::Font* arial() const;
 	//TODO: list all fonts needed
 };
+class AllFiles
+{
 
+}
 
 #endif

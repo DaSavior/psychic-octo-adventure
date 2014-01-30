@@ -3,23 +3,72 @@
 //      and '??' to stand for some string
 //NOTE: [] will mean repetition, like in music
 
+
 #props
 [
-room ##
-
-
-]
-
-#puzzle
-[
-room ##
-
-
+  propType ??
+  description ??*
+  direction ??
+  ^storyText ??*
+  position ## ##
+  collision ## ## ## ##
 ]
 
 #story
 [
-room ##
+walkOverTiles
+  [
+  position ## ##
+  size ## ##
+  repeat ##
+  text ??*
+  ]
+newRoomTiles
+  [
+  position ## ##
+  size ## ##
+  repeat ##
+  text ??*
+  room ##
+  direction ??
+  ]
+]
 
+#puzzle
+[
+doors
+  [
+  position ## ##
+  size ## ##
+  collision ## ## ## ##
+  answer ##
+  circuitFrom ##
+  direction ??
+  ]
 
+circuits
+[
+  number ##
+
+  plug
+    position ## ##
+    size ## ##
+    collision ## ##
+    state ??
+    attachedCircuits ## ## //NOTE: if for players, numbers will be 0
+
+  lever
+    position ## ##
+    size ## ##
+    collision ## ##
+    state ??    
+
+  bulbCount ##
+  bulbs
+  [
+    position ## ##
+    size ## ##
+    collision ## ##
+  ]
+  circuitEnergy ##
 ]

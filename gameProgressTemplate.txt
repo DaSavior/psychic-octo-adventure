@@ -2,8 +2,12 @@
 //NOTE: I will be using '##' to stand for some number 
 //      and '??' to stand for some string
 //NOTE: [] will mean repetition, like in music
+//NOTE: act files will be identical, only without settings and character
+
 #settings
-//TODO: This
+  resolution ## ##
+  volume ##
+  style ##
 
 #character
   energy ##
@@ -12,7 +16,86 @@
   room ##
 
 #props
-
-#puzzle
+[
+  propType ??
+  description ??*
+  direction ??
+  ^storyText ??*
+  position ## ##
+  collision ## ## ## ##
+]
 
 #story
+[
+walkOverTiles
+  [
+  position ## ##
+  size ## ##
+  repeat ##
+  text ??*
+  ]
+newRoomTiles
+  [
+  position ## ##
+  size ## ##
+  repeat ##
+  text ??*
+  room ##
+  direction ??
+  ]
+]
+
+#puzzle
+[
+doors
+  [
+  position ## ##
+  size ## ##
+  collision ## ## ## ##
+  answer ##
+  circuitFrom ##
+  direction ??
+  ]
+
+circuits
+[
+  number ##
+
+  plug
+    position ## ##
+    size ## ##
+    collision ## ##
+    state ??
+    attachedCircuits ## ## //NOTE: if for players, numbers will be 0
+
+  lever
+    position ## ##
+    size ## ##
+    collision ## ##
+    state ??    
+
+  bulbCount ##
+  bulbs
+  [
+    position ## ##
+    size ## ##
+    collision ## ##
+  ]
+  circuitEnergy ##
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

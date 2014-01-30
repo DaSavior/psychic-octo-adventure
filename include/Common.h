@@ -10,28 +10,46 @@
 
 #pragma region enums
 
-enum location {
+enum interactType
+{
+	NO_OBJECT =-1,
+	STORY_OBJECT,
+	CLOSED_DOOR,
+	OPEN_DOOR,
+	LEVER,
+	COUNT
+};
+enum location 
+{
 	NO_LOCATION =-1, 
 	GAME, 
 	MAIN_MENU, 
 	PAUSE_MENU, 
-	OPTIONS_MENU};
-enum direction {
+	OPTIONS_MENU
+};
+enum direction 
+{
 	NO_DIRECTION = -1, 
 	NORTH, 
 	EAST, 
 	SOUTH,
-	WEST};
-enum leverState {
+	WEST
+};
+enum leverState 
+{
 	NO_LEVER =-1, 
 	NEGATIVE, 
 	NEUTRAL, 
-	POSITIVE};
-enum plugState {
+	POSITIVE
+};
+enum plugState 
+{
 	NO_PLUG =-1, 
 	PLAYER_TO_CIRCUIT, 
-	CIRCUIT_TO_CIRCUIT};
-enum propType {
+	CIRCUIT_TO_CIRCUIT
+};
+enum propType 
+{
 	NO_OBJECT =-1, 
 	BED, 
 	WARDROBE,

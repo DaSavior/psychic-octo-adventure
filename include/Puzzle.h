@@ -43,9 +43,9 @@ class DoorObject: public Fileable, public SpritePlus
 private:
 	short answer_;
 	sf::Text doorNumber_;
-
-	direction facing_;
+	
 	short circuitFrom_;
+	direction facing_;
 
 public:
 	DoorObject();

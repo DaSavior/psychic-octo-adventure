@@ -7,7 +7,7 @@ Puzzle::Puzzle()
 	room_ = 0;
 }
 
-void Puzzle::update(short room)
+void Puzzle::updateRoom(short room)
 {
 	room_ = room;
 }
@@ -30,9 +30,9 @@ bool Puzzle::charFromPlugEnergy(Character &character)
 }
 bool Puzzle::charInteract(const Character &character) 
 {
-	for (const CircuitObject &circuit : circuits_[room_])
+	for (CircuitObject &circuit : circuits_[room_])
 		if (circuit.charInteract(character))
-			return true;
+			return LEVER;
 
 	return false;
 }

@@ -187,10 +187,8 @@ void AllTextures::loadSheets()
 	//floors
 	size = sf::Vector2i(100, 100);
 	sheet.loadFromFile("Resources/floors.png");
-/*
 	for (int c = 0; c < floorType::COUNT; c++)
-		for (int d = 0; d < 4; d++)
-			props_[c][d].loadFromImage(sheet.copyToImage(), sf::IntRect(size.x*c, size.x*d, size.x, size.y));*/
+		floors_[c].loadFromImage(sheet.copyToImage(), sf::IntRect(size.x*c, size.x*d, size.x, size.y));*/
 
 
 	//walls
