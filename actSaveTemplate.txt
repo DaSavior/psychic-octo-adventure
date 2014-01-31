@@ -3,27 +3,29 @@
 //      and '??' to stand for some string
 //NOTE: [] will mean repetition, like in music
 
-
-#props
 [
+#props room ##
+props ##
+  [
   propType ??
   description ??*
   direction ??
   ^storyText ??*
   position ## ##
   collision ## ## ## ##
+  ]
 ]
 
-#story
 [
-walkOverTiles
+#story room ##
+walkOverTiles ##
   [
   position ## ##
   size ## ##
   repeat ##
   text ??*
   ]
-newRoomTiles
+newRoomTiles ##
   [
   position ## ##
   size ## ##
@@ -34,9 +36,9 @@ newRoomTiles
   ]
 ]
 
-#puzzle
 [
-doors
+#puzzle room ##
+doors ##
   [
   position ## ##
   size ## ##
@@ -46,8 +48,8 @@ doors
   direction ??
   ]
 
-circuits
-[
+circuits ##
+  [
   number ##
 
   plug
@@ -63,8 +65,7 @@ circuits
     collision ## ##
     state ??    
 
-  bulbCount ##
-  bulbs
+  bulbs ##
   [
     position ## ##
     size ## ##

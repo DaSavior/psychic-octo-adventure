@@ -11,7 +11,7 @@ private:
     //std::vector<std::vector<sf::IntRect>> refers to room then objects within the room
 	std::vector<std::vector<DoorObject>> doors_;
 	std::vector<std::vector<CircuitObject>> circuits_;
-	std::vector<std::vector<WireObject>> wires_;
+	std::vector<std::vector<CurveShape>> wires_;
 	short room_;
 
 	AllTextures textures;
@@ -78,7 +78,7 @@ public:
 	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 };
 
-class WireObject: public Fileable, public sf::RectangleShape	//HACK: Try to make a "CurveShape" instead of rectangle shape, allowing multiple points in any orientation, curveshape can hold multiple "LineShapes"
+class WireObject: public CurveShape
 {
 private:
 

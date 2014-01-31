@@ -12,21 +12,19 @@ protected:
 
 public:
 	void loadFiles();
-	void saveFiles();
 
-	virtual bool loadProgress()=0; //used for progress
-	virtual void saveProgress()=0;
 	virtual void checkpoint()=0;
+	
+	virtual bool load(int file); //if file <= 0, then use progress file
+	virtual void save(int file);
 
-	virtual bool load(std::ifstream &in); //used for main file
-	virtual void save(std::ofstream &out);
-
-	friend std::ifstream& operator>> (std::ifstream &in, Fileable fileable)
+	//TODO: this
+	friend std::ifstream& operator>> (std::istream &in, Fileable fileable)
 	{
 		fileable.load(in);
 		return in;
 	}
-	friend std::ofstream& operator<< (std::ofstream &out, Fileable fileable)
+	friend std::ofstream& operator<< (std::ostream &out, Fileable fileable)
 	{
 		fileable.save(out);
 		return out;
