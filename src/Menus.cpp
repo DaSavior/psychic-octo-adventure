@@ -2,7 +2,28 @@
 
 #pragma region MainMenu
 
-MainMenu::MainMenu();
+MainMenu::MainMenu(bool t_canContinue_)
+{
+	canContinue_ = t_canContinue_;
+
+	menu_option = MAIN_NO_CHOICE;
+
+	newGame_.setFont(*fonts_.arial());
+	continue_.setFont(*fonts_.arial());
+	options_.setFont(*fonts_.arial());
+	close_.setFont(*fonts_.arial());
+
+	newGame_.setString("New Game");
+	continue_.setString("Continue");
+	options_.setString("Options");
+	close_.setString("Exit");
+
+	sf::Vector2f start(100,100), distance(0,100);
+	newGame_.setPosition(start);
+	continue_.setPosition(start+distance);
+	options_.setPosition(start+(2.0f*distance));
+	close_.setPosition(start+(3.0f*distance));
+}
 
 location MainMenu::mousePressed(sf::Vector2i mouse_pos, location loc)
 {
@@ -163,12 +184,41 @@ void MainMenu::draw(sf::RenderTarget& target, sf::RenderStates states) const
 
 #pragma region OptionsMenu
 
-OptionsMenu::OptionsMenu(SettingsInfo *t_setting_p, sf::RenderWindow *t_window_p)
+OptionsMenu::OptionsMenu(SettingsInfo *t_setting_p, sf::RenderWindow *t_window_p) //HACK: rellok at everything here
 {
 	changed = false;
 	setting_p = t_setting_p;
 	t_setting = *setting_p;
 	window_p = t_window_p;
+
+	menu_option = OPTION_NO_CHOICE; 
+
+	fullScreenToggle_.setFont(*fonts_.arial());
+	volume_.setFont(*fonts_.arial());
+	resolution_up_.setFont(*fonts_.arial());
+	resolution_down_.setFont(*fonts_.arial());
+	accept_.setFont(*fonts_.arial());
+	cancel_.setFont(*fonts_.arial());
+	apply_.setFont(*fonts_.arial());
+
+	fullScreenToggle_.setString("Toggle Fullscreen ");
+	volume_.setString("Continue");
+	resolution_up_.setString("Options");
+	resolution_down_.setString("Exit");
+	accept_.setString("Continue");
+	cancel_.setString("Options");
+	apply_.setString("Exit");
+
+	sf::Vector2f start(100,100), distance(0,100);
+	fullScreenToggle_.setPosition(start);
+	volume_.setPosition(start+distance);
+	resolution_up_.setPosition(start+(2.0f*distance));
+	resolution_down_.setPosition(start+(3.0f*distance));
+	accept_.setPosition(start+distance);
+	cancel_.setPosition(start+(2.0f*distance));
+	apply_.setPosition(start+(3.0f*distance));
+
+
 }
 OptionsMenu::~OptionsMenu()
 {
@@ -410,12 +460,16 @@ location OptionsMenu::keyPressed(sf::Keyboard::Key key, location loc) //TODO: ad
 		{
 		case FULL_SCREEN_TOGGLE:
 			menu_option = RESOLUTION_BUTTON;
+			break;
 		case VOLUME:
 			menu_option = FULL_SCREEN_TOGGLE;
+			break;
 		case RESOLUTION_BUTTON:
 			menu_option = VOLUME;
+			break;
 		case OPTION_NO_CHOICE:
 			menu_option = RESOLUTION_BUTTON;
+			break;
 		}
 	}
 	else if (key == sf::Keyboard::S || key == sf::Keyboard::Down)
@@ -424,15 +478,19 @@ location OptionsMenu::keyPressed(sf::Keyboard::Key key, location loc) //TODO: ad
 		{
 		case OPTION_NO_CHOICE:
 			menu_option = FULL_SCREEN_TOGGLE;
+			break;
 		case FULL_SCREEN_TOGGLE:
 			menu_option = VOLUME;
+			break;
 		case VOLUME:
 			menu_option = RESOLUTION_BUTTON;
+			break;
 		case RESOLUTION_BUTTON:
 			menu_option = FULL_SCREEN_TOGGLE;
+			break;
 		}
 	}
-	else if (key == sf::Keyboard::Return)
+	else if (key == sf::Keyboard::Return) //TODO: fix
 	{
 		switch (menu_option)
 		{
@@ -442,11 +500,11 @@ location OptionsMenu::keyPressed(sf::Keyboard::Key key, location loc) //TODO: ad
 		case RESOLUTION_BUTTON:
 		}
 	}
-	else if (key == sf::Keyboard::Escape)
+	else if (key == sf::Keyboard::Escape) //TODO: fix
 	{
 
 	}
-	else if (key == sf::Keyboard::Space)
+	else if (key == sf::Keyboard::Space) //TODO: fix
 	{
 
 	}
@@ -460,7 +518,21 @@ void OptionsMenu::draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
 #pragma region PauseMenu
 	
-PauseMenu::PauseMenu();
+PauseMenu::PauseMenu()
+{
+	resumegame_.setFont(*fonts_.arial());
+	options_.setFont(*fonts_.arial());
+	exitToMenu_.setFont(*fonts_.arial());
+
+	resumegame_.setString("Resume");
+	options_.setString("Options");
+	exitToMenu_.setString("Main Menu");
+
+	sf::Vector2f start(100,100), distance(0,100);
+	resumegame_.setPosition(start);
+	options_.setPosition(start+distance);
+	exitToMenu_.setPosition(start+(2.0f*distance));
+}
 	
 location PauseMenu::mousePressed(sf::Vector2i mouse_pos, location loc)
 {
@@ -492,33 +564,44 @@ location PauseMenu::mouseMoved(sf::Vector2i mouse_pos, location loc)
 }
 location PauseMenu::keyPressed(sf::Keyboard::Key key, location loc)//TODO: fix this to format
 {
-	fullScreenToggle_.removeHighlight();
-	volume_.removeHighlight();
-	resolution_up_.removeHighlight();
-	resolution_down_.removeHighlight();
-	accept_.removeHighlight();
-	cancel_.removeHighlight();
-	apply_.removeHighlight();
+	resumegame_.removeHighlight();
+	options_.removeHighlight();
+	exitToMenu_.removeHighlight();
 
 	if (key == sf::Keyboard::W || key == sf::Keyboard::Up)
 	{
 		switch (menu_option)
 		{
-		case FULL_SCREEN_TOGGLE:
-			menu_option = VOLUME;
-		case VOLUME:
-		case RESOLUTION_BUTTON:
-		case OPTION_NO_CHOICE:
+		case RESUME_GAME:
+			menu_option = EXIT_TO_MENU;
+			break;
+		case PAUSE_OPTIONS:
+			menu_option = RESUME_GAME;
+			break;
+		case EXIT_TO_MENU:
+			menu_option = PAUSE_OPTIONS;
+			break;
+		case PAUSE_NO_CHOICE:
+			menu_option = EXIT_TO_MENU;
+			break;
 		}
 	}
 	else if (key == sf::Keyboard::S || key == sf::Keyboard::Down)
 	{
 		switch (menu_option)
 		{
-		case OPTION_NO_CHOICE:
-		case FULL_SCREEN_TOGGLE:
-		case VOLUME:
-		case RESOLUTION_BUTTON:
+		case PAUSE_NO_CHOICE:
+			menu_option = RESUME_GAME;
+			break;
+		case RESUME_GAME:
+			menu_option = PAUSE_OPTIONS;
+			break;
+		case PAUSE_OPTIONS:
+			menu_option = EXIT_TO_MENU;
+			break;
+		case EXIT_TO_MENU:
+			menu_option = RESUME_GAME;
+			break;
 		}
 	}
 	else if (key == sf::Keyboard::Return)
@@ -526,9 +609,17 @@ location PauseMenu::keyPressed(sf::Keyboard::Key key, location loc)//TODO: fix t
 		switch (menu_option)
 		{
 		case OPTION_NO_CHOICE:
-		case FULL_SCREEN_TOGGLE:
-		case VOLUME:
-		case RESOLUTION_BUTTON:
+			return PAUSE_MENU;
+			break;
+		case RESUME_GAME:
+			return GAME;
+			break;
+		case PAUSE_OPTIONS:
+			return OPTIONS_MENU;
+			break;
+		case EXIT_TO_MENU:
+			return MAIN_MENU;
+			break;
 		}
 	}
 	else if (key == sf::Keyboard::Escape)
@@ -540,7 +631,7 @@ location PauseMenu::keyPressed(sf::Keyboard::Key key, location loc)//TODO: fix t
 
 	}
 
-	return OPTIONS_MENU;
+	return PAUSE_MENU;
 }
 void PauseMenu::draw(sf::RenderTarget& target, sf::RenderStates states) const;
 

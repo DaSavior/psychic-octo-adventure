@@ -17,6 +17,10 @@ sf::IntRect Textbox::getRectangle() const
 	sf::FloatRect r = sf::RectangleShape::getGlobalBounds();
 	return sf::IntRect (r.left, r.top, r.width, r.height);
 }
+sf::Vector2i Textbox::getBoxSize() const
+{
+	return sf::Vector2i(box.getSize().x,box.getSize().y);
+}
 
 void Textbox::setScroll(std::string scroll)
 {
@@ -27,6 +31,10 @@ void Textbox::setRectangle(sf::IntRect rect)
 	sf::RectangleShape::setPosition(rect.left, rect.top);
 	sf::RectangleShape::setSize(rect.width, rect.height);
 	fit();
+}
+void Textbox::setBoxSize(sf::Vector2i t_size)
+{
+	box.setSize(sf::Vector2f(t_size.x,t_size.y));
 }
 
 bool Textbox::isOpen() const

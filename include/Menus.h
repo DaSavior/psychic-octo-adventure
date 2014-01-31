@@ -21,7 +21,7 @@ private:
 
 public:	
 	friend GodMode;
-	MainMenu();
+	MainMenu(bool t_canContinue_);
 
 	virtual location mousePressed(sf::Vector2i mouse_pos, location loc);
 	virtual location mouseMoved(sf::Vector2i mouse_pos, location loc);

@@ -8,6 +8,7 @@
 #include <vector>
 #include <functional>
 
+
 #pragma region enums
 
 enum interactType
@@ -42,8 +43,6 @@ enum pauseMenuOptions
 	PAUSE_OPTIONS,
 	EXIT_TO_MENU
 };
-
-
 
 
 enum location 
@@ -170,17 +169,10 @@ bool progressFileExists();
 
 #pragma region structs
 
-struct SettingsInfo
-{
-	SettingsInfo(sf::VideoMode win_res = sf::VideoMode(800, 600), unsigned short vol = 50, 
-				 sf::Uint32 t_style = sf::Style::Fullscreen, std::string window_title = "Psychosis");
-	void loadFromFile(std::string file_name);
-
-	std::string window_name;
-	sf::VideoMode resolution;
-	unsigned short volume;
-	sf::Uint32 style;
+struct IFeelLonely{
+bool alone = true;
 };
+
 #pragma endregion
 
 

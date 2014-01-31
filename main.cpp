@@ -14,7 +14,7 @@ int main()
 	SettingsInfo settings;
 
 	if (can_continue)
-		settings.loadFromFile(FILE_PROGRESS);
+		settings.load(0);
 
 	{
 		AllTextures t;
@@ -26,7 +26,7 @@ int main()
 	sf::RenderWindow window(settings.resolution, settings.window_name, settings.style);
 
 	Game game;
-	MainMenu mainMenu;
+	MainMenu mainMenu(can_continue);
 	PauseMenu pauseMenu;
 	OptionsMenu optionsMenu(&settings, &window);
 	sf::Event event;
@@ -51,8 +51,6 @@ int main()
 		{
 			if (event.type == sf::Event::Closed)
 				window.close();
-			//if (event.type == sf::Event::KeyPressed)
-				//if ((event.key.alt) && (event.key.code == sf::Keyboard::Key::Tab))
 
 			switch (loc)
 			{

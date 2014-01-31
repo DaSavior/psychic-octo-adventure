@@ -12,16 +12,19 @@ private:
 	std::string scroll_;
 	std::string line_;
 
+	bool fixedsize_aka_ithinkitsaysfitwillnotchangeitbasicallywhatwouldthatbeifitwastrueofifitwasfalsefitwouldnothappen;
 public:
 	Textbox();
 	
 	//gets
 	std::string getScroll() const;
 	sf::IntRect getRectangle() const;
+	sf::Vector2i getBoxSize() const;
 
 	//sets
 	void setScroll(std::string scroll);
 	void setRectangle(sf::IntRect rect);
+	void setBoxSize(sf::Vector2i t_size);
 	//void setLine();
 
 	//checks

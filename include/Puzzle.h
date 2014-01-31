@@ -31,10 +31,8 @@ public:
 	bool charCanWalk(const Character &character) const;
 
 	//virtuals
-	virtual bool loadProgress();
-	virtual void saveProgress();
-	virtual bool load(std::ifstream &in);
-	virtual void save(std::ofstream &out);
+	virtual bool load(int file);
+	virtual void save(int file);
 	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 };
 
@@ -71,10 +69,8 @@ public:
 	void close();
 	
 	//virtuals
-	virtual bool loadProgress();
-	virtual void saveProgress();
-	virtual bool load(std::ifstream &in);
-	virtual void save(std::ofstream &out);
+	virtual bool load(int file);
+	virtual void save(int file);
 	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 };
 
@@ -90,10 +86,8 @@ public:
 	void setState(leverState state);
 
 	//virtuals
-	virtual bool loadProgress();
-	virtual void saveProgress();
-	virtual bool load(std::ifstream &in);
-	virtual void save(std::ofstream &out);
+	virtual bool load(int file);
+	virtual void save(int file);
 };
 
 
@@ -140,10 +134,8 @@ public:
 	bool charCanWalk(const Character &character) const;
 	
 	//virtuals
-	virtual bool loadProgress();
-	virtual void saveProgress();
-	virtual bool load(std::ifstream &in);
-	virtual void save(std::ofstream &out);
+	virtual bool load(int file);
+	virtual void save(int file);
 	virtual void draw(sf::RenderTarget &target, sf::RenderStates states);
 };
 
@@ -165,10 +157,8 @@ public:
 	void toggle();
 
 	//virtuals
-	virtual bool loadProgress();
-	virtual void saveProgress();
-	virtual bool load(std::ifstream &in);
-	virtual void save(std::ofstream &out);
+	virtual bool load(int file);
+	virtual void save(int file);
 };
 
 class LeverObject: public SpritePlus, public Fileable
@@ -189,10 +179,8 @@ public:
 	void toggleState();
 
 	//virtuals
-	virtual bool loadProgress();
-	virtual void saveProgress();
-	virtual bool load(std::ifstream &in);
-	virtual void save(std::ofstream &out);
+	virtual bool load(int file);
+	virtual void save(int file);
 };
 
 class PlugObject: public SpritePlus, public Fileable
@@ -213,10 +201,8 @@ public:
 	void setFrom(sf::Vector2i from);
 
 	//virtuals
-	virtual bool loadProgress();
-	virtual void saveProgress();
-	virtual bool load(std::ifstream &in);
-	virtual void save(std::ofstream &out);
+	virtual bool load(int file);
+	virtual void save(int file);
 };
 
 

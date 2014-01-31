@@ -13,7 +13,7 @@ protected:
 public:
 	void loadFiles();
 
-	virtual void checkpoint()=0;
+	virtual void checkpoint();
 	
 	virtual bool load(int file); //if file <= 0, then use progress file
 	virtual void save(int file);
@@ -169,6 +169,19 @@ public:
 class AllFiles
 {
 
+};
+
+struct SettingsInfo: public Fileable
+{
+	SettingsInfo(sf::VideoMode win_res = sf::VideoMode(800, 600), unsigned short vol = 50, 
+				 sf::Uint32 t_style = sf::Style::Fullscreen, std::string window_title = "Psychosis");
+	virtual bool load(int file);
+	virtual void save(int file);
+
+	std::string window_name;
+	sf::VideoMode resolution;
+	unsigned short volume;
+	sf::Uint32 style;
 };
 
 #endif

@@ -8,7 +8,7 @@ Character::Character()
 	stopWalk();
 	lowerArm();
 	collides_ = true;
-	//TODO: initialize walkDistance_ to something
+	walkDistance_ = 1000;//TODO: initialize walkDistance_ to something
 }
 
 unsigned short Character::getEnergy() const
