@@ -265,7 +265,10 @@ LineShape::LineShape(sf::Vector2i t_start, sf::Vector2i t_end, sf::Color color)
 	setColor(color);
 }
 
-sf::Vector2i LineShape::getState(); //HACK: get start???
+sf::Vector2i LineShape::getStart()
+{
+	return start;
+}
 sf::Vector2i LineShape::getEnd()
 {
 	return end;
@@ -276,7 +279,10 @@ int LineShape::getThickness()
 }
 
 //sets
-void LineShape::setState(sf::Vector2i point);
+void LineShape::setStart(sf::Vector2i point)
+{
+	start = point;
+}
 void LineShape::setEnd(sf::Vector2i point)
 {
 	end = point;
@@ -313,12 +319,20 @@ CurveShape::CurveShape(std::vector<sf::Vector2i> points, sf::Color color = sf::C
 	}
 }
 
+void CurveShape::recreate(std::vector<sf::Vector2i> points, sf::Color color = sf::Color::Green)
+{
+	lines.clear();
+	for (int index = 0; index < points.size()-1; index++)
+	{
+		LineShape temp_line(points[index], points[index+1], color);
+		lines.push_back(temp_line);
+	}
+}
+
 void CurveShape::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
-	for (const LineShape &temp : lines)
-	{
-		temp.draw(target, states); //TODO: the fuck????	error: "function "sf::Shape::draw" (declared at line 267 of "C:\SFML-2.1\include\SFML/Graphics/Shape.hpp") is inaccessible
-	}
+	for (const auto &temp : lines)
+		target.draw(temp, states);
 }
 
 #pragma endregion

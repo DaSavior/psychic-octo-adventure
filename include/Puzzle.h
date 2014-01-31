@@ -78,7 +78,7 @@ public:
 	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 };
 
-class WireObject: public Fileable, public sf::RectangleShape	//HACK: Try to make a "CurveShape" instead of rectangle shape, allowing multiple points in any orientation, curveshape can hold multiple "LineShapes"
+class WireObject: public Fileable, public CurveShape
 {
 private:
 

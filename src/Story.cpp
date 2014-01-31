@@ -7,7 +7,7 @@ Story::Story()
 	room_ = 0;
 }
 
-void Story::update(short room)
+void Story::updateRoom(short room)
 {
 	room_ = room;
 	saveProgress();

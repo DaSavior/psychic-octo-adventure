@@ -14,7 +14,7 @@ void Puzzle::updateRoom(short room)
 
 bool Puzzle::charToPlugEnergy(Character &character)
 {
-	for (const CircuitObject &circuit : circuits_[room_])
+	for (CircuitObject &circuit : circuits_[room_])
 		if (circuit.charToPlugEnergy(character))
 			return true;
 
@@ -22,7 +22,7 @@ bool Puzzle::charToPlugEnergy(Character &character)
 }
 bool Puzzle::charFromPlugEnergy(Character &character)
 {
-	for (const CircuitObject &circuit : circuits_[room_])
+	for (CircuitObject &circuit : circuits_[room_])
 		if (circuit.charFromPlugEnergy(character))
 			return true;
 	
@@ -70,7 +70,7 @@ void Puzzle::draw(sf::RenderTarget &target, sf::RenderStates states) const
 #pragma region Door
 
 //TODO: figure out this weird error
-DoorObject::DoorObject() : sf::Sprite()
+DoorObject::DoorObject()
 {
 	setAnswer(0);
 	setFacing(SOUTH);
@@ -130,17 +130,13 @@ void DoorObject::close()
 	setFrame(0, getFrame().y);
 }
 
-bool DoorObject::loadProgress();
-void DoorObject::saveProgress();
-bool DoorObject::load(std::ifstream &in);
-void DoorObject::save(std::ofstream &out);
 void DoorObject::draw(sf::RenderTarget &target, sf::RenderStates states) const;
 
 #pragma endregion
 
 #pragma region Wire
 
-WireObject::WireObject() : sf::RectangleShape()
+WireObject::WireObject()
 {
 	setState (NO_LEVER);
 }

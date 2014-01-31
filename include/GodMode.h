@@ -18,8 +18,8 @@ public:
 	void toggleClipping();
 	void gotoActRoom(int act, int room);
 	void setCharEnergy(unsigned short energy);
-	void loadFile(std::ifstream stream);
-	void saveFile(std::ofstream stream);
+	void load(int file);
+	void save(int file);
 	void toggleCollisionBoxVisibility();
     sf::Vector2i getCharPosition();
 	void reloadRooms();

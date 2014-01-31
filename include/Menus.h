@@ -24,15 +24,6 @@ public:
 	MainMenu();
 
 	virtual location mousePressed(sf::Vector2i mouse_pos, location loc);
-	/*
-		if (.contain new game
-			clear save
-			loc = GAME
-		else if (stuff migiger
-		return loc
-	*/
-	//	new game button also clears save file
-
 	virtual location mouseMoved(sf::Vector2i mouse_pos, location loc);
 	virtual location keyPressed(sf::Keyboard::Key key, location loc);
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;

@@ -36,7 +36,6 @@ private:
 	direction facing_;
 	propType type_;
 public:
-	//HACK: inheriting constructors from SpritePlus
 	PropObject();
 	
 	//gets

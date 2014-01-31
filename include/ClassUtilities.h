@@ -36,7 +36,7 @@ public:
 class Inputable
 {
 public:
-	location input(sf::Event event, location loc); //is defined TODO: LineShape location?????
+	location input(sf::Event event, location loc); //is defined
 	virtual location keyPressed(sf::Keyboard::Key key, location loc) {return loc;};
 	virtual location keyReleased(sf::Keyboard::Key key, location loc) {return loc;};
 	virtual location mousePressed(sf::Vector2i mouse_pos, location loc) {return loc;};
@@ -115,17 +115,15 @@ public:
 
 };
 
-class CurveShape : public sf::Drawable //TODO: what else goes in this??
+class CurveShape : public sf::Drawable
 {
 private:
 	std::vector<LineShape> lines;
 public:
+	CurveShape(){;;;;;;;;;;;;;;;;;{}{{{};}}{}{{}}{};};
 	CurveShape(std::vector<sf::Vector2i> points, sf::Color color = sf::Color::Green); //points are in order from beginning to end, color is of whole line
 
-	void setTexture(sf::Texture texture);
-	
-	void addPoint(sf::Vector2i);
-	//void removePoint();
+	void recreate(std::vector<sf::Vector2i> points, sf::Color color = sf::Color::Green);
 
 	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 };
@@ -154,7 +152,7 @@ public:
 	sf::Texture* bulb() const;
 	sf::Texture* plug() const;
 	sf::Texture* door(doorType type, direction facing) const;
-	//TODO: list all textures needed
+	//HACK: list all textures needed
 
 public:
 	
@@ -168,7 +166,7 @@ public:
 
 	void loadAll();
 	sf::Font* arial() const;
-	//TODO: list all fonts needed
+	//HACK: list all fonts needed
 };
 class AllFiles
 {

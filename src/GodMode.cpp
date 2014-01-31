@@ -42,10 +42,7 @@ void GodMode::setCharEnergy(unsigned short energy)
 }
 
 
-void GodMode::toggleCollisionBoxVisibility()
-{
-
-}
+void GodMode::toggleCollisionBoxVisibility();
 
 sf::Vector2i GodMode::getCharPosition()
 {
@@ -54,11 +51,7 @@ sf::Vector2i GodMode::getCharPosition()
 
 void GodMode::reloadRooms()
 {
-	std::ifstream stream(game_p->findActFile(game_p->act_));
-
-	game_p->props.load(stream);
-	game_p->puzzle.load(stream);
-	game_p->story.load(stream);
-
-	stream.close();
+	game_p->props.load(game_p->act_);
+	game_p->puzzle.load(game_p->act_);
+	game_p->story.load(game_p->act_);
 }
