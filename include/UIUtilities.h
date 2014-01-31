@@ -4,7 +4,7 @@
 #include "Common.h"
 #include "ClassUtilities.h"
 
-//TODO: test if draw can call draw from rectngleshape and 
+
 class Textbox: public sf::Text, public Animateable
 {
 private:

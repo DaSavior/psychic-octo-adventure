@@ -24,7 +24,7 @@ public:
 	//for character
 	std::string charWalk(const Character &character);		//for text
 	std::string charInteract(const Character &character);	//for text
-	short charNewRoomCheck(Character &character);			//for new room tiles, will move character if there is one and returns the room of the character or NEXTACT
+	short charNewRoomCheck(Character &character);			//for new room tiles, will move character if there is one and returns the room of the character or NEXT_ACT
 
 	virtual bool loadProgress();
 	virtual void saveProgress();
@@ -58,7 +58,7 @@ public:
 class NewRoomTile : public TextTile
 {
 private:
-    short nextRoom_;	//999 = next act, -999 = from previous act //HACK: could be a define
+    short nextRoom_;	//999 = next act 
 	direction exiting_;	//for where the character will move after
 
 public:

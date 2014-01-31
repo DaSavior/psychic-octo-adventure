@@ -134,6 +134,8 @@ enum floorType
 
 #define FILE_PROGRESS "Resources/save.txt"	//TODO: change to .dat once everything works
 
+#define NEXT_ACT 999
+
 #define ID_SETTINGS "#settings"
 #define ID_PROPS "#props"
 #define ID_PUZZLE "#puzzle"

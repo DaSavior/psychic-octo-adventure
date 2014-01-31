@@ -10,14 +10,13 @@
 #include "GodMode.h"
 
 //TODO: fill out game
-class Game: public Inputable, public Animateable, public sf::Drawable
+class Game: public Fileable, public Inputable, public Animateable, public sf::Drawable
 {
 private:
 	//
 	//classses
 	Character character;
 	Props props;
-	std::vector<int> *t;	//what is this?
 	Story story;
 	Puzzle puzzle;
 	AllTextures textures;
@@ -32,8 +31,6 @@ public:
 	Game();
 
 	void resetGame();
-	void saveGame();
-	void loadFromFile();
 	void updateRoom(short act, short room);
 
 
@@ -50,6 +47,8 @@ public:
 	virtual location keyReleased(sf::Keyboard::Key key, location loc);
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 	virtual void animate();
+
+
 };
 
 #endif
