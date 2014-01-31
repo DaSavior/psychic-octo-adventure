@@ -35,7 +35,7 @@ public:
 class Inputable
 {
 public:
-	location input(sf::Event event, location loc); //is defined
+	location input(sf::Event event, location loc); //is defined TODO: LineShape location?????
 	virtual location keyPressed(sf::Keyboard::Key key, location loc) {return loc;};
 	virtual location keyReleased(sf::Keyboard::Key key, location loc) {return loc;};
 	virtual location mousePressed(sf::Vector2i mouse_pos, location loc) {return loc;};
