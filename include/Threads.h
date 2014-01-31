@@ -1,6 +1,7 @@
 
 #include "Common.h"
 #include "Game.h"
+#include "SFML\Audio.hpp"
 #include <iostream>
 
 
@@ -53,7 +54,17 @@ void godModeConsole(Game &t_game_r, sf::RenderWindow &t_window_r, SettingsInfo &
 }
 
 
-void musicThreadFunction()
+void musicThreadFunction(sf::RenderWindow *t_window_p, location *loc_p, SettingsInfo *setting_p)
 {
+	sf::Music music;
 
+	if (
+
+	while (t_window_p->isOpen())
+	{
+		switch (*loc_p)
+		{
+
+		}
+	}
 }

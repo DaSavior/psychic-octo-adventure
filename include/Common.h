@@ -9,12 +9,40 @@
 
 #pragma region enums
 
-enum location {
+enum mainMenuOptions
+{
+	MAIN_NO_CHOICE = 0,
+	NEW_GAME,
+	CONTINUE,
+	MAIN_OPTIONS,
+	CLOSE
+};
+enum optionMenuOptions
+{
+	OPTION_NO_CHOICE = 0,
+	FULL_SCREEN_TOGGLE,
+	VOLUME,
+	RESOLUTION_BUTTON
+};
+enum pauseMenuOptions
+{
+	PAUSE_NO_CHOICE = 0,
+	RESUME_GAME,
+	PAUSE_OPTIONS,
+	EXIT_TO_MENU
+};
+
+
+
+enum location 
+{
 	NO_LOCATION =-1, 
 	GAME, 
 	MAIN_MENU, 
 	PAUSE_MENU, 
-	OPTIONS_MENU};
+	OPTIONS_MENU,
+	EXIT_GAME
+};
 enum direction {
 	NO_DIRECTION = -1, 
 	NORTH, 

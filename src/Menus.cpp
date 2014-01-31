@@ -23,6 +23,7 @@ location MainMenu::mousePressed(sf::Vector2i mouse_pos, location loc)
 }
 location MainMenu::mouseMoved(sf::Vector2i mouse_pos, location loc)
 {
+	menu_option = MAIN_NO_CHOICE;
 	if (!newGame_.contains(mouse_pos))
 		newGame_.removeHighlight();
 	if (!continue_.contains(mouse_pos) && canContinue_)
@@ -45,6 +46,110 @@ location MainMenu::mouseMoved(sf::Vector2i mouse_pos, location loc)
 		close_.highlight(COLOR_MOUSE_OVER);
 
 	return loc;
+}
+location MainMenu::keyPressed(sf::Keyboard::Key key, location loc)
+{
+	std::ofstream file;
+
+	newGame_.removeHighlight();
+	options_.removeHighlight();
+	close_.removeHighlight();
+	
+	if (!canContinue_)
+		continue_.highlight(COLOR_GRAY);
+	else
+		continue_.removeHighlight();
+
+	if (key == sf::Keyboard::W || key == sf::Keyboard::Up)
+	{
+		switch (menu_option)
+		{
+		case NEW_GAME:
+			menu_option = CLOSE;
+			close_.highlight(COLOR_MOUSE_OVER);
+			break;
+		case CONTINUE:
+			menu_option = NEW_GAME;
+			newGame_.highlight(COLOR_MOUSE_OVER);
+			break;
+		case MAIN_OPTIONS:
+			if (canContinue_)
+			{
+				menu_option = CONTINUE;
+				continue_.highlight(COLOR_MOUSE_OVER);
+			}
+			else
+			{
+				menu_option = NEW_GAME;
+				newGame_.highlight(COLOR_MOUSE_OVER);
+			}
+			break;
+		case CLOSE:
+			menu_option = MAIN_OPTIONS;
+			options_.highlight(COLOR_MOUSE_OVER);
+			break;
+		case MAIN_NO_CHOICE:
+			menu_option = CLOSE;
+			close_.highlight(COLOR_MOUSE_OVER);
+			break;
+		}
+	}
+	else if (key == sf::Keyboard::S || key == sf::Keyboard::Down)
+	{
+		switch (menu_option)
+		{
+		case MAIN_NO_CHOICE:
+			menu_option = NEW_GAME;
+			close_.highlight(COLOR_MOUSE_OVER);
+			break;
+		case NEW_GAME:
+			if (canContinue_)
+			{
+				menu_option = CONTINUE;
+				continue_.highlight(COLOR_MOUSE_OVER);
+			}
+			else
+			{
+				menu_option = MAIN_OPTIONS;
+				options_.highlight(COLOR_MOUSE_OVER);
+			}
+			break;
+		case CONTINUE:
+			menu_option = MAIN_OPTIONS;
+			options_.highlight(COLOR_MOUSE_OVER);
+			break;
+		case MAIN_OPTIONS:
+			menu_option = CLOSE;
+			close_.highlight(COLOR_MOUSE_OVER);
+			break;
+		case CLOSE:
+			menu_option = NEW_GAME;
+			close_.highlight(COLOR_MOUSE_OVER);
+			break;
+		}
+	}
+	else if (key == sf::Keyboard::Return)
+	{
+		switch (menu_option)
+		{
+		case NEW_GAME:
+			file.open(FILE_PROGRESS);
+			file.close();
+			return GAME;
+		case CONTINUE:
+			return GAME;
+		case MAIN_OPTIONS:
+			return OPTIONS_MENU;
+		case CLOSE:
+			return EXIT_GAME;
+		}
+	}
+	else if (key == sf::Keyboard::Escape)
+	{
+		return EXIT_GAME;
+	}
+
+	return MAIN_MENU;
 }
 void MainMenu::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
@@ -256,6 +361,7 @@ location OptionsMenu::mousePressed(sf::Vector2i mouse_pos, location loc)
 }
 location OptionsMenu::mouseMoved(sf::Vector2i mouse_pos, location loc)
 {
+	menu_option = OPTION_NO_CHOICE;
 	if (!fullScreenToggle_.contains(mouse_pos))
 		fullScreenToggle_.removeHighlight();
 	if (!volume_.contains(mouse_pos))
@@ -288,6 +394,65 @@ location OptionsMenu::mouseMoved(sf::Vector2i mouse_pos, location loc)
 
 	return OPTIONS_MENU;
 }
+location OptionsMenu::keyPressed(sf::Keyboard::Key key, location loc) //TODO: add highlights
+{
+	fullScreenToggle_.removeHighlight();
+	volume_.removeHighlight();
+	resolution_up_.removeHighlight();
+	resolution_down_.removeHighlight();
+	accept_.removeHighlight();
+	cancel_.removeHighlight();
+	apply_.removeHighlight();
+
+	if (key == sf::Keyboard::W || key == sf::Keyboard::Up)
+	{
+		switch (menu_option)
+		{
+		case FULL_SCREEN_TOGGLE:
+			menu_option = RESOLUTION_BUTTON;
+		case VOLUME:
+			menu_option = FULL_SCREEN_TOGGLE;
+		case RESOLUTION_BUTTON:
+			menu_option = VOLUME;
+		case OPTION_NO_CHOICE:
+			menu_option = RESOLUTION_BUTTON;
+		}
+	}
+	else if (key == sf::Keyboard::S || key == sf::Keyboard::Down)
+	{
+		switch (menu_option)
+		{
+		case OPTION_NO_CHOICE:
+			menu_option = FULL_SCREEN_TOGGLE;
+		case FULL_SCREEN_TOGGLE:
+			menu_option = VOLUME;
+		case VOLUME:
+			menu_option = RESOLUTION_BUTTON;
+		case RESOLUTION_BUTTON:
+			menu_option = FULL_SCREEN_TOGGLE;
+		}
+	}
+	else if (key == sf::Keyboard::Return)
+	{
+		switch (menu_option)
+		{
+		case OPTION_NO_CHOICE:
+		case FULL_SCREEN_TOGGLE:
+		case VOLUME:
+		case RESOLUTION_BUTTON:
+		}
+	}
+	else if (key == sf::Keyboard::Escape)
+	{
+
+	}
+	else if (key == sf::Keyboard::Space)
+	{
+
+	}
+
+	return OPTIONS_MENU;
+}
 
 void OptionsMenu::draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
@@ -308,6 +473,7 @@ location PauseMenu::mousePressed(sf::Vector2i mouse_pos, location loc)
 }
 location PauseMenu::mouseMoved(sf::Vector2i mouse_pos, location loc)
 {
+	menu_option = PAUSE_NO_CHOICE;
 	if (!resumegame_.contains(mouse_pos))
 		resumegame_.removeHighlight();
 	if (!options_.contains(mouse_pos))
@@ -323,6 +489,58 @@ location PauseMenu::mouseMoved(sf::Vector2i mouse_pos, location loc)
 		exitToMenu_.highlight(COLOR_MOUSE_OVER);
 
 	return loc;
+}
+location PauseMenu::keyPressed(sf::Keyboard::Key key, location loc)//TODO: fix this to format
+{
+	fullScreenToggle_.removeHighlight();
+	volume_.removeHighlight();
+	resolution_up_.removeHighlight();
+	resolution_down_.removeHighlight();
+	accept_.removeHighlight();
+	cancel_.removeHighlight();
+	apply_.removeHighlight();
+
+	if (key == sf::Keyboard::W || key == sf::Keyboard::Up)
+	{
+		switch (menu_option)
+		{
+		case FULL_SCREEN_TOGGLE:
+			menu_option = VOLUME;
+		case VOLUME:
+		case RESOLUTION_BUTTON:
+		case OPTION_NO_CHOICE:
+		}
+	}
+	else if (key == sf::Keyboard::S || key == sf::Keyboard::Down)
+	{
+		switch (menu_option)
+		{
+		case OPTION_NO_CHOICE:
+		case FULL_SCREEN_TOGGLE:
+		case VOLUME:
+		case RESOLUTION_BUTTON:
+		}
+	}
+	else if (key == sf::Keyboard::Return)
+	{
+		switch (menu_option)
+		{
+		case OPTION_NO_CHOICE:
+		case FULL_SCREEN_TOGGLE:
+		case VOLUME:
+		case RESOLUTION_BUTTON:
+		}
+	}
+	else if (key == sf::Keyboard::Escape)
+	{
+
+	}
+	else if (key == sf::Keyboard::Space)
+	{
+
+	}
+
+	return OPTIONS_MENU;
 }
 void PauseMenu::draw(sf::RenderTarget& target, sf::RenderStates states) const;
 

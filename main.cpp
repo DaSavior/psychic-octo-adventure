@@ -17,18 +17,19 @@ int main()
 	if (can_continue)
 		settings.loadFromFile(FILE_PROGRESS);
 
+	sf::RenderWindow window(settings.resolution, settings.window_name, settings.style);
+
 	Game game;
 	MainMenu mainMenu;
 	PauseMenu pauseMenu;
-	OptionsMenu optionsMenu(&settings);
+	OptionsMenu optionsMenu(&settings, &window);
 	sf::Event event;
 
-	sf::RenderWindow window(settings.resolution, settings.window_name, settings.style);
 	location	prev_menu = MAIN_MENU,
 				loc = MAIN_MENU;
 
 
-	//HACK: sf::Thread music_thread(musicThreadFunction);
+	//HACK: sf::Thread music_thread(std::bind(&musicThreadFunction, &window, &loc, &settings));
 	//HACK: sf::Thread console_thread(std::bind(&godModeConsole, game, window, settings));
 
 	//HACK: console_thread.launch();
@@ -47,7 +48,7 @@ int main()
 			//if (event.type == sf::Event::KeyPressed)
 				//if ((event.key.alt) && (event.key.code == sf::Keyboard::Key::Tab))
 
-			switch (loc) //
+			switch (loc)
 			{
 			case GAME:
 				loc = game.input(event, loc);
@@ -65,6 +66,8 @@ int main()
 					break;
 				loc = optionsMenu.input(event, prev_menu);
 				break;
+			case EXIT_GAME:
+				window.close();
 			}
 		}
 #pragma endregion
