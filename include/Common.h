@@ -140,6 +140,8 @@ enum floorType
 #define ID_STORY "#story"
 #define ID_CHARACTER "#character"
 
+#define LINE_THICKNESS 5
+
 #pragma endregion
 
 #pragma region functions

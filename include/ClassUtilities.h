@@ -2,6 +2,7 @@
 #define CLASS_UTILITIES_H
 
 #include "Common.h"
+#include <cmath>
 
 class Fileable
 {
@@ -82,29 +83,51 @@ public:
 	void moveFrameTo(direction position);
 };
 
-class LineShape: private sf::RectangleShape
+class LineShape: public sf::RectangleShape //TODO: set AA to x8/x16
 {
 private:
 	sf::Vector2i start;
 	sf::Vector2i end;
+
+	int theta; // the angle between the line formed by the 2 points and the x-axis
+	int distance; // the distance between the 2 points
+
 public:
+	LineShape(sf::Vector2i t_start, sf::Vector2i t_end, sf::Color color = sf::Color::Green);
+
 	//gets
-	sf::Vector2i getState();
+	sf::Vector2i getStart();
 	sf::Vector2i getEnd();
 	int getThickness();
 	sf::Color getColor();
 
 	//sets
-	void setState(sf::Vector2i point);
+	void setStart(sf::Vector2i point);
 	void setEnd(sf::Vector2i point);
 	void setThickness(int thickness);
-	void setColor(sf::Color::color)
+	void setColor(sf::Color color);
 
 	//checks
 	bool intersects(LineShape other);
 	bool intersects(sf::RectangleShape other);
 
 	//changes
+
+};
+
+class CurveShape : public sf::Drawable //TODO: what else goes in this??
+{
+private:
+	std::vector<LineShape> lines;
+public:
+	CurveShape(std::vector<sf::Vector2i> points, sf::Color color = sf::Color::Green); //points are in order from beginning to end, color is of whole line
+
+	void setTexture(sf::Texture texture);
+	
+	void addPoint(sf::Vector2i);
+	//void removePoint();
+
+	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 };
 
 class AllTextures
@@ -150,6 +173,6 @@ public:
 class AllFiles
 {
 
-}
+};
 
 #endif

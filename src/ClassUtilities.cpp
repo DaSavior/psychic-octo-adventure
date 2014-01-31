@@ -247,3 +247,78 @@ sf::Texture* AllTextures::plug() const
 }
 
 #pragma endregion
+
+#pragma region LineShape
+
+LineShape::LineShape(sf::Vector2i t_start, sf::Vector2i t_end, sf::Color color)
+{
+	start = t_start;
+	end = t_end;
+
+	theta = std::atan((end.y-start.y)/(end.x-start.x));
+
+	distance = std::sqrt(std::pow(end.x-start.x,2) + std::pow(end.y-start.y,2));
+
+	setPosition(start.x, start.y);
+	setSize(sf::Vector2f(distance, LINE_THICKNESS));
+	setRotation(theta);
+	setColor(color);
+}
+
+sf::Vector2i LineShape::getState(); //HACK: get start???
+sf::Vector2i LineShape::getEnd()
+{
+	return end;
+}
+int LineShape::getThickness()
+{
+	return getSize().y;
+}
+
+//sets
+void LineShape::setState(sf::Vector2i point);
+void LineShape::setEnd(sf::Vector2i point)
+{
+	end = point;
+}
+void LineShape::setThickness(int thickness)
+{
+	setSize(sf::Vector2f(distance, thickness));
+}
+void LineShape::setColor(sf::Color color)
+{
+	setColor(color);
+}
+
+//checks
+bool LineShape::intersects(LineShape other)
+{
+	return getGlobalBounds().intersects(other.getGlobalBounds());
+}
+bool LineShape::intersects(sf::RectangleShape other)
+{
+	return getGlobalBounds().intersects(other.getGlobalBounds());
+}
+
+#pragma endregion
+
+#pragma region CurveShape
+
+CurveShape::CurveShape(std::vector<sf::Vector2i> points, sf::Color color = sf::Color::Green)
+{
+	for (int index = 0; index < points.size()-1; index++)
+	{
+		LineShape temp_line(points[index], points[index+1], color);
+		lines.push_back(temp_line);
+	}
+}
+
+void CurveShape::draw(sf::RenderTarget &target, sf::RenderStates states) const
+{
+	for (const LineShape &temp : lines)
+	{
+		temp.draw(target, states); //TODO: the fuck????	error: "function "sf::Shape::draw" (declared at line 267 of "C:\SFML-2.1\include\SFML/Graphics/Shape.hpp") is inaccessible
+	}
+}
+
+#pragma endregion
