@@ -7,6 +7,7 @@
 #include <fstream>
 #include <vector>
 #include <functional>
+#include <sstream>
 
 
 #pragma region enums

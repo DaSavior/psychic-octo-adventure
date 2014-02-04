@@ -26,6 +26,8 @@ public:
 	
 	virtual bool load(int file);
 	virtual void save(int file);
+	virtual bool loadRoom(int room);
+	virtual void saveRoom(int room);
 	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 };
 

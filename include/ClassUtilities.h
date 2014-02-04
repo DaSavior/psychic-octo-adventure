@@ -17,6 +17,8 @@ public:
 	
 	virtual bool load(int file); //if file <= 0, then use progress file
 	virtual void save(int file);
+	virtual bool loadRoom(std::istream, int room);
+	virtual void saveRoom(int room);
 
 	//TODO: this
 	friend std::ifstream& operator>> (std::istream &in, Fileable fileable);

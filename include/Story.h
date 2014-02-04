@@ -29,6 +29,8 @@ public:
 	
 	virtual bool load(int file);
 	virtual void save(int file);
+	virtual bool loadRoom(int room);
+	virtual void saveRoom(int room);
 };
 
 class TextTile : public sf::IntRect , public Fileable

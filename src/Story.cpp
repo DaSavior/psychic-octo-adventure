@@ -40,20 +40,14 @@ short Story::charNewRoomCheck(Character &character)
 
 bool Story::load(int file)
 {
-	std::string loading, find;
-	find = "#story room " + std::to_string(room_);
-	if (file <= 0)
-	{
-		loading = Fileable::progressFile_.sub
-	}
-	else
-	{
-
-	}
-
+	int count;
+	while (loadRoom(count))
+		count++;
+	
 }
 void Story::save(int file);
-
+bool Story::loadRoom(int room);
+void Story::saveRoom(int room);
 #pragma endregion
 
 #pragma region TextTile
