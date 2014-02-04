@@ -1,33 +1,18 @@
 #include "..\include\Common.h"
 
 
-direction convertKeyToDirection(sf::Keyboard::Key key)
+bool progressFileExists()
 {
-    direction dir;
-    switch(key)
-    {
-	case sf::Keyboard::Up:
-    case sf::Keyboard::W:
-        dir = NORTH;
-        break;
-    case sf::Keyboard::Right:
-    case sf::Keyboard::D:
-        dir = EAST;
-        break;
-    case sf::Keyboard::Down:
-    case sf::Keyboard::S:
-        dir = SOUTH;
-        break;
-    case sf::Keyboard::Left:
-    case sf::Keyboard::A:
-        dir = WEST;
-        break;
-    default:
-        dir = NO_DIRECTION;
-        break;
-    }
-    return dir;
+	std::ifstream progress_file(FILE_PROGRESS);
+	std::string buffer = "";
+
+	std::getline(progress_file, buffer);
+
+	return (buffer != "");
 }
+
+#pragma region rectangles
+
 sf::Font fontFromFile(std::string fileName)
 {
 	sf::Font font;
@@ -105,21 +90,121 @@ int rect_Right(sf::IntRect rect)
 {
 	return (rect.left + rect.width);
 }
+#pragma endregion
 
-bool progressFileExists()
+#pragma region translate
+direction keyToDirection(sf::Keyboard::Key key)
 {
-	bool exists = true;
-
-	std::ifstream progress_file(FILE_PROGRESS);
-	std::string buffer = "";
-
-	std::getline(progress_file, buffer);
-
-	if (buffer == "")
-	{
-		exists = false;
-	}
-
-	return exists;
+    direction dir;
+    switch(key)
+    {
+	case sf::Keyboard::Up:
+    case sf::Keyboard::W:
+        dir = NORTH;
+        break;
+    case sf::Keyboard::Right:
+    case sf::Keyboard::D:
+        dir = EAST;
+        break;
+    case sf::Keyboard::Down:
+    case sf::Keyboard::S:
+        dir = SOUTH;
+        break;
+    case sf::Keyboard::Left:
+    case sf::Keyboard::A:
+        dir = WEST;
+        break;
+    default:
+        dir = NO_DIRECTION;
+        break;
+    }
+    return dir;
 }
+direction stringToDirection(std::string translate)
+{
+	if (translate == "NORTH")
+		return NORTH;
+	if (translate == "EAST")
+		return EAST;
+	if (translate == "SOUTH")
+		return SOUTH;
+	if (translate == "WEST")
+		return WEST;
 
+	return NO_DIRECTION;
+}
+leverState stringToLeverState(std::string translate)
+{
+	if (translate == "NEGATIVE")
+		return NEGATIVE;
+	if (translate == "NEUTRAL")
+		return NEUTRAL;
+	if (translate == "POSITIVE")
+		return POSITIVE;
+
+	return NO_LEVER;
+}
+plugState stringToPlugState(std::string translate)
+{
+	if (translate == "PLAYER_TO_CIRCUIT")
+		return PLAYER_TO_CIRCUIT;
+	if (translate == "CIRCUIT_TO_CIRCUIT")
+		return CIRCUIT_TO_CIRCUIT;
+
+	return NO_PLUG;
+}
+propType stringToPropType(std::string translate) 
+{
+	if (translate == "BED")
+		return BED;
+	if (translate == "WARDROBE")
+		return WARDROBE;
+	if (translate == "WINDOW")
+		return WINDOW;
+	if (translate == "CHILD_MALE")
+		return CHILD_MALE;
+	if (translate == "CHILD_FEMALE")
+		return CHILD_FEMALE;
+	if (translate == "JANITOR")
+		return JANITOR;
+
+	return NO_OBJECT;
+}
+doorType stringToDoorType(std::string translate) 
+{
+	if (translate == "WOODEN")
+		return doorType::WOODEN;
+	if (translate == "MAHOGANY")
+		return MAHOGANY;
+	if (translate == "BATHROOM")
+		return BATHROOM;
+	if (translate == "METAL")
+		return METAL;
+	if (translate == "VAULT")
+		return VAULT;
+
+	return NO_DOOR;
+}
+wallType stringToWallType(std::string translate) 
+{
+	if (translate == "STRIPED")
+		return STRIPED;
+	if (translate == "WOODEN")
+		return wallType::WOODEN;
+	if (translate == "UTILITY_CLOSET")
+		return UTILITY_CLOSET;
+	if (translate == "MAINTENCE_TUNNEL")
+		return MAINTENCE_TUNNEL;
+
+	return NO_WALL;
+}
+floorType stringToFloorType(std::string translate) 
+{
+	if (translate == "WOODEN")
+		return floorType::WOODEN;
+	if (translate == "TILE")
+		return TILE;
+
+	return NO_FLOOR;
+}
+#pragma endregion

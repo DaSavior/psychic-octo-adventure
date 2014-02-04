@@ -26,10 +26,8 @@ bool Props::charCanWalk(const Character &character) const
 	return true;
 }
 
-bool Props::loadProgress();
-void Props::saveProgress();
-bool Props::load(std::ifstream &in);
-void Props::save(std::ofstream &out);
+bool Props::load(int file);
+void Props::save(int file);
 void Props::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
 	for (int c = 0; c < propList_[room_].size(); c++)
@@ -73,7 +71,7 @@ void PropObject::setType(propType type)
 	type_ = type;
 }
 
-bool PropObject::load(std::ifstream &in);
-void PropObject::save(std::ofstream &out);
+std::ifstream& operator>> (std::istream &in, PropObject prop);
+std::ofstream& operator<< (std::ostream &out, PropObject prop);
 
 #pragma endregion

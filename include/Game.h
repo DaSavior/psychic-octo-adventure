@@ -43,6 +43,9 @@ public:
 	//changes
 
 	//virtual functions
+	virtual bool load(int file); //if file <= 0, then use progress file
+	virtual void save(int file);
+
 	virtual location keyPressed(sf::Keyboard::Key key, location loc);
 	virtual location keyReleased(sf::Keyboard::Key key, location loc);
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;

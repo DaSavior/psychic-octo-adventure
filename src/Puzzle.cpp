@@ -1,5 +1,7 @@
 #include "..\include\Puzzle.h"
 
+//TODO: define >> and << for objects
+
 #pragma region Puzzle
 
 Puzzle::Puzzle()
@@ -49,10 +51,9 @@ bool Puzzle::charCanWalk(const Character &character) const
 	return true;
 }
 
-bool Puzzle::loadProgress();
-void Puzzle::saveProgress();
-bool Puzzle::load(std::ifstream &in);
-void Puzzle::save(std::ofstream &out);
+bool Puzzle::load(int file);
+void Puzzle::save(int file);
+
 void Puzzle::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
 	for (const CircuitObject &circuit : circuits_[room_])
@@ -130,6 +131,9 @@ void DoorObject::close()
 	setFrame(0, getFrame().y);
 }
 
+std::ifstream& operator>> (std::istream &in, DoorObject door);
+std::ofstream& operator<< (std::ostream &out, DoorObject door);
+
 void DoorObject::draw(sf::RenderTarget &target, sf::RenderStates states) const;
 
 #pragma endregion
@@ -161,10 +165,8 @@ void WireObject::setState(leverState state)
 	}
 }
 
-bool WireObject::loadProgress();
-void WireObject::saveProgress();
-bool WireObject::load(std::ifstream &in);
-void WireObject::save(std::ofstream &out);
+std::ifstream& operator>> (std::istream &in, WireObject wire);
+std::ofstream& operator<< (std::ostream &out, WireObject wire);
 
 #pragma endregion
 
@@ -214,7 +216,6 @@ short CircuitObject::getOutput() const
 	}
 	return 0;
 }
-// ITS NOT PARSING AAAAAAAAAAAAAAAAAAAAA
 std::vector<sf::Vector2i> CircuitObject::getCenterPoints () const // ITS NOT PARSING AAAAAAAAAAAAAAAAAAAAA
 {
 	std::vector<sf::Vector2i> centers;
@@ -285,7 +286,6 @@ bool CircuitObject::removeEnergy(unsigned short energy)
 	return true;
 }
 
-
 bool CircuitObject::charToPlugEnergy(Character &character)
 {
 	if (plug_.collides(character.getWalkCollision()) 
@@ -332,11 +332,11 @@ bool CircuitObject::charCanWalk(const Character &character) const
 
 }
 
-bool CircuitObject::loadProgress();
-void CircuitObject::saveProgress();
-bool CircuitObject::load(std::ifstream &in);
-void CircuitObject::save(std::ofstream &out);
-void CircuitObject::draw(sf::RenderTarget &target, sf::RenderStates states)
+	
+std::ifstream& operator>> (std::istream &in, CircuitObject circuit);
+std::ofstream& operator<< (std::ostream &out, CircuitObject circuit);
+
+void CircuitObject::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
 	target.draw(lever_, states);
 	for (BulbObject& bulb : bulbs_)
@@ -374,10 +374,8 @@ void BulbObject::toggle()
 		turnOn();
 }
 
-bool BulbObject::loadProgress();
-void BulbObject::saveProgress();
-bool BulbObject::load(std::ifstream &in);
-void BulbObject::save(std::ofstream &out);
+std::ifstream& operator>> (std::istream &in, BulbObject bulb);
+std::ofstream& operator<< (std::ostream &out, BulbObject bulb);
 
 #pragma endregion
 
@@ -415,11 +413,12 @@ void LeverObject::toggleState()
 	}
 }
 
-bool LeverObject::loadProgress();
-void LeverObject::saveProgress();
-bool LeverObject::load(std::ifstream &in);
-void LeverObject::save(std::ofstream &out);
+std::ifstream& operator>> (std::istream &in, LeverObject lever);
+std::ofstream& operator<< (std::ostream &out, LeverObject lever);
 
+#pragma endregion
+
+#pragma region PlugObject
 
 PlugObject::PlugObject() : SpritePlus::SpritePlus()
 {
@@ -444,9 +443,7 @@ void PlugObject::setFrom(sf::Vector2i from)
 	from_ = from;
 }
 
-bool PlugObject::loadProgress();
-void PlugObject::saveProgress();
-bool PlugObject::load(std::ifstream &in);
-void PlugObject::save(std::ofstream &out);
+std::ifstream& operator>> (std::istream &in, PlugObject plug);
+std::ofstream& operator<< (std::ostream &out, PlugObject plug);
 
 #pragma endregion

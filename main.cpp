@@ -17,8 +17,10 @@ int main()
 		settings.load(0);
 
 	{
+		Fileable fl;
 		AllTextures t;
 		AllFonts f;
+		fl.loadFiles();
 		t.loadAll();
 		f.loadAll();
 	}
@@ -56,6 +58,8 @@ int main()
 			{
 			case GAME:
 				loc = game.input(event, loc);
+				if (loc == MAIN_MENU)
+					can_continue = progressFileExists();
 				break;
 			case MAIN_MENU:
 				prev_menu = MAIN_MENU;

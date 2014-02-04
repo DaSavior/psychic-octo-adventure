@@ -7,7 +7,7 @@
 
 //TODO: IMPORTANT, when will character update for the new room, because it needs to know things from story (the new room tiles)
 
-class Story: public Inputable
+class Story: public Inputable, public Fileable
 {
 private:
     //std::vector<std::vector<sf::IntRect>> refers to room then objects within the room
@@ -26,15 +26,14 @@ public:
 	std::string charInteract(const Character &character);	//for text
 	short charNewRoomCheck(Character &character);			//for new room tiles, will move character if there is one and returns the room of the character or NEXT_ACT
 
-	virtual bool loadProgress();
-	virtual void saveProgress();
-	virtual bool load(std::ifstream &in);
-	virtual void save(std::ofstream &out);
+	
+	virtual bool load(int file);
+	virtual void save(int file);
 };
 
 class TextTile : public sf::IntRect , public Fileable
 {
-private:
+protected:
     std::string text_;
 	short repeat_; //repeat forever if == -1
 public:
@@ -51,8 +50,9 @@ public:
 	std::string useTile();//return text and lowers repeat
 	
 	//virtuals
-	virtual bool load(std::ifstream &in);
-	virtual void save(std::ofstream &out);
+	
+	friend std::ifstream& operator>> (std::istream &in, TextTile tile);
+	friend std::ofstream& operator<< (std::ostream &out, TextTile tile);
 };
 
 class NewRoomTile : public TextTile
@@ -73,8 +73,9 @@ public:
 	void setExitDirection(direction exit);
 
 	//virtuals
-	virtual bool load(std::ifstream &in);
-	virtual void save(std::ofstream &out);
+	
+	friend std::ifstream& operator>> (std::istream &in, NewRoomTile tile);
+	friend std::ofstream& operator<< (std::ostream &out, NewRoomTile tile);
 };
 
 #endif

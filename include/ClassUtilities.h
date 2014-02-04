@@ -19,16 +19,8 @@ public:
 	virtual void save(int file);
 
 	//TODO: this
-	friend std::ifstream& operator>> (std::istream &in, Fileable fileable)
-	{
-		fileable.load(in);
-		return in;
-	}
-	friend std::ofstream& operator<< (std::ostream &out, Fileable fileable)
-	{
-		fileable.save(out);
-		return out;
-	}
+	friend std::ifstream& operator>> (std::istream &in, Fileable fileable);
+	friend std::ofstream& operator<< (std::ostream &out, Fileable fileable);
 };
  
 class Inputable
@@ -165,10 +157,6 @@ public:
 	void loadAll();
 	sf::Font* arial() const;
 	//HACK: list all fonts needed
-};
-class AllFiles
-{
-
 };
 
 struct SettingsInfo: public Fileable

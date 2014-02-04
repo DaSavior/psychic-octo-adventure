@@ -22,7 +22,7 @@ props ##
   propType ??
   description ??*
   direction ??
-  ^storyText ??*
+  ^storyText ## ??* //NOTE: here, ## is the room number
   position ## ##
   collision ## ## ## ##
   ]
@@ -43,7 +43,6 @@ newRoomTiles ##
   size ## ##
   repeat ##
   text ??*
-  room ##
   direction ??
   ]
 ]

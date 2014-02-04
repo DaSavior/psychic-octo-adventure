@@ -38,10 +38,21 @@ short Story::charNewRoomCheck(Character &character)
 	return room_;
 }
 
-bool Story::loadProgress();
-void Story::saveProgress();
-bool Story::load(std::ifstream &in);
-void Story::save(std::ofstream &out);
+bool Story::load(int file)
+{
+	std::string loading, find;
+	find = "#story room " + std::to_string(room_);
+	if (file <= 0)
+	{
+		loading = Fileable::progressFile_.sub
+	}
+	else
+	{
+
+	}
+
+}
+void Story::save(int file);
 
 #pragma endregion
 
@@ -80,8 +91,25 @@ std::string TextTile::useTile()
 	return text_;
 }
 	
-bool TextTile::load(std::ifstream &in);
-void TextTile::save(std::ofstream &out);
+std::ifstream& operator>> (std::istream &in, TextTile tile)
+{
+	std::string blank;
+	int x, y;
+
+	in >> blank >> tile.left >> tile.top
+		>> blank >> tile.width >> tile.height
+		>> blank >> tile.repeat_;
+
+	in >> blank;
+	std::getline(in, tile.text_, '*');
+}
+std::ofstream& operator<< (std::ostream &out, TextTile tile)
+{
+	out << "  position " << tile.left << ' ' << tile.top << '\n'
+		<< "  size " << tile.width << ' ' << tile.height << '\n'
+		<< "  repeat " << tile.repeat_ << '\n'
+		<< "  text " << tile.text_ << '*' << '\n'
+}
 
 #pragma endregion
 
@@ -111,7 +139,28 @@ void NewRoomTile::setExitDirection(direction exit)
 	exiting_ = exit;
 }
 
-bool NewRoomTile::load(std::ifstream &in);
-void NewRoomTile::save(std::ofstream &out);
+std::ifstream& operator>> (std::istream &in, NewRoomTile tile)
+{
+	std::string blank;
+	int x, y;
+
+	in >> blank >> tile.left >> tile.top
+		>> blank >> tile.width >> tile.height
+		>> blank >> tile.repeat_;
+
+	in >> blank;
+	std::getline(in, tile.text_, '*');
+
+	in >> blank >> blank;
+	tile.exiting_ = stringToDirection(blank);
+}
+std::ofstream& operator<< (std::ostream &out, NewRoomTile tile)
+{
+	out << "  position " << tile.left << ' ' << tile.top << '\n'
+		<< "  size " << tile.width << ' ' << tile.height << '\n'
+		<< "  repeat " << tile.repeat_ << '\n'
+		<< "  text " << tile.text_ << '*' << '\n'
+		<< "  direction " << directionToString(tile.exiting_) << '\n';
+}
 
 #pragma endregion

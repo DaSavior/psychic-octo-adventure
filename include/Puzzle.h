@@ -1,9 +1,18 @@
 #ifndef PUZZLE_H
 #define PUZZLE_H
 
+class Puzzle;
+class DoorObject;
+class WireObject;
+class CircuitObject;
+class BulbObject;
+class LeverObject;
+class PlugObject;
+
 #include "Common.h"
 #include "ClassUtilities.h"
 #include "Character.h"
+
 
 class Puzzle: public Fileable
 {
@@ -36,7 +45,7 @@ public:
 	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 };
 
-class DoorObject: public Fileable, public SpritePlus
+class DoorObject: public SpritePlus
 {
 private:
 	short answer_;
@@ -69,13 +78,14 @@ public:
 	void close();
 	
 	//virtuals
-	virtual bool load(int file);
-	virtual void save(int file);
+	
+	friend std::ifstream& operator>> (std::istream &in, DoorObject door);
+	friend std::ofstream& operator<< (std::ostream &out, DoorObject door);
+
 	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 };
 
-
-class WireObject: public Fileable, public CurveShape
+class WireObject: public CurveShape
 {
 private:
 
@@ -86,12 +96,12 @@ public:
 	void setState(leverState state);
 
 	//virtuals
-	virtual bool load(int file);
-	virtual void save(int file);
+	
+	friend std::ifstream& operator>> (std::istream &in, WireObject wire);
+	friend std::ofstream& operator<< (std::ostream &out, WireObject wire);
 };
 
-
-class CircuitObject: public Fileable, public sf::Drawable
+class CircuitObject: public sf::Drawable
 {
 	friend Puzzle;
 
@@ -104,7 +114,6 @@ private:
 
 public:
 	CircuitObject();
-	CircuitObject(std::ifstream &file);
 
 	//gets
 	unsigned short getCircuitNumber() const;
@@ -134,19 +143,19 @@ public:
 	bool charCanWalk(const Character &character) const;
 	
 	//virtuals
-	virtual bool load(int file);
-	virtual void save(int file);
-	virtual void draw(sf::RenderTarget &target, sf::RenderStates states);
+	
+	friend std::ifstream& operator>> (std::istream &in, CircuitObject circuit);
+	friend std::ofstream& operator<< (std::ostream &out, CircuitObject circuit);
+	
+	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 };
 
-class BulbObject: public Fileable, public SpritePlus
+class BulbObject: public SpritePlus
 {
 private:
 	bool on_;
 public:
 	BulbObject();
-	//using SpritePlus::SpritePlus;
-	//HACK: can I inherit constructors from SpritePlus without redefining each one
 
 	//checks
 	bool isOn() const;
@@ -157,17 +166,17 @@ public:
 	void toggle();
 
 	//virtuals
-	virtual bool load(int file);
-	virtual void save(int file);
+	
+	friend std::ifstream& operator>> (std::istream &in, BulbObject bulb);
+	friend std::ofstream& operator<< (std::ostream &out, BulbObject bulb);
 };
 
-class LeverObject: public SpritePlus, public Fileable
+class LeverObject: public SpritePlus
 {
 private:
 	leverState state_;
 public:
 	LeverObject();
-	LeverObject(std::ifstream& file);
 
 	//gets
 	leverState getLeverState() const;
@@ -179,18 +188,18 @@ public:
 	void toggleState();
 
 	//virtuals
-	virtual bool load(int file);
-	virtual void save(int file);
+	
+	friend std::ifstream& operator>> (std::istream &in, LeverObject lever);
+	friend std::ofstream& operator<< (std::ostream &out, LeverObject lever);
 };
 
-class PlugObject: public SpritePlus, public Fileable
+class PlugObject: public SpritePlus
 {
 private:
 	plugState state_;
 	sf::Vector2i from_;
 public:
 	PlugObject();
-	PlugObject(std::ifstream& file);
 
 	//gets
 	plugState getPlugState() const;
@@ -201,8 +210,9 @@ public:
 	void setFrom(sf::Vector2i from);
 
 	//virtuals
-	virtual bool load(int file);
-	virtual void save(int file);
+	
+	friend std::ifstream& operator>> (std::istream &in, PlugObject plug);
+	friend std::ofstream& operator<< (std::ostream &out, PlugObject plug);
 };
 
 

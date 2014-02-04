@@ -23,10 +23,9 @@ public:
 	bool charCanWalk(const Character &character) const;
 
 	//virtuals
-	virtual bool loadProgress();
-	virtual void saveProgress();
-	virtual bool load(std::ifstream &in);
-	virtual void save(std::ofstream &out);
+	
+	virtual bool load(int file);
+	virtual void save(int file);
 	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 };
 
@@ -49,8 +48,10 @@ public:
 	void setType(propType type);
 
 	//virtuals
-	virtual bool load(std::ifstream &in);
-	virtual void save(std::ofstream &out);
+	
+	friend std::ifstream& operator>> (std::istream &in, PropObject prop);
+	friend std::ofstream& operator<< (std::ostream &out, PropObject prop);
+
 };
 
 #endif

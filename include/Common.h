@@ -78,6 +78,7 @@ enum plugState
 enum propType 
 {
 	NO_OBJECT =-1, 
+
 	BED, 
 	WARDROBE,
 	WINDOW,
@@ -100,22 +101,17 @@ enum doorType
 enum wallType
 {
 	NO_WALL = -1,
-	CLASSY,
 	STRIPED,
-	DECROSHUTTHEUCKUPTIVE,
-	FESTIVE,
 	WOODEN,
 	UTILITY_CLOSET,
 	MAINTENCE_TUNNEL,
-	BRICK,
-	FELT,
 	COUNT
 };
 enum floorType
 {
 	NO_FLOOR,
 	TILE,
-	WOOD,
+	WOODEN,
 	COUNT
 };
 
@@ -147,7 +143,9 @@ enum floorType
 
 #pragma region functions
 
-direction convertKeyToDirection(sf::Keyboard::Key key);
+bool progressFileExists();
+
+#pragma region rectangles
 sf::Font fontFromFile(std::string fileName);
 
 sf::Vector2i getCenter(sf::IntRect rect);
@@ -162,8 +160,28 @@ sf::IntRect rectMove(sf::IntRect rect, direction d, int distance);
 
 int rect_Bottom(sf::IntRect rect);
 int rect_Right(sf::IntRect rect);
+#pragma endregion
 
-bool progressFileExists();
+
+#pragma region translate
+direction keyToDirection(sf::Keyboard::Key key);
+direction stringToDirection(std::string translate);
+leverState stringToLeverState(std::string translate);
+plugState stringToPlugState(std::string translate);
+propType stringToPropType(std::string translate); 
+doorType stringToDoorType(std::string translate);
+wallType stringToWallType(std::string translate);
+floorType stringToFloorType(std::string translate);
+
+
+std::string directionToString(direction translate);
+std::string leverStateToString(leverState translate);
+std::string plugStateToString(plugState translate);
+std::string propTypeToString(propType translate); 
+std::string doorTypeToString(doorType translate);
+std::string wallTypeToString(wallType translate);
+std::string floorTypeToString(floorType translate);
+#pragma endregion
 
 #pragma endregion
 

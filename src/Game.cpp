@@ -15,7 +15,7 @@ void Game::updateRoom(short act, short room)
 
 location Game::keyPressed(sf::Keyboard::Key key, location loc)
 {
-    direction dir = convertKeyToDirection(key);
+    direction dir = keyToDirection(key);
 
 	if (character.getDirection() == dir && character.canWalk())
 		character.startWalk();
@@ -56,7 +56,7 @@ location Game::keyPressed(sf::Keyboard::Key key, location loc)
 
 location Game::keyReleased(sf::Keyboard::Key key, location loc)
 {
-    direction dir = convertKeyToDirection(key);
+    direction dir = keyToDirection(key);
 
 	if (character.getDirection() == dir && character.isWalking())
 		character.stopWalk(); 

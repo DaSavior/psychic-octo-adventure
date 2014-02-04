@@ -44,6 +44,10 @@ public:
 	bool removeEnergy(unsigned short energy);
 	
 	//virtuals
+	
+	friend std::ifstream& operator>> (std::istream &in, Fileable fileable);
+	friend std::ofstream& operator<< (std::ostream &out, Fileable fileable);
+
 	virtual void animate();
 
 	//console stuff
