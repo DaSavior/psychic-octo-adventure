@@ -16,7 +16,7 @@ public:
 	virtual void checkpoint();
 	
 	virtual bool load(int file); //if file <= 0, then use progress file
-	virtual void save(int file);
+	virtual void saveProgress()=0;
 	virtual bool loadRoom(std::istream, int room);
 	virtual void saveRoom(int room);
 

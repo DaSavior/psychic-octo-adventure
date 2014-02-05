@@ -28,7 +28,7 @@ public:
 
 	
 	virtual bool load(int file);
-	virtual void save(int file);
+	virtual void saveProgress();
 	virtual bool loadRoom(int room);
 	virtual void saveRoom(int room);
 };

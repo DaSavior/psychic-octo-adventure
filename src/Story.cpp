@@ -40,12 +40,27 @@ short Story::charNewRoomCheck(Character &character)
 
 bool Story::load(int file)
 {
-	int count;
-	while (loadRoom(count))
-		count++;
+	std::stringstream checkingFile;
+	if (file <= 0)
+		checkingFile << progressFile_;
+	else
+		checkingFile << actFiles_[file];
+
+	std::string find ="";
+	while (find != "roomCount")
+		checkingFile >> find;
+
+	int roomCount;
+	checkingFile >> roomCount;
+
+	for (int c = 0; c < roomCount; c++)
+		loadRoom(c);
 	
 }
-void Story::save(int file);
+void Story::saveProgress()
+{
+
+}
 bool Story::loadRoom(int room);
 void Story::saveRoom(int room);
 #pragma endregion
