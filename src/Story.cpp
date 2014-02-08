@@ -56,7 +56,6 @@ bool Story::load(int file)
 
 	return true;
 }
-void Story::saveProgress();
 bool Story::loadNextRoom(std::istream &stream)
 {
 	int room;
@@ -81,6 +80,7 @@ bool Story::loadNextRoom(std::istream &stream)
 		stream >> newRoomTiles_[room][c];
 
 }
+void Story::saveProgress();
 void Story::saveRoom(int room);
 #pragma endregion
 

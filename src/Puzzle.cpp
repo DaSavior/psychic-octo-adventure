@@ -51,8 +51,47 @@ bool Puzzle::charCanWalk(const Character &character) const
 	return true;
 }
 
-bool Puzzle::load(int file);
-void Puzzle::save(int file);
+bool Puzzle::load(int file)
+{	
+	doors_.clear();
+	circuits_.clear();
+	wires_.clear();
+
+	std::stringstream checkingFile;
+	if (file <= 0)
+		checkingFile << progressFile_;
+	else
+		checkingFile << actFiles_[file];
+
+	if (!loadNextRoom(checkingFile))
+		return false;
+	while (loadNextRoom(checkingFile));
+
+	return true;
+}
+bool Puzzle::loadNextRoom(std::istream &stream)
+{
+	int room;
+	std::string blank = "";
+	while (blank != "#puzzle")
+		stream >> blank;
+
+	stream >> blank >> room;
+
+	int count;
+	
+	stream >> blank >> count;
+	for (int c = 0; c < count; c++)
+		stream >> doors_[room][c];
+
+	stream >> blank >> count;
+	for (int c = 0; c < count; c++)
+		stream >> circuits_[room][c];
+
+	 makeWires(room);
+}
+void Puzzle::saveProgress();
+void Puzzle::saveRoom(int room);
 
 void Puzzle::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {

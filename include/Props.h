@@ -22,16 +22,18 @@ public:
 	std::string charInteract(const Character &character) const;
 	bool charCanWalk(const Character &character) const;
 
+	setTextures(int room);
+
 	//virtuals
 	
 	virtual bool load(int file);
-	virtual void save(int file);
-	virtual bool loadRoom(int room);
+	virtual bool loadNextRoom(std::istream &stream);
+	virtual void saveProgress();
 	virtual void saveRoom(int room);
 	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 };
 
-class PropObject : public SpritePlus, public Fileable
+class PropObject : public SpritePlus
 {
 private:
 	direction facing_;
