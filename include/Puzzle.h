@@ -39,10 +39,11 @@ public:
 	bool charInteract(const Character &character);
 	bool charCanWalk(const Character &character) const;
 
+	void makeWires(int room);
 	//virtuals
 	virtual bool load(int file);
-	virtual void save(int file);
-	virtual bool loadRoom(int room);
+	virtual bool loadNextRoom(std::istream &stream);
+	virtual void saveProgress();
 	virtual void saveRoom(int room);
 	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 };

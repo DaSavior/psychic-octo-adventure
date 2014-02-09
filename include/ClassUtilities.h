@@ -12,17 +12,14 @@ protected:
 
 public:
 	void loadFiles();
+	void loadNextAct();
 
 	virtual void checkpoint();
 	
-	virtual bool load(int file); //if file <= 0, then use progress file
-	virtual void saveProgress()=0;
-	virtual bool loadRoom(std::istream, int room);
-	virtual void saveRoom(int room);
-
-	//TODO: this
-	friend std::ifstream& operator>> (std::istream &in, Fileable fileable);
-	friend std::ofstream& operator<< (std::ostream &out, Fileable fileable);
+	virtual bool load(int file) =0; //if file <= 0, then use progress file
+	virtual void saveProgress() =0;
+	virtual bool loadNextRoom(std::istream &stream) =0;
+	virtual void saveRoom(int room) =0;
 };
  
 class Inputable

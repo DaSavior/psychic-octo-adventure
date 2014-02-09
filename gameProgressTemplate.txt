@@ -3,6 +3,7 @@
 //      and '??' to stand for some string
 //NOTE: [] will mean repetition, like in music
 //NOTE: act files will be identical, only without settings and character
+ACT ##
 
 #settings
   resolution ## ##
@@ -15,16 +16,14 @@
   direction ??
   room ##
 
-roomCount ##
-
 [
 #props room ##
+
 props ##
   [
   propType ??
   description ??*
   direction ??
-  ^storyText ## ??* //NOTE: here, ## is the room number
   position ## ##
   collision ## ## ## ##
   ]
@@ -32,6 +31,13 @@ props ##
 
 [
 #story room ##
+
+interactTiles ##
+  [
+  position ## ##
+  collision ## ## ## ##
+  ^storyText ??* //NOTE: here, ## is the room number
+  ]
 walkOverTiles ##
   [
   position ## ##

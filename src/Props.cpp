@@ -26,8 +26,41 @@ bool Props::charCanWalk(const Character &character) const
 	return true;
 }
 
-bool Props::load(int file);
-void Props::save(int file);
+bool Props::load(int file)
+{	
+	propList_.clear();
+
+	std::stringstream checkingFile;
+	if (file <= 0)
+		checkingFile << progressFile_;
+	else
+		checkingFile << actFiles_[file];
+
+	if (!loadNextRoom(checkingFile))
+		return false;
+	while (loadNextRoom(checkingFile));
+
+	return true;
+}
+bool Props::loadNextRoom(std::istream &stream)
+{
+	int room;
+	std::string blank = "";
+	while (blank != "#props")
+		stream >> blank;
+
+	stream >> blank >> room;
+
+	int count;
+	
+	stream >> blank >> count;
+	for (int c = 0; c < count; c++)
+		stream >> propList_[room][c];
+
+	setTextures(room);
+}
+void Puzzle::saveProgress();
+void Puzzle::saveRoom(int room);
 void Props::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
 	for (int c = 0; c < propList_[room_].size(); c++)
