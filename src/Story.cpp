@@ -40,25 +40,52 @@ short Story::charNewRoomCheck(Character &character)
 
 bool Story::load(int file)
 {
+	newRoomTiles_.clear();
+	interactText_.clear();
+	walkOverText_.clear();
+
 	std::stringstream checkingFile;
 	if (file <= 0)
 		checkingFile << progressFile_;
 	else
 		checkingFile << actFiles_[file];
 
-	std::string find ="";
-	while (find != "roomCount")
-		checkingFile >> find;
+	if (!loadNextRoom(checkingFile))
+		return false;
+	while (loadNextRoom(checkingFile));
 
-	int roomCount;
-	checkingFile >> roomCount;
-
-	for (int c = 0; c < roomCount; c++)
-		loadRoom(c);
-	
+	return true;
 }
+<<<<<<< HEAD
 void Story::saveProgress();
 bool Story::loadRoom(int room);
+=======
+bool Story::loadNextRoom(std::istream &stream)
+{
+	int room;
+	std::string blank = "";
+	while (blank != "#story")
+		stream >> blank;
+
+	stream >> blank >> room;
+
+	int count;
+	
+	stream >> blank >> count;
+	for (int c = 0; c < count; c++)
+		stream >> interactText_[room][c];
+
+	stream >> blank >> count;
+	for (int c = 0; c < count; c++)
+		stream >> walkOverText_[room][c];
+
+	stream >> blank >> count;
+	for (int c = 0; c < count; c++)
+		stream >> newRoomTiles_[room][c];
+
+}
+void Story::saveProgress();
+>>>>>>> 24b07fc2c5e630ba5626421ec0303fd0aad953e5
 void Story::saveRoom(int room);
 #pragma endregion
 
