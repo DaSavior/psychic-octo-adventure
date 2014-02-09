@@ -57,9 +57,12 @@ bool Story::load(int file)
 	return true;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 void Story::saveProgress();
 bool Story::loadRoom(int room);
 =======
+=======
+>>>>>>> 24b07fc2c5e630ba5626421ec0303fd0aad953e5
 bool Story::loadNextRoom(std::istream &stream)
 {
 	int room;
@@ -85,6 +88,9 @@ bool Story::loadNextRoom(std::istream &stream)
 
 }
 void Story::saveProgress();
+<<<<<<< HEAD
+>>>>>>> 24b07fc2c5e630ba5626421ec0303fd0aad953e5
+=======
 >>>>>>> 24b07fc2c5e630ba5626421ec0303fd0aad953e5
 void Story::saveRoom(int room);
 #pragma endregion
