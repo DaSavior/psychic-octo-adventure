@@ -29,11 +29,11 @@ public:
 	
 	virtual bool load(int file);
 	virtual void saveProgress();
-	virtual bool loadNextRoom(std::istream &stream);
+	virtual bool loadRoom(int room);
 	virtual void saveRoom(int room);
 };
 
-class TextTile : public sf::IntRect
+class TextTile : public sf::IntRect , public Fileable
 {
 protected:
     std::string text_;
