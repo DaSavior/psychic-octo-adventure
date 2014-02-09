@@ -1,6 +1,8 @@
 #ifndef CHARACTER_H
 #define CHARACTER_H
 
+class Character;
+
 #include "Common.h"
 #include "ClassUtilities.h"
 

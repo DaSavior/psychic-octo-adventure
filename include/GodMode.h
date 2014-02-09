@@ -1,6 +1,8 @@
 #ifndef GODMODE_H
 #define GODMODE_H
 
+class GodMode;
+
 #include "Common.h"
 #include "Game.h"
 

@@ -1,6 +1,8 @@
 #ifndef GAME_H
 #define GAME_H
 
+class Game;
+
 #include "Common.h"
 #include "ClassUtilities.h"
 #include "Character.h"

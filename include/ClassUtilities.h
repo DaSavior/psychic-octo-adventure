@@ -1,6 +1,16 @@
 #ifndef CLASS_UTILITIES_H
 #define CLASS_UTILITIES_H
 
+class Fileable;
+class Inputable;
+class Animateable;
+class SpritePlus;
+class LineShape;
+class CurveShape;
+class AllTextures;
+class AllFonts;
+struct SettingsInfo;
+
 #include "Common.h"
 #include <cmath>
 

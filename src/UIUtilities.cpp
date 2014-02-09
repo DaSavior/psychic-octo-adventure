@@ -12,29 +12,39 @@ std::string Textbox::getScroll() const
 {
 	return scroll_;
 }
-sf::IntRect Textbox::getRectangle() const
+sf::IntRect Textbox::getTextBounds() const
 {
-	sf::FloatRect r = sf::RectangleShape::getGlobalBounds();
+	sf::FloatRect r = sf::Text::getGlobalBounds();
 	return sf::IntRect (r.left, r.top, r.width, r.height);
 }
-sf::Vector2i Textbox::getBoxSize() const
+sf::IntRect Textbox::getBoxBounds() const
 {
-	return sf::Vector2i(box.getSize().x,box.getSize().y);
+	sf::FloatRect r = box_.getGlobalBounds();
+	return sf::IntRect (r.left, r.top, r.width, r.height);
+}
+textStyle Textbox::getTextStyle() const
+{
+	return style_;
 }
 
 void Textbox::setScroll(std::string scroll)
 {
 	scroll = scroll;
 }
-void Textbox::setRectangle(sf::IntRect rect)
+void Textbox::setBox(sf::IntRect rect)
 {
-	sf::RectangleShape::setPosition(rect.left, rect.top);
-	sf::RectangleShape::setSize(rect.width, rect.height);
-	fit();
+	box_.setPosition(rect.left, rect.top); //TODO: make this affect the box the text is in
+	box_.setSize(sf::Vector2f(rect.width, rect.height));
+	if (autoFit_)
+		fit();
 }
-void Textbox::setBoxSize(sf::Vector2i t_size)
+void Textbox::setAutoFit(bool autoFit)
 {
-	box.setSize(sf::Vector2f(t_size.x,t_size.y));
+	autoFit_ = autoFit;
+}
+void Textbox::setTextStyle(textStyle style)
+{
+	style_ = style;
 }
 
 bool Textbox::isOpen() const
@@ -42,7 +52,8 @@ bool Textbox::isOpen() const
 	return !(getString() == "" && line_ == "")
 }
 
-void Textbox::fit();//fits text into box
+void Textbox::fitBox();
+void Textbox::styleText();
 void Textbox::appendScroll(std::string scroll)
 {
 	scroll_ += scroll;
@@ -74,12 +85,11 @@ void Textbox::animate()
 	setString(getString() + line_.front());
 	line_ = line_.substr(1, line_.size() -1);
 
-	fit();
+	if (autoFit_)
+		fitBox();
+	styleText();
 }
-void Textbox::draw(sf::RenderTarget& target, sf::RenderStates states) const
-{
-
-}
+void Textbox::draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
 #pragma endregion
 
@@ -89,7 +99,7 @@ Button::Button() :Textbox::Textbox()
 {
 	fit();
 }
-void Button::fit(); //fits highlight and sprite onto box
+void Button::fitEffects(); 
 
 void Button::highlight(sf::Color color)
 {
@@ -110,18 +120,6 @@ void Button::removeEffect()
 	effect_.setTexture(sf::Texture());
 }
 
-bool Button::contains(sf::Vector2i point)
-{
-	return getRectangle().contains(point);
-}
-bool Button::intersects(sf::IntRect rect)
-{
-	return getRectangle().intersects(rect);
-}
-
-void Button::draw(sf::RenderTarget& target, sf::RenderStates states) const 
-{
-
-}
+void Button::draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
 #pragma endregion

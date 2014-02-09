@@ -1,6 +1,10 @@
 #ifndef STORY_H
 #define STORY_H
 
+class Story;
+class TextTile;
+class NewRoomTile;
+
 #include "Common.h"
 #include "ClassUtilities.h"
 #include "Character.h"

@@ -1,37 +1,42 @@
 #ifndef UIUTILITIES_H
 #define UIUTILITIES_H
 
+class Textbox;
+class Button;
+
 #include "Common.h"
 #include "ClassUtilities.h"
-
 
 class Textbox: public sf::Text, public Animateable
 {
 private:
-	sf::RectangleShape box;
+	sf::RectangleShape box_;
 	std::string scroll_;
 	std::string line_;
 
-	bool fixedsize_aka_ithinkitsaysfitwillnotchangeitbasicallywhatwouldthatbeifitwastrueofifitwasfalsefitwouldnothappen;
+	bool autoFit_;
+	textStyle style_;
 public:
 	Textbox();
 	
 	//gets
 	std::string getScroll() const;
-	sf::IntRect getRectangle() const;
-	sf::Vector2i getBoxSize() const;
+	sf::IntRect getTextBounds() const;
+	sf::IntRect getBoxBounds() const;
+	textStyle getTextStyle() const;
 
 	//sets
 	void setScroll(std::string scroll);
-	void setRectangle(sf::IntRect rect);
-	void setBoxSize(sf::Vector2i t_size);
-	//void setLine();
+	void setBox(sf::IntRect rect);
+	void setAutoFit(bool autoFit);
+	void setTextStyle(textStyle style);
 
 	//checks
 	bool isOpen() const;
 
 	//changes
-	void fit();
+	void fitBox(); //fits box around text (will be called automatically if autoFit_ is true)
+	void styleText();	//will move text around to match selected style (mostly called automatically)
 	void appendScroll(std::string scroll);
 	void close();
 	void scrollText();
@@ -49,10 +54,7 @@ private:
 
 public:
 	Button();
-	void fit();
-
-	bool Button::contains(sf::Vector2i point);
-	bool Button::intersects(sf::IntRect rect);
+	void fitEffects(); //fits highlight and sprite onto box
 
 	void highlight(sf::Color color);
 	void addEffect(sf::Sprite sprite);

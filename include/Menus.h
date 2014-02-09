@@ -1,6 +1,10 @@
 #ifndef MENUS_H
 #define MENUS_H
 
+class MainMenu;
+class OptionsMenu;
+class PauseMenu;
+
 #include "Common.h"
 #include "ClassUtilities.h"
 #include "UIUtilities.h"

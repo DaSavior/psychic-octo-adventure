@@ -12,6 +12,15 @@
 
 #pragma region enums
 
+enum textStyle
+{
+	NO_STYLE = -1,
+	LEFT_JUSTIFIED,
+	CENTERED,
+	RIGHT_JUSTIFIED,
+	FILL
+};
+
 enum interactType
 {
 	NO_OBJECT =-1,
@@ -30,6 +39,7 @@ enum mainMenuOptions
 	MAIN_OPTIONS,
 	CLOSE
 };
+
 enum optionMenuOptions
 {
 	OPTION_NO_CHOICE = 0,
@@ -37,6 +47,7 @@ enum optionMenuOptions
 	VOLUME,
 	RESOLUTION_BUTTON
 };
+
 enum pauseMenuOptions
 {
 	PAUSE_NO_CHOICE = 0,
@@ -45,10 +56,9 @@ enum pauseMenuOptions
 	EXIT_TO_MENU
 };
 
-
 enum location 
 {
-	NO_LOCATION =-1, 
+	NO_LOCATION = -1, 
 	GAME, 
 	MAIN_MENU, 
 	PAUSE_MENU, 
@@ -63,6 +73,7 @@ enum direction {
 	SOUTH,
 	WEST
 };
+
 enum leverState 
 {
 	NO_LEVER =-1, 
@@ -70,15 +81,17 @@ enum leverState
 	NEUTRAL, 
 	POSITIVE
 };
+
 enum plugState 
 {
 	NO_PLUG =-1, 
 	PLAYER_TO_CIRCUIT, 
 	CIRCUIT_TO_CIRCUIT
 };
+
 enum propType 
 {
-	NO_OBJECT =-1, 
+	NO_PROP =-1, 
 
 	BED, 
 	WARDROBE,
@@ -87,18 +100,20 @@ enum propType
 	CHILD_MALE,
 	CHILD_FEMALE,
 	JANITOR,
-	COUNT
+	COUNT_PROPTYPE
 }; 
+
 enum doorType
 {
 	NO_DOOR =-1,
-	WOODEN,
+	WOOD,
 	MAHOGANY,
 	BATHROOM,
 	METAL,
 	VAULT,
-	COUNT
+	COUNT_DOORTYPE
 };
+
 enum wallType
 {
 	NO_WALL = -1,
@@ -106,14 +121,15 @@ enum wallType
 	WOODEN,
 	UTILITY_CLOSET,
 	MAINTENCE_TUNNEL,
-	COUNT
+	COUNT_WALLTYPE
 };
+
 enum floorType
 {
 	NO_FLOOR,
 	TILE,
 	WOODEN,
-	COUNT
+	COUNT_FLOORTYPE
 };
 
 #pragma endregion
@@ -187,10 +203,6 @@ std::string floorTypeToString(floorType translate);
 #pragma endregion
 
 #pragma region structs
-
-struct IFeelLonely{
-bool alone = true;
-};
 
 #pragma endregion
 

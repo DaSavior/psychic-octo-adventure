@@ -1,6 +1,9 @@
 #ifndef PROPS_H
 #define PROPS_H
 
+class Props;
+class PropObject;
+
 #include "Common.h"
 #include "Character.h"
 #include "ClassUtilities.h"
@@ -22,7 +25,7 @@ public:
 	std::string charInteract(const Character &character) const;
 	bool charCanWalk(const Character &character) const;
 
-	setTextures(int room);
+	void setTextures(int room);
 
 	//virtuals
 	
