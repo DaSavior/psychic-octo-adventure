@@ -57,7 +57,10 @@ bool Story::load(int file)
 		loadRoom(c);
 	
 }
-void Story::saveProgress();
+void Story::saveProgress()
+{
+
+}
 bool Story::loadRoom(int room);
 void Story::saveRoom(int room);
 #pragma endregion
