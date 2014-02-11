@@ -189,17 +189,14 @@ void WireObject::setState(leverState state)
 	switch (state)
 	{
 	case NEUTRAL:
-		setFillColor(sf::Color(150,150,150));
-		setOutlineColor(sf::Color(150,150,150));
+		setColor(sf::Color(150,150,150));
 		break;
 	case NO_LEVER:
 	case POSITIVE:
-		setFillColor(sf::Color::Green);
-		setOutlineColor(sf::Color::Green);
+		setColor(sf::Color::Green);
 		break;
 	case NEGATIVE:
-		setFillColor(sf::Color::Red);
-		setOutlineColor(sf::Color::Red);
+		setColor(sf::Color::Red);
 		break;
 	}
 }

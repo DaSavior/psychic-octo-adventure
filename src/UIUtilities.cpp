@@ -36,7 +36,8 @@ void Textbox::setBox(sf::IntRect rect)
 	box_.setPosition(rect.left, rect.top); //TODO: make this affect the box the text is in
 	box_.setSize(sf::Vector2f(rect.width, rect.height));
 	if (autoFit_)
-		fit();
+		fitBox();
+	styleText();
 }
 void Textbox::setAutoFit(bool autoFit)
 {
@@ -49,7 +50,7 @@ void Textbox::setTextStyle(textStyle style)
 
 bool Textbox::isOpen() const
 {
-	return !(getString() == "" && line_ == "")
+	return !(getString() == "" && line_ == "");
 }
 
 void Textbox::fitBox();
@@ -97,7 +98,7 @@ void Textbox::draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
 Button::Button() :Textbox::Textbox()
 {
-	fit();
+	fitBox();
 }
 void Button::fitEffects(); 
 

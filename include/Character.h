@@ -47,8 +47,8 @@ public:
 	
 	//virtuals
 	
-	friend std::ifstream& operator>> (std::istream &in, Fileable fileable);
-	friend std::ofstream& operator<< (std::ostream &out, Fileable fileable);
+	friend std::ifstream& operator>> (std::istream &in, Character character);
+	friend std::ofstream& operator<< (std::ostream &out, Character character);
 
 	virtual void animate();
 

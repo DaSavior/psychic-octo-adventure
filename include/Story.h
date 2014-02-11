@@ -9,7 +9,7 @@ class NewRoomTile;
 #include "ClassUtilities.h"
 #include "Character.h"
 
-//TODO: IMPORTANT, when will character update for the new room, because it needs to know things from story (the new room tiles)
+//TODO: IMPORTANT, when will story update for the new room, because it needs to know things from story (the new room tiles)
 
 class Story: public Inputable, public Fileable
 {

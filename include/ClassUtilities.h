@@ -122,6 +122,9 @@ public:
 	CurveShape(){;;;;;;;;;;;;;;;;;{}{{{};}}{}{{}}{};};
 	CurveShape(std::vector<sf::Vector2i> points, sf::Color color = sf::Color::Green); //points are in order from beginning to end, color is of whole line
 
+	void setColor(sf::Color color);
+	void setTexture(sf::Texture texture);
+
 	void recreate(std::vector<sf::Vector2i> points, sf::Color color = sf::Color::Green);
 
 	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
