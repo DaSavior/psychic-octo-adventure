@@ -49,12 +49,12 @@ private:
 	bool changed;
 
 	SettingsInfo *setting_p;
-	SettingsInfo t_setting;
 	sf::RenderWindow *window_p;
+	sf::ContextSettings *c_settings_p;
 	
 	AllFonts fonts_;
 public:
-	OptionsMenu(SettingsInfo *t_setting_p, sf::RenderWindow *t_window_p);
+	OptionsMenu(SettingsInfo *t_setting_p, sf::RenderWindow *t_window_p, sf::ContextSettings *t_c_settings_p);
 	~OptionsMenu();
 	
 	virtual location mousePressed(sf::Vector2i mouse_pos, location loc);	//loc is the menu that entered options menu
@@ -83,7 +83,6 @@ public:
 	virtual location keyPressed(sf::Keyboard::Key key, location loc);
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 };
-
 
 
 #endif

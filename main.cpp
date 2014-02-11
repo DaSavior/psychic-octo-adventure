@@ -4,6 +4,7 @@
 #include "include\GodMode.h"
 #include "include\Threads.h"
 
+
 int main()
 {
 #pragma region initialize
@@ -25,12 +26,15 @@ int main()
 		f.loadAll();
 	}
 
-	sf::RenderWindow window(settings.resolution, settings.window_name, settings.style);
+	sf::ContextSettings context_settings;
+	context_setting.antialiasingLevel = 8;
+
+	sf::RenderWindow window(settings.resolution, settings.window_name, settings.style, context_setting);
 
 	Game game;
 	MainMenu mainMenu(can_continue);
 	PauseMenu pauseMenu;
-	OptionsMenu optionsMenu(&settings, &window);
+	OptionsMenu optionsMenu(&settings, &window, &context_setting);
 	sf::Event event;
 
 	location	prev_menu = MAIN_MENU,

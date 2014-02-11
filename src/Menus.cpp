@@ -184,12 +184,12 @@ void MainMenu::draw(sf::RenderTarget& target, sf::RenderStates states) const
 
 #pragma region OptionsMenu
 
-OptionsMenu::OptionsMenu(SettingsInfo *t_setting_p, sf::RenderWindow *t_window_p) //HACK: rellok at everything here
+OptionsMenu::OptionsMenu(SettingsInfo *t_setting_p, sf::RenderWindow *t_window_p, sf::ContextSettings *t_c_settings_p) //HACK: rellok at everything here
 {
 	changed = false;
 	setting_p = t_setting_p;
-	t_setting = *setting_p;
 	window_p = t_window_p;
+	c_settings_p = t_c_settings_p;
 
 	menu_option = OPTION_NO_CHOICE; 
 
@@ -201,7 +201,7 @@ OptionsMenu::OptionsMenu(SettingsInfo *t_setting_p, sf::RenderWindow *t_window_p
 	cancel_.setFont(*fonts_.arial());
 	apply_.setFont(*fonts_.arial());
 
-	fullScreenToggle_.setString("Toggle Fullscreen ");
+	fullScreenToggle_.setString("Toggle Fullscreen");
 	volume_.setString("Continue");
 	resolution_up_.setString("Options");
 	resolution_down_.setString("Exit");
@@ -223,9 +223,20 @@ OptionsMenu::OptionsMenu(SettingsInfo *t_setting_p, sf::RenderWindow *t_window_p
 OptionsMenu::~OptionsMenu()
 {
 	if (setting_p == NULL)
+	{
+		delete setting_p;
 		setting_p = NULL;
+	}
 	if (window_p == NULL)
+	{
+		delete window_p;
 		window_p = NULL;
+	}
+	if (c_settings_p == NULL)
+	{
+		delete c_setting_p;
+		c_setting_p = NULL;
+	}
 }
 
 location OptionsMenu::mousePressed(sf::Vector2i mouse_pos, location loc)
@@ -387,7 +398,7 @@ location OptionsMenu::mousePressed(sf::Vector2i mouse_pos, location loc)
 		*setting_p = t_setting;
 		if (!changed)
 		{
-			window_p->create(setting_p->resolution, setting_p->window_name, setting_p->style);
+			window_p->create(setting_p->resolution, setting_p->window_name, setting_p->style, *c_settings_p);
 		}
 		changed = false;
 		return loc;
@@ -396,7 +407,7 @@ location OptionsMenu::mousePressed(sf::Vector2i mouse_pos, location loc)
 	{
 		if (changed)
 		{
-			window_p->create(setting_p->resolution, setting_p->window_name, setting_p->style);
+			window_p->create(setting_p->resolution, setting_p->window_name, setting_p->style, *c_settings_p);
 		}
 		changed = false;
 		return loc;
@@ -404,7 +415,7 @@ location OptionsMenu::mousePressed(sf::Vector2i mouse_pos, location loc)
 	if (apply_.contains(mouse_pos))
 	{
 		changed = true;
-		window_p->create(t_setting.resolution, t_setting.window_name, t_setting.style);
+		window_p->create(t_setting.resolution, t_setting.window_name, t_setting.style, *c_settings_p);
 	}
 
 	return OPTIONS_MENU;

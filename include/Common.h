@@ -191,13 +191,13 @@ wallType stringToWallType(std::string translate);
 floorType stringToFloorType(std::string translate);
 
 
-std::string directionToString(direction translate);
-std::string leverStateToString(leverState translate);
-std::string plugStateToString(plugState translate);
-std::string propTypeToString(propType translate); 
-std::string doorTypeToString(doorType translate);
-std::string wallTypeToString(wallType translate);
-std::string floorTypeToString(floorType translate);
+std::string to_string(direction translate);
+std::string to_string(leverState translate);
+std::string to_string(plugState translate);
+std::string to_string(propType translate); 
+std::string to_string(doorType translate);
+std::string to_string(wallType translate);
+std::string to_string(floorType translate);
 #pragma endregion
 
 #pragma endregion

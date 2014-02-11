@@ -92,7 +92,8 @@ int rect_Right(sf::IntRect rect)
 }
 #pragma endregion
 
-#pragma region translate
+//#pragma region translate
+
 direction keyToDirection(sf::Keyboard::Key key)
 {
     direction dir;
@@ -120,6 +121,7 @@ direction keyToDirection(sf::Keyboard::Key key)
     }
     return dir;
 }
+///////////////////////////////////////////////////////////////////////;;;;;;;;;;;;;;
 direction stringToDirection(std::string translate)
 {
 	if (translate == "NORTH")
@@ -207,4 +209,92 @@ floorType stringToFloorType(std::string translate)
 
 	return NO_FLOOR;
 }
-#pragma endregion
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+std::string to_string(direction translate)
+{
+    if (translate == NORTH)
+		return "NORTH";
+	if (translate == EAST)
+		return "EAST";
+	if (translate == SOUTH)
+		return "SOUTH";
+	if (translate == WEST)
+		return "WEST";
+
+	return "NO_DIRECTION";
+}
+std::string to_string(leverState translate)
+{
+	if (translate == NEGATIVE)
+		return "NEGATIVE";
+	if (translate == NEUTRAL)
+		return "NEUTRAL";
+	if (translate == POSITIVE)
+		return "POSITIVE";
+
+	return "NO_LEVER";
+}
+std::string to_string(plugState translate)
+{
+	if (translate == PLAYER_TO_CIRCUIT)
+		return "PLAYER_TO_CIRCUIT";
+	if (translate == CIRCUIT_TO_CIRCUIT)
+		return "CIRCUIT_TO_CIRCUIT";
+
+	return "NO_PLUG";
+}
+std::string to_string(propType translate)
+{
+	if (translate == BED)
+		return "BED";
+	if (translate == WARDROBE)
+		return "WARDROBE";
+	if (translate == WINDOW)
+		return "WINDOW";
+	if (translate == CHILD_MALE)
+		return "CHILD_MALE";
+	if (translate == CHILD_FEMALE)
+		return "CHILD_FEMALE";
+	if (translate == JANITOR)
+		return "JANITOR";
+
+	return "NO_OBJECT";
+}
+std::string to_string(doorType translate)
+{
+	if (translate == doorType::WOODEN)
+		return "WOODEN";
+	if (translate == MAHOGANY)
+		return "MAHOGANY";
+	if (translate == BATHROOM)
+		return "BATHROOM";
+	if (translate == METAL)
+		return "METAL";
+	if (translate == VAULT)
+		return "VAULT";
+
+	return "NO_DOOR";
+}
+std::string to_string(wallType translate)
+{
+	if (translate == "STRIPED")
+		return "STRIPED";
+	if (translate == wallType::WOODEN)
+		return "WOODEN";
+	if (translate == UTILITY_CLOSET)
+		return "UTILITY_CLOSET";
+	if (translate == MAINTENCE_TUNNEL)
+		return "MAINTENCE_TUNNEL";
+
+	return "NO_WALL";
+}
+std::string to_string(floorType translate) 
+{
+	if (translate == floorType::WOODEN)
+		return "WOODEN";
+	if (translate == TILE)
+		return "TILE";
+
+	return "NO_FLOOR";
+}
+//#pragma endregion
