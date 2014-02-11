@@ -29,7 +29,7 @@ public:
 	virtual bool load(int file) =0; //if file <= 0, then use progress file
 	virtual void saveProgress() =0;
 	virtual bool loadNextRoom(std::istream &stream) =0;
-	virtual void saveRoom(int room) =0;
+	virtual std::string roomSave(int room) =0;
 };
  
 class Inputable

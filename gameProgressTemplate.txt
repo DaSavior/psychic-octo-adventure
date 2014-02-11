@@ -36,7 +36,8 @@ interactTiles ##
   [
   position ## ##
   collision ## ## ## ##
-  ^storyText ??* //NOTE: here, ## is the room number
+  repeat ##
+  text ??* //NOTE: here, ## is the room number
   ]
 walkOverTiles ##
   [
@@ -60,11 +61,10 @@ newRoomTiles ##
 doors ##
   [
   position ## ##
-  size ## ##
-  collision ## ## ## ##
   answer ##
   circuitFrom ##
   direction ??
+  doorType ??
   ]
 
 circuits ##

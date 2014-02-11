@@ -15,12 +15,12 @@ class Story: public Inputable, public Fileable
 {
 private:
     //std::vector<std::vector<sf::IntRect>> refers to room then objects within the room
-	std::vector<std::vector<NewRoomTile>> newRoomTiles_;
 	std::vector<std::vector<TextTile>> interactText_;
 	std::vector<std::vector<TextTile>> walkOverText_;
+	std::vector<std::vector<NewRoomTile>> newRoomTiles_;
 	short room_;
 
-public:
+public: 
 	Story();
 
 	void updateRoom(short room);
@@ -34,7 +34,7 @@ public:
 	virtual bool load(int file);
 	virtual void saveProgress();
 	virtual bool loadNextRoom(std::istream &stream);
-	virtual void saveRoom(int room);
+	virtual std::string roomSave(int room);
 };
 
 class TextTile : public sf::IntRect

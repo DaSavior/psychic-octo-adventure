@@ -56,6 +56,7 @@ private:
 	
 	short circuitFrom_;
 	direction facing_;
+	doorType type_;
 
 public:
 	DoorObject();
@@ -66,11 +67,13 @@ public:
 	short getAnswer() const;
 	direction getFacing() const;
 	short getCircuitFrom() const;
-	
+	doorType getType() const;
+
 	//sets
 	void setAnswer(short answer);
 	void setFacing(direction facing);
 	void setCircuitFrom(short from);
+	void setType(doorType type);
 
 	//checks
 	bool isOpen() const; //is the door open

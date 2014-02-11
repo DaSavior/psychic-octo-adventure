@@ -80,8 +80,25 @@ bool Story::loadNextRoom(std::istream &stream)
 		stream >> newRoomTiles_[room][c];
 
 }
-void Story::saveProgress();
-void Story::saveRoom(int room);
+void Story::saveProgress()
+{
+	for (int c = 0; c < newRoomTiles_.size(); c++)
+		progressFile_ += roomSave(c); //TODO: IMPORTANT, when the save functions are all called, progressFile needs to be erased first
+}
+std::string Story::roomSave(int room)
+{
+	std::stringstream stream;
+	stream << "#story room " << room;
+
+	for (const auto &x : interactText_[room])
+		stream << x;
+	for (const auto &x : walkOverText_[room])
+		stream << x;
+	for (const auto &x : newRoomTiles_[room])
+		stream << x;
+
+	return stream.str();
+}
 #pragma endregion
 
 #pragma region TextTile
@@ -122,7 +139,6 @@ std::string TextTile::useTile()
 std::ifstream& operator>> (std::istream &in, TextTile tile)
 {
 	std::string blank;
-	int x, y;
 
 	in >> blank >> tile.left >> tile.top
 		>> blank >> tile.width >> tile.height
@@ -133,7 +149,8 @@ std::ifstream& operator>> (std::istream &in, TextTile tile)
 }
 std::ofstream& operator<< (std::ostream &out, TextTile tile)
 {
-	out << "  position " << tile.left << ' ' << tile.top << '\n'
+	out << '\n'
+		<< "  position " << tile.left << ' ' << tile.top << '\n'
 		<< "  size " << tile.width << ' ' << tile.height << '\n'
 		<< "  repeat " << tile.repeat_ << '\n'
 		<< "  text " << tile.text_ << '*' << '\n'
@@ -184,7 +201,8 @@ std::ifstream& operator>> (std::istream &in, NewRoomTile tile)
 }
 std::ofstream& operator<< (std::ostream &out, NewRoomTile tile)
 {
-	out << "  position " << tile.left << ' ' << tile.top << '\n'
+	out << '\n'
+		<< "  position " << tile.left << ' ' << tile.top << '\n'
 		<< "  size " << tile.width << ' ' << tile.height << '\n'
 		<< "  repeat " << tile.repeat_ << '\n'
 		<< "  text " << tile.text_ << '*' << '\n'

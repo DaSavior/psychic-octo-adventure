@@ -170,8 +170,32 @@ void DoorObject::close()
 	setFrame(0, getFrame().y);
 }
 
-std::ifstream& operator>> (std::istream &in, DoorObject door);
-std::ofstream& operator<< (std::ostream &out, DoorObject door);
+std::ifstream& operator>> (std::istream &in, DoorObject door)
+{
+	std::string blank;
+	int x, y;
+
+	in >> blank >> x >> y;
+	door.setPosition(x, y);
+
+	in >> blank >> door.answer_
+		>> blank >> door.circuitFrom_
+		>> blank >> blank;
+
+	door.setFacing(stringToDirection(blank));
+
+	in >> blank >> blank;
+	door.setType(stringToDoorType(blank));
+}
+std::ofstream& operator<< (std::ostream &out, DoorObject door)
+{
+	out << '\n'
+		<< "  position " << door.getPosition().x << ' ' << door.getPosition().y << '\n'
+		<< "  answer " << door.answer_ << '\n'
+		<< "  circuitFrom " << door.circuitFrom_ << '\n'
+		<< "  direction " << tostr door.facing_ << '*' << '\n'
+		<< "  doorType " << tile.text_ << '*' << '\n'
+}
 
 void DoorObject::draw(sf::RenderTarget &target, sf::RenderStates states) const;
 
