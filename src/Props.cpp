@@ -59,8 +59,21 @@ bool Props::loadNextRoom(std::istream &stream)
 
 	setTextures(room);
 }
-void Puzzle::saveProgress();
-void Puzzle::saveRoom(int room);
+void Puzzle::saveProgress()
+{
+	for (int c = 0; c < propList_.size(); c++)
+		progressFile_ += roomSave(c); //TODO: IMPORTANT, when the save functions are all called, progressFile needs to be erased first
+}
+std::string Puzzle::roomSave(int room)
+{
+	std::stringstream stream;
+	stream << "#props room " << room;
+
+	for (const auto &x : propList_[room])
+		stream << x;
+
+	return stream.str();
+}
 void Props::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
 	for (int c = 0; c < propList_[room_].size(); c++)
@@ -104,7 +117,28 @@ void PropObject::setType(propType type)
 	type_ = type;
 }
 
-std::ifstream& operator>> (std::istream &in, PropObject prop);
+std::ifstream& operator>> (std::istream &in, PropObject prop)
+{
+	std::string blank;
+	int x, y;
+	sf::IntRect r;
+
+	in >> blank >> blank;
+	prop.setType(stringToPropType(blank));
+	
+	std::getline(in, blank, '*');
+	
+	in >> blank >> blank;
+	prop.setDirection(stringToDirection(blank));
+
+		//gelbin
+
+	in >> blank >> x >> y;
+	prop.setPosition(x, y);
+
+	in >> blank >> r.left >> r.top >> r.width >> r.height;
+	prop.setCollisionRectangle(r);
+}
 std::ofstream& operator<< (std::ostream &out, PropObject prop);
 
 #pragma endregion

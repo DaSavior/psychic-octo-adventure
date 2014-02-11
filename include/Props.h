@@ -32,7 +32,7 @@ public:
 	virtual bool load(int file);
 	virtual bool loadNextRoom(std::istream &stream);
 	virtual void saveProgress();
-	virtual void saveRoom(int room);
+	virtual std::string roomSave(int room);
 	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 };
 
