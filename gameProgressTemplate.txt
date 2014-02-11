@@ -73,22 +73,19 @@ circuits ##
 
   plug
     position ## ##
-    size ## ##
-    collision ## ##
+    collision ## ## ## ##
     state ??
     attachedCircuits ## ## //NOTE: if for players, numbers will be 0
 
   lever
     position ## ##
-    size ## ##
-    collision ## ##
+    collision ## ## ## ##
     state ??    
 
   bulbs ##
   [
     position ## ##
-    size ## ##
-    collision ## ##
+    collision ## ## ## ##
   ]
   circuitEnergy ##
 ]

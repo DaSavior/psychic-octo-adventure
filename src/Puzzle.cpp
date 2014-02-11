@@ -90,8 +90,23 @@ bool Puzzle::loadNextRoom(std::istream &stream)
 
 	 makeWires(room);
 }
-void Puzzle::saveProgress();
-void Puzzle::saveRoom(int room);
+void Puzzle::saveProgress()
+{
+	for (int c = 0; c < doors_.size(); c++)
+		progressFile_ += roomSave(c); //TODO: IMPORTANT, when the save functions are all called, progressFile needs to be erased first
+}
+std::string Puzzle::roomSave(int room)
+{
+	std::stringstream stream;
+	stream << "#puzzle room " << room;
+
+	for (const auto &x : doors_[room])
+		stream << x;
+	for (const auto &x : circuits_[room])
+		stream << x;
+
+	return stream.str();
+}
 
 void Puzzle::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
@@ -193,8 +208,8 @@ std::ofstream& operator<< (std::ostream &out, DoorObject door)
 		<< "  position " << door.getPosition().x << ' ' << door.getPosition().y << '\n'
 		<< "  answer " << door.answer_ << '\n'
 		<< "  circuitFrom " << door.circuitFrom_ << '\n'
-		<< "  direction " << tostr door.facing_ << '*' << '\n'
-		<< "  doorType " << tile.text_ << '*' << '\n'
+		<< "  direction " << to_string(door.facing_) << '*' << '\n'
+		<< "  doorType " << to_string(door.type_) << '*' << '\n';
 }
 
 void DoorObject::draw(sf::RenderTarget &target, sf::RenderStates states) const;
@@ -225,8 +240,6 @@ void WireObject::setState(leverState state)
 	}
 }
 
-std::ifstream& operator>> (std::istream &in, WireObject wire);
-std::ofstream& operator<< (std::ostream &out, WireObject wire);
 
 #pragma endregion
 
@@ -393,8 +406,34 @@ bool CircuitObject::charCanWalk(const Character &character) const
 }
 
 	
-std::ifstream& operator>> (std::istream &in, CircuitObject circuit);
-std::ofstream& operator<< (std::ostream &out, CircuitObject circuit);
+std::ifstream& operator>> (std::istream &in, CircuitObject circuit)
+{
+	std::string blank;
+	int n;
+
+	in >> blank >> circuit.circuitNumber_
+		>> blank >> circuit.plug_
+		>> blank >> circuit.lever_;
+
+	in >> blank >> n;
+	circuit.bulbs_.clear();
+	for (int c = 0; c < n; c++)
+		in >> circuit.bulbs_[c];
+
+	in >> blank >> n;
+	circuit.setEnergy(n);
+}
+std::ofstream& operator<< (std::ostream &out, CircuitObject circuit)
+{
+	out << '\n'
+		<< "  number " << circuit.circuitNumber_ << '\n'
+		<< "  plug " << circuit.plug_ << '\n'
+		<< "  lever " << circuit.lever_ << '\n'
+		<< "  bulbs " << circuit.bulbs_.size() << '\n';
+	for (const auto &x: circuit.bulbs_)
+		out << x;
+	out << "  circuitEnergy " << circuit.getEnergy() << '\n';
+}
 
 void CircuitObject::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
@@ -434,8 +473,26 @@ void BulbObject::toggle()
 		turnOn();
 }
 
-std::ifstream& operator>> (std::istream &in, BulbObject bulb);
-std::ofstream& operator<< (std::ostream &out, BulbObject bulb);
+std::ifstream& operator>> (std::istream &in, BulbObject bulb)
+{
+	std::string blank;
+	int x, y;
+	sf::IntRect r;
+
+	in >> blank >> x >> y;
+	bulb.setPosition(x, y);
+	in >> blank >> r.left >> r.top >> r.width >> r.height;
+	bulb.setCollisionRectangle(r);
+}
+std::ofstream& operator<< (std::ostream &out, BulbObject bulb)
+{
+	sf::Vector2f pos = bulb.getPosition();
+	sf::IntRect col = bulb.getCollisionRectangle();
+
+	out << '\n'
+		<< "    position " << pos.y << pos.y << '\n'
+		<< "    collision " << col.left << col.top << col.width << col.height << '\n';
+}
 
 #pragma endregion
 
@@ -473,18 +530,38 @@ void LeverObject::toggleState()
 	}
 }
 
-std::ifstream& operator>> (std::istream &in, LeverObject lever);
-std::ofstream& operator<< (std::ostream &out, LeverObject lever);
+std::ifstream& operator>> (std::istream &in, LeverObject lever)
+{
+	std::string blank;
+	int x, y;
+	sf::IntRect r;
+
+	in >> blank >> x >> y;
+	lever.setPosition(x, y);
+
+	in >> blank >> r.left >> r.top >> r.width >> r.height;
+	lever.setCollisionRectangle(r);
+
+	in >> blank >> blank;
+	lever.setLeverState(stringToLeverState(blank));
+}
+std::ofstream& operator<< (std::ostream &out, LeverObject lever)
+{
+	sf::Vector2f pos = lever.getPosition();
+	sf::IntRect col = lever.getCollisionRectangle();
+
+	out << '\n'
+		<< "    position " << pos.y << pos.y << '\n'
+		<< "    collision " << col.left << col.top << col.width << col.height << '\n'
+		<< "    state " << to_string(lever.state_) << '\n';
+
+}
 
 #pragma endregion
 
 #pragma region PlugObject
 
-PlugObject::PlugObject() : SpritePlus::SpritePlus()
-{
-
-};
-
+PlugObject::PlugObject() : SpritePlus::SpritePlus();
 plugState PlugObject::getPlugState() const
 {
 	return state_;
@@ -503,7 +580,34 @@ void PlugObject::setFrom(sf::Vector2i from)
 	from_ = from;
 }
 
-std::ifstream& operator>> (std::istream &in, PlugObject plug);
-std::ofstream& operator<< (std::ostream &out, PlugObject plug);
+std::ifstream& operator>> (std::istream &in, PlugObject plug)
+{
+	std::string blank;
+	int x, y;
+	sf::IntRect r;
+
+	in >> blank >> x >> y;
+	plug.setPosition(x, y);
+
+	in >> blank >> r.left >> r.top >> r.width >> r.height;
+	plug.setCollisionRectangle(r);
+
+	in >> blank >> blank;
+	plug.setPlugState(stringToPlugState(blank));
+
+	in >> plug.from_.x >> plug.from_.y;
+}
+std::ofstream& operator<< (std::ostream &out, PlugObject plug)
+{
+	sf::Vector2f pos = plug.getPosition();
+	sf::IntRect col = plug.getCollisionRectangle();
+
+	out << '\n'
+		<< "    position " << pos.y << pos.y << '\n'
+		<< "    collision " << col.left << col.top << col.width << col.height << '\n'
+		<< "    state " << to_string(plug.state_) << '\n'
+		<< "    attachedCircuit " << plug.from_.x << plug.from_.y << '\n';
+
+}
 
 #pragma endregion

@@ -192,7 +192,7 @@ floorType stringToFloorType(std::string translate);
 
 
 std::string to_string(direction translate);
-std::string to_string(leverState translate);
+std::string to_string(leverState translate); //TODO: weird error here
 std::string to_string(plugState translate);
 std::string to_string(propType translate); 
 std::string to_string(doorType translate);
