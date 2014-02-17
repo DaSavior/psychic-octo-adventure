@@ -45,12 +45,10 @@ public:
 	PropObject();
 	
 	//gets
-	std::string getText() const;
 	direction getDirection() const;
 	propType getType() const;
 	
 	//sets
-	void setText(std::string text);
 	void setDirection(direction facing);
 	void setType(propType type);
 

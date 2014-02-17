@@ -105,12 +105,12 @@ void Button::fitEffects();
 void Button::highlight(sf::Color color)
 {
 	highlight_.setFillColor(color);
-	fit();
+	fitEffects();
 }
 void Button::addEffect(sf::Sprite sprite)
 {
 	effect_ = sprite;
-	fit();
+	fitEffects();
 }
 void Button::removeHighlight()
 {

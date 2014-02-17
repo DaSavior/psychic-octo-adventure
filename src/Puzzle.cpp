@@ -116,7 +116,7 @@ void Puzzle::draw(sf::RenderTarget &target, sf::RenderStates states) const
 	for (const DoorObject &door : doors_[room_])
 		target.draw(door, states);
 
-	for (const WireObject &wire : wires_[room_])
+	for (const CurveShape &wire : wires_[room_])
 		target.draw(wire, states);
 }
 
@@ -438,7 +438,7 @@ std::ofstream& operator<< (std::ostream &out, CircuitObject circuit)
 void CircuitObject::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
 	target.draw(lever_, states);
-	for (BulbObject& bulb : bulbs_)
+	for (const BulbObject& bulb : bulbs_)
 		target.draw(bulb, states);
 	target.draw(plug_, states);
 }
@@ -561,7 +561,8 @@ std::ofstream& operator<< (std::ostream &out, LeverObject lever)
 
 #pragma region PlugObject
 
-PlugObject::PlugObject() : SpritePlus::SpritePlus();
+PlugObject::PlugObject();
+
 plugState PlugObject::getPlugState() const
 {
 	return state_;

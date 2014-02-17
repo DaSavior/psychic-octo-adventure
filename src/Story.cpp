@@ -153,7 +153,7 @@ std::ofstream& operator<< (std::ostream &out, TextTile tile)
 		<< "  position " << tile.left << ' ' << tile.top << '\n'
 		<< "  size " << tile.width << ' ' << tile.height << '\n'
 		<< "  repeat " << tile.repeat_ << '\n'
-		<< "  text " << tile.text_ << '*' << '\n'
+		<< "  text " << tile.text_ << '*' << '\n';
 }
 
 #pragma endregion
@@ -163,7 +163,7 @@ std::ofstream& operator<< (std::ostream &out, TextTile tile)
 NewRoomTile::NewRoomTile() : TextTile::TextTile()
 {
 	nextRoom_ = -1;
-	exiting_ = NONE;
+	exiting_ = NO_DIRECTION;
 }
 
 short NewRoomTile::getNextRoom() const
@@ -206,7 +206,7 @@ std::ofstream& operator<< (std::ostream &out, NewRoomTile tile)
 		<< "  size " << tile.width << ' ' << tile.height << '\n'
 		<< "  repeat " << tile.repeat_ << '\n'
 		<< "  text " << tile.text_ << '*' << '\n'
-		<< "  direction " << directionToString(tile.exiting_) << '\n';
+		<< "  direction " << to_string(tile.exiting_) << '\n';
 }
 
 #pragma endregion

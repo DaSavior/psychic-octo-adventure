@@ -59,12 +59,12 @@ bool Props::loadNextRoom(std::istream &stream)
 
 	setTextures(room);
 }
-void Puzzle::saveProgress()
+void Props::saveProgress()
 {
 	for (int c = 0; c < propList_.size(); c++)
 		progressFile_ += roomSave(c); //TODO: IMPORTANT, when the save functions are all called, progressFile needs to be erased first
 }
-std::string Puzzle::roomSave(int room)
+std::string Props::roomSave(int room)
 {
 	std::stringstream stream;
 	stream << "#props room " << room;
@@ -86,14 +86,8 @@ void Props::draw(sf::RenderTarget &target, sf::RenderStates states) const
 
 PropObject::PropObject() :SpritePlus::SpritePlus()
 {
-	text_ = "";
 	facing_ = NO_DIRECTION;
-	type_ = NO_OBJECT;
-}
-	
-std::string PropObject::getText() const
-{
-	return text_;
+	type_ = NO_PROP;
 }
 direction PropObject::getDirection() const
 {
@@ -102,11 +96,6 @@ direction PropObject::getDirection() const
 propType PropObject::getType() const
 {
 	return type_;
-}
-	
-void PropObject::setText(std::string text)
-{
-	text_ = text;
 }
 void PropObject::setDirection(direction facing)
 {

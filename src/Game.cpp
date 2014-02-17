@@ -17,11 +17,11 @@ location Game::keyPressed(sf::Keyboard::Key key, location loc)
 {
     direction dir = keyToDirection(key);
 
-	if (character.getDirection() == dir && character.canWalk())
-		character.startWalk();
+	if (character_.getDirection() == dir && character_.canWalk())
+		character_.startWalk();
 
-	else if((character.getDirection() != dir) && (dir != NO_DIRECTION))
-		character.setDirection(dir);
+	else if((character_.getDirection() != dir) && (dir != NO_DIRECTION))
+		character_.setDirection(dir);
 
 	else if(dir == NO_DIRECTION)
 	{
@@ -30,23 +30,23 @@ location Game::keyPressed(sf::Keyboard::Key key, location loc)
 
 		else if (key == sf::Keyboard::Space)	//TODO: interact
 		{
-			if (
-			props.charInteract(character)
+			if (textbox_.isOpen())
+			props_.charInteract(character_)
 		}
 		else if (key == sf::Keyboard::E)	//give energy
 		{
-			if (!character.movingArm())
+			if (!character_.movingArm())
 			{
-				puzzle.charToPlugEnergy(character);
-				character.raiseArm();
+				puzzle_.charToPlugEnergy(character_);
+				character_.raiseArm();
 			}
 		}
 		else if (key == sf::Keyboard::Q)	//take energy
 		{
-			if (!character.movingArm())
+			if (!character_.movingArm())
 			{
-				puzzle.charFromPlugEnergy(character);
-				character.raiseArm();
+				puzzle_.charFromPlugEnergy(character_);
+				character_.raiseArm();
 			}
 		}
 	}
@@ -58,12 +58,12 @@ location Game::keyReleased(sf::Keyboard::Key key, location loc)
 {
     direction dir = keyToDirection(key);
 
-	if (character.getDirection() == dir && character.isWalking())
-		character.stopWalk(); 
+	if (character_.getDirection() == dir && character_.isWalking())
+		character_.stopWalk(); 
 
 	else if(dir == NO_DIRECTION)
 		if (key == sf::Keyboard::Space || (key == sf::Keyboard::E || key == sf::Keyboard::Q))
-			character.lowerArm();
+			character_.lowerArm();
 			
 	return loc;
 }
