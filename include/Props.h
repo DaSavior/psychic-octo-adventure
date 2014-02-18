@@ -9,6 +9,29 @@ class PropObject;
 #include "ClassUtilities.h"
 #include "UIUtilities.h"
 
+class PropObject : public SpritePlus
+{
+private:
+	direction facing_;
+	propType type_;
+public:
+	PropObject();
+	
+	//gets
+	direction getDirection() const;
+	propType getType() const;
+	
+	//sets
+	void setDirection(direction facing);
+	void setType(propType type);
+
+	//virtuals
+	
+	friend std::ifstream& operator>> (std::istream &in, PropObject prop);
+	friend std::ofstream& operator<< (std::ostream &out, PropObject prop);
+
+};
+
 class Props: public Fileable
 {
 private:
@@ -33,29 +56,6 @@ public:
 	virtual void saveProgress();
 	virtual std::string roomSave(int room);
 	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
-};
-
-class PropObject : public SpritePlus
-{
-private:
-	direction facing_;
-	propType type_;
-public:
-	PropObject();
-	
-	//gets
-	direction getDirection() const;
-	propType getType() const;
-	
-	//sets
-	void setDirection(direction facing);
-	void setType(propType type);
-
-	//virtuals
-	
-	friend std::ifstream& operator>> (std::istream &in, PropObject prop);
-	friend std::ofstream& operator<< (std::ostream &out, PropObject prop);
-
 };
 
 #endif

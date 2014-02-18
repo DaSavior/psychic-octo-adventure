@@ -174,7 +174,7 @@ void AllTextures::loadSheets()
 	size = sf::Vector2i(100, 100);
 	sheet.loadFromFile("Resources/props.png");
 
-	for (int c = 0; c < propType::COUNT; c++)
+	for (int c = 0; c < propType::COUNT_PROPTYPE; c++)
 	{
 		for (int d = 0; d < 4; d++)
 		{
@@ -187,15 +187,15 @@ void AllTextures::loadSheets()
 	//floors
 	size = sf::Vector2i(100, 100);
 	sheet.loadFromFile("Resources/floors.png");
-	for (int c = 0; c < floorType::COUNT; c++)
-		floors_[c].loadFromImage(sheet.copyToImage(), sf::IntRect(size.x*c, size.x*d, size.x, size.y));*/
+	for (int c = 0; c < floorType::COUNT_FLOORTYPE; c++)
+		floors_[c].loadFromImage(sheet.copyToImage(), sf::IntRect(size.x*c, 0, size.x, size.y));
 
 
 	//walls
 	size = sf::Vector2i(100, 160); //if 160 will be the height of the wall
 	sheet.loadFromFile("Resources/walls.png");
 
-	for (int c = 0; c < wallType::COUNT; c++)
+	for (int c = 0; c < wallType::COUNT_WALLTYPE; c++)
 		for (int d = 0; d < 4; d++)
 			props_[c][d].loadFromImage(sheet.copyToImage(), sf::IntRect(size.x*c, size.x*d, size.x, size.y));
 
@@ -204,7 +204,7 @@ void AllTextures::loadSheets()
 	size = sf::Vector2i(200, 100);	//size of open and closed door in one texture
 	sheet.loadFromFile("Resources/doors.png");
 
-	for (int c = 0; c < doorType::COUNT; c++)
+	for (int c = 0; c < doorType::COUNT_DOORTYPE; c++)
 		for (int d = 0; d < 4; d++)
 			props_[c][d].loadFromImage(sheet.copyToImage(), sf::IntRect(size.x*c, size.x*d, size.x, size.y));
 }

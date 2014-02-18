@@ -28,7 +28,7 @@ GodMode::~GodMode()
 
 void GodMode::toggleClipping()
 {
-	game_p->character.toggleCollision();
+	game_p->character_.toggleCollision();
 }
 
 void GodMode::gotoActRoom(int act, int room)
@@ -38,7 +38,7 @@ void GodMode::gotoActRoom(int act, int room)
 
 void GodMode::setCharEnergy(unsigned short energy)
 {
-    game_p->character.setEnergy(energy);
+    game_p->character_.setEnergy(energy);
 }
 
 
@@ -46,12 +46,12 @@ void GodMode::toggleCollisionBoxVisibility();
 
 sf::Vector2i GodMode::getCharPosition()
 {
-	return sf::Vector2i(game_p->character.getPosition().x,game_p->character.getPosition().y);
+	return sf::Vector2i(game_p->character_.getPosition().x,game_p->character_.getPosition().y);
 }
 
 void GodMode::reloadRooms()
 {
-	game_p->props.load(game_p->act_);
-	game_p->puzzle.load(game_p->act_);
-	game_p->story.load(game_p->act_);
+	game_p->props_.load(game_p->act_);
+	game_p->puzzle_.load(game_p->act_);
+	game_p->story_.load(game_p->act_);
 }

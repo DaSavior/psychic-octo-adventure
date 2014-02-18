@@ -170,12 +170,12 @@ propType stringToPropType(std::string translate)
 	if (translate == "JANITOR")
 		return JANITOR;
 
-	return NO_OBJECT;
+	return NO_PROP;
 }
 doorType stringToDoorType(std::string translate) 
 {
-	if (translate == "WOODEN")
-		return doorType::WOODEN;
+	if (translate == "WOOD")
+		return WOOD;
 	if (translate == "MAHOGANY")
 		return MAHOGANY;
 	if (translate == "BATHROOM")
@@ -191,8 +191,8 @@ wallType stringToWallType(std::string translate)
 {
 	if (translate == "STRIPED")
 		return STRIPED;
-	if (translate == "WOODEN")
-		return wallType::WOODEN;
+	if (translate == "WOODEN_WALL")
+		return WOODEN_WALL;
 	if (translate == "UTILITY_CLOSET")
 		return UTILITY_CLOSET;
 	if (translate == "MAINTENCE_TUNNEL")
@@ -202,8 +202,8 @@ wallType stringToWallType(std::string translate)
 }
 floorType stringToFloorType(std::string translate) 
 {
-	if (translate == "WOODEN")
-		return floorType::WOODEN;
+	if (translate == "WOODEN_FLOOR")
+		return WOODEN_FLOOR;
 	if (translate == "TILE")
 		return TILE;
 
@@ -262,8 +262,8 @@ std::string to_string(propType translate)
 }
 std::string to_string(doorType translate)
 {
-	if (translate == doorType::WOODEN)
-		return "WOODEN";
+	if (translate == WOOD)
+		return "WOOD";
 	if (translate == MAHOGANY)
 		return "MAHOGANY";
 	if (translate == BATHROOM)
@@ -277,10 +277,10 @@ std::string to_string(doorType translate)
 }
 std::string to_string(wallType translate)
 {
-	if (translate == "STRIPED")
+	if (translate == STRIPED)
 		return "STRIPED";
-	if (translate == wallType::WOODEN)
-		return "WOODEN";
+	if (translate == WOODEN_WALL)
+		return "WOODEN_WALL";
 	if (translate == UTILITY_CLOSET)
 		return "UTILITY_CLOSET";
 	if (translate == MAINTENCE_TUNNEL)
@@ -290,8 +290,8 @@ std::string to_string(wallType translate)
 }
 std::string to_string(floorType translate) 
 {
-	if (translate == floorType::WOODEN)
-		return "WOODEN";
+	if (translate == WOODEN_FLOOR)
+		return "WOODEN_FLOOR";
 	if (translate == TILE)
 		return "TILE";
 

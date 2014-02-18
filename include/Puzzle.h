@@ -14,39 +14,6 @@ class PlugObject;
 #include "Character.h"
 
 
-class Puzzle: public Fileable
-{
-private:
-    //std::vector<std::vector<sf::IntRect>> refers to room then objects within the room
-	std::vector<std::vector<DoorObject>> doors_;
-	std::vector<std::vector<CircuitObject>> circuits_;
-	std::vector<std::vector<CurveShape>> wires_;
-	short room_;
-
-	AllTextures textures;
-	AllFonts fonts;
-
-public:
-	Puzzle();
-
-	//gets
-
-	void updateRoom(short room);
-
-	//for character
-	bool charToPlugEnergy(Character &character);
-	bool charFromPlugEnergy(Character &character);
-	bool charInteract(const Character &character);
-	bool charCanWalk(const Character &character) const;
-
-	void makeWires(int room);
-	//virtuals
-	virtual bool load(int file);
-	virtual bool loadNextRoom(std::istream &stream);
-	virtual void saveProgress();
-	virtual std::string roomSave(int room);
-	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
-};
 
 class DoorObject: public SpritePlus
 {
@@ -103,55 +70,6 @@ public:
 
 	//virtuals
 	
-};
-
-class CircuitObject: public sf::Drawable
-{
-	friend Puzzle;
-
-private:
-	PlugObject plug_;
-	std::vector<BulbObject> bulbs_;
-	LeverObject lever_;
-
-	unsigned short circuitNumber_;
-
-public:
-	CircuitObject();
-
-	//gets
-	unsigned short getCircuitNumber() const;
-	unsigned short getEnergy() const; //energy in bulbs
-	unsigned short getMaxEnergy() const;
-	unsigned short getSpace() const;
-	short getOutput() const; //energy sent by circuit with lever (can be negative)
-	std::vector<sf::Vector2i> getCenterPoints () const; //returns centers of objects on screen to draw wires with
-
-	//sets
-	bool setEnergy(unsigned short energy);
-	void setCircuitNumber(short number);
-
-	//checks
-	bool hasEnergy() const;
-	bool hasSpace() const;
-	bool collides(sf::IntRect globalRect) const;
-
-	//changes
-	bool addEnergy(unsigned short energy);
-	bool removeEnergy(unsigned short energy);
-	
-	//for character
-	bool charToPlugEnergy(Character &character);
-	bool charFromPlugEnergy(Character &character);
-	bool charInteract(const Character &character);
-	bool charCanWalk(const Character &character) const;
-	
-	//virtuals
-	
-	friend std::ifstream& operator>> (std::istream &in, CircuitObject circuit);
-	friend std::ofstream& operator<< (std::ostream &out, CircuitObject circuit);
-	
-	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 };
 
 class BulbObject: public SpritePlus
@@ -219,5 +137,87 @@ public:
 	friend std::ofstream& operator<< (std::ostream &out, PlugObject plug);
 };
 
+class CircuitObject: public sf::Drawable
+{
+	friend Puzzle;
+
+private:
+	PlugObject plug_;
+	std::vector<BulbObject> bulbs_;
+	LeverObject lever_;
+
+	unsigned short circuitNumber_;
+
+public:
+	CircuitObject();
+
+	//gets
+	unsigned short getCircuitNumber() const;
+	unsigned short getEnergy() const; //energy in bulbs
+	unsigned short getMaxEnergy() const;
+	unsigned short getSpace() const;
+	short getOutput() const; //energy sent by circuit with lever (can be negative)
+	std::vector<sf::Vector2i> getCenterPoints () const; //returns centers of objects on screen to draw wires with
+
+	//sets
+	bool setEnergy(unsigned short energy);
+	void setCircuitNumber(short number);
+
+	//checks
+	bool hasEnergy() const;
+	bool hasSpace() const;
+	bool collides(sf::IntRect globalRect) const;
+
+	//changes
+	bool addEnergy(unsigned short energy);
+	bool removeEnergy(unsigned short energy);
+	
+	//for character
+	bool charToPlugEnergy(Character &character);
+	bool charFromPlugEnergy(Character &character);
+	bool charInteract(const Character &character);
+	bool charCanWalk(const Character &character) const;
+	
+	//virtuals
+	
+	friend std::ifstream& operator>> (std::istream &in, CircuitObject circuit);
+	friend std::ofstream& operator<< (std::ostream &out, CircuitObject circuit);
+	
+	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
+};
+
+class Puzzle: public Fileable
+{
+private:
+    //std::vector<std::vector<sf::IntRect>> refers to room then objects within the room
+	std::vector<std::vector<DoorObject>> doors_;
+	std::vector<std::vector<CircuitObject>> circuits_;
+	std::vector<std::vector<CurveShape>> wires_;
+	short room_;
+
+	AllTextures textures;
+	AllFonts fonts;
+
+public:
+	Puzzle();
+
+	//gets
+
+	void updateRoom(short room);
+
+	//for character
+	bool charToPlugEnergy(Character &character);
+	bool charFromPlugEnergy(Character &character);
+	bool charInteract(const Character &character);
+	bool charCanWalk(const Character &character) const;
+
+	void makeWires(int room);
+	//virtuals
+	virtual bool load(int file);
+	virtual bool loadNextRoom(std::istream &stream);
+	virtual void saveProgress();
+	virtual std::string roomSave(int room);
+	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
+};
 
 #endif

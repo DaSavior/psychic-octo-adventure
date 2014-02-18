@@ -16,7 +16,7 @@ void Game::updateRoom(short act, short room)
 location Game::keyPressed(sf::Keyboard::Key key, location loc)
 {
     direction dir = keyToDirection(key);
-
+	//TODO: handle walk text and (more importantly) new room tiles
 	if (character_.getDirection() == dir && character_.canWalk())
 		character_.startWalk();
 

@@ -9,14 +9,6 @@ void Props::updateRoom(short room)
 	saveProgress();
 }
 
-std::string Props::charInteract(const Character &character) const
-{
-	for (int c = 0; c < propList_[room_].size(); c++)
-		if (propList_[room_][c].collides(character.getInteractCollision()))
-			return propList_[room_][c].getText();
-
-	return "";
-}
 bool Props::charCanWalk(const Character &character) const
 {
 	for (int c = 0; c < propList_[room_].size(); c++)

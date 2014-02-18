@@ -326,17 +326,13 @@ bool CircuitObject::hasEnergy() const
 {
 	return (getEnergy() > 0);
 }
-bool CircuitObject::hasEnergy() const
-{
-	return (getSpace() > 0);
-}
 bool CircuitObject::collides(sf::IntRect globalRect) const
 {
 	if (lever_.collides(globalRect))
 		return true;
 	if (plug_.collides(globalRect))
 		return true;
-	for (BulbObject& bulb : bulbs_)
+	for (const BulbObject& bulb : bulbs_)
 		if (bulb.collides(globalRect))
 			return true;
 
@@ -348,7 +344,6 @@ bool CircuitObject::addEnergy(unsigned short energy)
 	if (energy  >  getSpace())
 		return false;
 
-	setEnergy(getEnergy() + energy);
 }
 bool CircuitObject::removeEnergy(unsigned short energy)
 {
@@ -373,8 +368,7 @@ bool CircuitObject::charToPlugEnergy(Character &character)
 }
 bool CircuitObject::charFromPlugEnergy(Character &character)
 {
-	if (plug_.collides(character.getWalkCollision()) 
-		&& hasEnergy())
+	if (plug_.collides(character.getWalkCollision()) && hasEnergy())
 	{
 		character.addEnergy(1);
 		removeEnergy(1);
@@ -385,7 +379,7 @@ bool CircuitObject::charFromPlugEnergy(Character &character)
 }
 bool CircuitObject::charInteract(const Character &character)
 {
-	if (!lever_.collides(character.getInteractCollision()) || lever_.getState() == NO_LEVER)
+	if (!lever_.collides(character.getInteractCollision()) || lever_.getLeverState() == NO_LEVER)
 		return false;
 
 	lever_.toggleState();
@@ -397,7 +391,7 @@ bool CircuitObject::charCanWalk(const Character &character) const
 		return true;
 	if (plug_.collides(character.getWalkCollision()))
 		return true;
-	for (BulbObject& bulb : bulbs_)
+	for (const BulbObject& bulb : bulbs_)
 		if (bulb.collides(character.getWalkCollision()))
 			return true;
 
