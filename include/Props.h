@@ -22,7 +22,6 @@ public:
 	void updateRoom(short room);
 
 	//for character
-	std::string charInteract(const Character &character) const;
 	bool charCanWalk(const Character &character) const;
 
 	void setTextures(int room);

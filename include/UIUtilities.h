@@ -33,6 +33,8 @@ public:
 
 	//checks
 	bool isOpen() const;
+	bool hasScroll() const;
+	bool hasNextLine() const;
 
 	//changes
 	void fitBox(); //fits box around text (will be called automatically if autoFit_ is true)
@@ -40,6 +42,7 @@ public:
 	void appendScroll(std::string scroll);
 	void close();
 	void scrollText();
+	void finishLine();
 
 	//virtuals
 	virtual void animate();

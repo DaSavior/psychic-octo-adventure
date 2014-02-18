@@ -28,10 +28,24 @@ location Game::keyPressed(sf::Keyboard::Key key, location loc)
 		if (key == sf::Keyboard::Escape)
 			loc = PAUSE_MENU;
 
-		else if (key == sf::Keyboard::Space)	//TODO: interact
+		else if (key == sf::Keyboard::Space)	//basic interact
 		{
 			if (textbox_.isOpen())
-			props_.charInteract(character_)
+			{
+				if (textbox_.hasNextLine())
+					textbox_.finishLine();
+				else if (textbox_.hasScroll())
+					textbox_.scrollText();
+				else
+					textbox_.close();
+			}
+			else
+			{
+				textbox_.setScroll(story_.charInteract(character_));
+				if (textbox_.hasScroll())
+					textbox_.scrollText();
+			}
+			puzzle_.charInteract(character_);
 		}
 		else if (key == sf::Keyboard::E)	//give energy
 		{

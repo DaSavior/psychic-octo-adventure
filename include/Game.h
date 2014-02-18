@@ -17,12 +17,12 @@ class Game: public Fileable, public Inputable, public Animateable, public sf::Dr
 private:
 	//
 	//classses
-	Character character;
-	Props props;
-	Story story;
-	Puzzle puzzle;
-	AllTextures textures;
-	Textbox textbox;
+	Character character_;
+	Props props_;
+	Story story_;
+	Puzzle puzzle_;
+	AllTextures textures_;
+	Textbox textbox_;
     short act_, room_;
 
 	std::string findActFile(short act);
