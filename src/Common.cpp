@@ -297,4 +297,8 @@ std::string to_string(floorType translate)
 
 	return "NO_FLOOR";
 }
+std::string to_string(sf::VideoMode translate)
+{
+	return std::to_string(translate.width) + "x" + std::to_string(translate.height);
+}
 //#pragma endregion

@@ -27,7 +27,7 @@ MainMenu::MainMenu(bool t_canContinue_)
 
 location MainMenu::mousePressed(sf::Vector2i mouse_pos, location loc)
 {
-	if (newGame_.contains(mouse_pos))
+	if (newGame_.getGlobalBounds().contains(mouse_pos.x , mouse_pos.y))
 	{
 		std::ofstream file;
 		file.open(FILE_PROGRESS);
@@ -35,35 +35,35 @@ location MainMenu::mousePressed(sf::Vector2i mouse_pos, location loc)
 		
 		return GAME;
 	}
-	if (continue_.contains(mouse_pos))
+	if (continue_.getGlobalBounds().contains(mouse_pos.x , mouse_pos.y))
 		return GAME;
-	if (options_.contains(mouse_pos))
+	if (options_.getGlobalBounds().contains(mouse_pos.x , mouse_pos.y))
 		return OPTIONS_MENU;
-	if (close_.contains(mouse_pos))
-		return NO_LOCATION;
+	if (close_.getGlobalBounds().contains(mouse_pos.x , mouse_pos.y))
+		return EXIT_GAME;
 }
 location MainMenu::mouseMoved(sf::Vector2i mouse_pos, location loc)
 {
 	menu_option = MAIN_NO_CHOICE;
-	if (!newGame_.contains(mouse_pos))
+	if (!newGame_.getGlobalBounds().contains(mouse_pos.x , mouse_pos.y))
 		newGame_.removeHighlight();
-	if (!continue_.contains(mouse_pos) && canContinue_)
+	if (!continue_.getGlobalBounds().contains(mouse_pos.x , mouse_pos.y) && canContinue_)
 		continue_.removeHighlight();
-	if (!options_.contains(mouse_pos))
+	if (!options_.getGlobalBounds().contains(mouse_pos.x , mouse_pos.y))
 		options_.removeHighlight();
-	if (!close_.contains(mouse_pos))
+	if (!close_.getGlobalBounds().contains(mouse_pos.x , mouse_pos.y))
 		close_.removeHighlight();
 
 	if (!canContinue_)
 		continue_.highlight(COLOR_GRAY);
 
-	if (newGame_.contains(mouse_pos))
+	if (newGame_.getGlobalBounds().contains(mouse_pos.x , mouse_pos.y))
 		newGame_.highlight(COLOR_MOUSE_OVER);
-	if (continue_.contains(mouse_pos) && canContinue_)
+	if (continue_.getGlobalBounds().contains(mouse_pos.x , mouse_pos.y) && canContinue_)
 		continue_.highlight(COLOR_MOUSE_OVER);
-	if (options_.contains(mouse_pos))
+	if (options_.getGlobalBounds().contains(mouse_pos.x , mouse_pos.y))
 		options_.highlight(COLOR_MOUSE_OVER);
-	if (close_.contains(mouse_pos))
+	if (close_.getGlobalBounds().contains(mouse_pos.x , mouse_pos.y))
 		close_.highlight(COLOR_MOUSE_OVER);
 
 	return loc;
@@ -184,7 +184,7 @@ void MainMenu::draw(sf::RenderTarget& target, sf::RenderStates states) const
 
 #pragma region OptionsMenu
 
-OptionsMenu::OptionsMenu(SettingsInfo *t_setting_p, sf::RenderWindow *t_window_p, sf::ContextSettings *t_c_settings_p) //HACK: rellok at everything here
+OptionsMenu::OptionsMenu(SettingsInfo *t_setting_p, sf::RenderWindow *t_window_p, sf::ContextSettings *t_c_settings_p) 
 {
 	changed = false;
 	setting_p = t_setting_p;
@@ -192,6 +192,8 @@ OptionsMenu::OptionsMenu(SettingsInfo *t_setting_p, sf::RenderWindow *t_window_p
 	c_settings_p = t_c_settings_p;
 
 	menu_option = OPTION_NO_CHOICE; 
+
+	resolution.setBox(sf::IntRect(100,100,100,100));
 
 	fullScreenToggle_.setFont(*fonts_.arial());
 	volume_.setFont(*fonts_.arial());
@@ -201,23 +203,36 @@ OptionsMenu::OptionsMenu(SettingsInfo *t_setting_p, sf::RenderWindow *t_window_p
 	cancel_.setFont(*fonts_.arial());
 	apply_.setFont(*fonts_.arial());
 
+	//////////////////////
+
 	fullScreenToggle_.setString("Toggle Fullscreen");
-	volume_.setString("Continue");
-	resolution_up_.setString("Options");
-	resolution_down_.setString("Exit");
+
+	volume_.setString("Volume");
+
+	resolution.setString(to_string(setting_p->resolution));
+	resolution_up_.setString(char(175));
+	resolution_down_.setString(char(174));
+
 	accept_.setString("Continue");
 	cancel_.setString("Options");
 	apply_.setString("Exit");
 
-	sf::Vector2f start(100,100), distance(0,100);
-	fullScreenToggle_.setPosition(start);
-	volume_.setPosition(start+distance);
-	resolution_up_.setPosition(start+(2.0f*distance));
-	resolution_down_.setPosition(start+(3.0f*distance));
-	accept_.setPosition(start+distance);
-	cancel_.setPosition(start+(2.0f*distance));
-	apply_.setPosition(start+(3.0f*distance));
+	////////////////////
 
+	sf::Vector2f start(100,100), distance(0,100);
+
+	fullScreenToggle_.setPosition(start);
+
+	volume_.setPosition(start+distance);
+
+	resolution_down_.setPosition(start+(2.0f*distance));
+	resolution.setPosition(start.x + resolution_down_.getGlobalBounds().width + 20, start.y+resolution_down_.getPosition().y);
+	resolution_up_.setPosition(start.x + resolution.getGlobalBounds().width + 20, start.y+resolution_down_.getPosition().y);
+
+	accept_.setPosition(start+(3.0f*distance));
+	apply_.setPosition(start.x + accept_.getGlobalBounds().width + 20, start.y+accept_.getPosition().y);
+	cancel_.setPosition(start.x + apply_.getGlobalBounds().width + 20, start.y+apply_.getPosition().y);
+	
 
 }
 OptionsMenu::~OptionsMenu()
@@ -241,18 +256,18 @@ OptionsMenu::~OptionsMenu()
 
 location OptionsMenu::mousePressed(sf::Vector2i mouse_pos, location loc)
 {
-	if (fullScreenToggle_.contains(mouse_pos))
+	if (fullScreenToggle_.getGlobalBounds().contains(mouse_pos.x , mouse_pos.y))
 	{
 		if (t_setting.style == sf::Style::Fullscreen)
 			t_setting.style = sf::Style::Close;
 		else
 			t_setting.style = sf::Style::Fullscreen;
 	}
-	if (volume_.contains(mouse_pos))
+	if (volume_.getGlobalBounds().contains(mouse_pos.x , mouse_pos.y))
 	{
 		setting_p->volume = ((setting_p->volume+25) % 125);
 	}
-	if (resolution_up_.contains(mouse_pos))
+	if (resolution_up_.getGlobalBounds().contains(mouse_pos.x , mouse_pos.y))
 	{
 		int height = t_setting.resolution.height, width = t_setting.resolution.width;
 		switch (width)
@@ -321,8 +336,9 @@ location OptionsMenu::mousePressed(sf::Vector2i mouse_pos, location loc)
 			}
 			break;
 		}
+		resolution.setString(to_string(t_setting.resolution));
 	}
-	if (resolution_down_.contains(mouse_pos))
+	if (resolution_down_.getGlobalBounds().contains(mouse_pos.x , mouse_pos.y))
 	{
 		int height = t_setting.resolution.height, width = t_setting.resolution.width;
 		switch (width)
@@ -391,9 +407,9 @@ location OptionsMenu::mousePressed(sf::Vector2i mouse_pos, location loc)
 			}
 			break;
 		}
-		changed = false;
+		resolution.setString(to_string(t_setting.resolution));
 	}
-	if (accept_.contains(mouse_pos))
+	if (accept_.getGlobalBounds().contains(mouse_pos.x , mouse_pos.y))
 	{
 		*setting_p = t_setting;
 		if (!changed)
@@ -403,7 +419,7 @@ location OptionsMenu::mousePressed(sf::Vector2i mouse_pos, location loc)
 		changed = false;
 		return loc;
 	}
-	if (cancel_.contains(mouse_pos))
+	if (cancel_.getGlobalBounds().contains(mouse_pos.x , mouse_pos.y))
 	{
 		if (changed)
 		{
@@ -412,7 +428,7 @@ location OptionsMenu::mousePressed(sf::Vector2i mouse_pos, location loc)
 		changed = false;
 		return loc;
 	}
-	if (apply_.contains(mouse_pos))
+	if (apply_.getGlobalBounds().contains(mouse_pos.x , mouse_pos.y))
 	{
 		changed = true;
 		window_p->create(t_setting.resolution, t_setting.window_name, t_setting.style, *c_settings_p);
@@ -423,34 +439,34 @@ location OptionsMenu::mousePressed(sf::Vector2i mouse_pos, location loc)
 location OptionsMenu::mouseMoved(sf::Vector2i mouse_pos, location loc)
 {
 	menu_option = OPTION_NO_CHOICE;
-	if (!fullScreenToggle_.contains(mouse_pos))
+	if (!fullScreenToggle_.getGlobalBounds().contains(mouse_pos.x , mouse_pos.y))
 		fullScreenToggle_.removeHighlight();
-	if (!volume_.contains(mouse_pos))
+	if (!volume_.getGlobalBounds().contains(mouse_pos.x , mouse_pos.y))
 		volume_.removeHighlight();
-	if (!resolution_up_.contains(mouse_pos))
+	if (!resolution_up_.getGlobalBounds().contains(mouse_pos.x , mouse_pos.y))
 		resolution_up_.removeHighlight();
-	if (!resolution_down_.contains(mouse_pos))
+	if (!resolution_down_.getGlobalBounds().contains(mouse_pos.x , mouse_pos.y))
 		resolution_down_.removeHighlight();
-	if (!accept_.contains(mouse_pos))
+	if (!accept_.getGlobalBounds().contains(mouse_pos.x , mouse_pos.y))
 		accept_.removeHighlight();
-	if (!cancel_.contains(mouse_pos))
+	if (!cancel_.getGlobalBounds().contains(mouse_pos.x , mouse_pos.y))
 		cancel_.removeHighlight();
-	if (!apply_.contains(mouse_pos))
+	if (!apply_.getGlobalBounds().contains(mouse_pos.x , mouse_pos.y))
 		apply_.removeHighlight();
 
-	if (fullScreenToggle_.contains(mouse_pos))
+	if (fullScreenToggle_.getGlobalBounds().contains(mouse_pos.x , mouse_pos.y))
 		fullScreenToggle_.highlight(COLOR_MOUSE_OVER);
-	if (volume_.contains(mouse_pos))
+	if (volume_.getGlobalBounds().contains(mouse_pos.x , mouse_pos.y))
 		volume_.highlight(COLOR_MOUSE_OVER);
-	if (resolution_up_.contains(mouse_pos))
+	if (resolution_up_.getGlobalBounds().contains(mouse_pos.x , mouse_pos.y))
 		resolution_up_.highlight(COLOR_MOUSE_OVER);
-	if (resolution_down_.contains(mouse_pos))
+	if (resolution_down_.getGlobalBounds().contains(mouse_pos.x , mouse_pos.y))
 		resolution_down_.highlight(COLOR_MOUSE_OVER);
-	if (accept_.contains(mouse_pos))
+	if (accept_.getGlobalBounds().contains(mouse_pos.x , mouse_pos.y))
 		accept_.highlight(COLOR_MOUSE_OVER);
-	if (cancel_.contains(mouse_pos))
+	if (cancel_.getGlobalBounds().contains(mouse_pos.x , mouse_pos.y))
 		cancel_.highlight(COLOR_MOUSE_OVER);
-	if (apply_.contains(mouse_pos))
+	if (apply_.getGlobalBounds().contains(mouse_pos.x , mouse_pos.y))
 		apply_.highlight(COLOR_MOUSE_OVER);
 
 	return OPTIONS_MENU;
@@ -547,28 +563,28 @@ PauseMenu::PauseMenu()
 	
 location PauseMenu::mousePressed(sf::Vector2i mouse_pos, location loc)
 {
-	if (resumegame_.contains(mouse_pos))
+	if (resumegame_.getGlobalBounds().contains(mouse_pos.x , mouse_pos.y))
 		return GAME;
-	if (options_.contains(mouse_pos))
+	if (options_.getGlobalBounds().contains(mouse_pos.x , mouse_pos.y))
 		return OPTIONS_MENU;
-	if (exitToMenu_.contains(mouse_pos))
+	if (exitToMenu_.getGlobalBounds().contains(mouse_pos.x , mouse_pos.y))
 		return NO_LOCATION;
 }
 location PauseMenu::mouseMoved(sf::Vector2i mouse_pos, location loc)
 {
 	menu_option = PAUSE_NO_CHOICE;
-	if (!resumegame_.contains(mouse_pos))
+	if (!resumegame_.getGlobalBounds().contains(mouse_pos.x , mouse_pos.y))
 		resumegame_.removeHighlight();
-	if (!options_.contains(mouse_pos))
+	if (!options_.getGlobalBounds().contains(mouse_pos.x , mouse_pos.y))
 		options_.removeHighlight();
-	if (!exitToMenu_.contains(mouse_pos))
+	if (!exitToMenu_.getGlobalBounds().contains(mouse_pos.x , mouse_pos.y))
 		exitToMenu_.removeHighlight();
 
-	if (resumegame_.contains(mouse_pos))
+	if (resumegame_.getGlobalBounds().contains(mouse_pos.x , mouse_pos.y))
 		resumegame_.highlight(COLOR_MOUSE_OVER);
-	if (options_.contains(mouse_pos))
+	if (options_.getGlobalBounds().contains(mouse_pos.x , mouse_pos.y))
 		options_.highlight(COLOR_MOUSE_OVER);
-	if (exitToMenu_.contains(mouse_pos))
+	if (exitToMenu_.getGlobalBounds().contains(mouse_pos.x , mouse_pos.y))
 		exitToMenu_.highlight(COLOR_MOUSE_OVER);
 
 	return loc;

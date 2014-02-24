@@ -18,7 +18,7 @@ int main()
 		settings.load(0);
 
 	{
-		Fileable fl;
+		Fileable fl; //TODO: Doesnt work
 		AllTextures t;
 		AllFonts f;
 		fl.loadFiles();
@@ -27,14 +27,14 @@ int main()
 	}
 
 	sf::ContextSettings context_settings;
-	context_setting.antialiasingLevel = 8;
+	context_settings.antialiasingLevel = 8;
 
-	sf::RenderWindow window(settings.resolution, settings.window_name, settings.style, context_setting);
+	sf::RenderWindow window(settings.resolution, settings.window_name, settings.style, context_settings);
 
 	Game game;
 	MainMenu mainMenu(can_continue);
 	PauseMenu pauseMenu;
-	OptionsMenu optionsMenu(&settings, &window, &context_setting);
+	OptionsMenu optionsMenu(&settings, &window, &context_settings);
 	sf::Event event;
 
 	location	prev_menu = MAIN_MENU,

@@ -171,6 +171,8 @@ public:
 	//HACK: list all fonts needed
 };
 
+
+cant be left abstact
 struct SettingsInfo: public Fileable
 {
 	SettingsInfo(sf::VideoMode win_res = sf::VideoMode(800, 600), unsigned short vol = 50, 

@@ -42,6 +42,7 @@ private:
 	Button volume_;
 	Button accept_;
 	Button cancel_;
+	Textbox resolution;
 	Button resolution_up_;
 	Button resolution_down_;
 	Button apply_;
@@ -49,8 +50,10 @@ private:
 	bool changed;
 
 	SettingsInfo *setting_p;
+	//TODO: need to define t_setting
 	sf::RenderWindow *window_p;
 	sf::ContextSettings *c_settings_p;
+
 	
 	AllFonts fonts_;
 public:

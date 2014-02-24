@@ -198,6 +198,7 @@ std::string to_string(propType translate);
 std::string to_string(doorType translate);
 std::string to_string(wallType translate);
 std::string to_string(floorType translate);
+std::string to_string(sf::VideoMode translate);
 #pragma endregion
 
 #pragma endregion
